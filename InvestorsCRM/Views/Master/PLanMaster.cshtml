@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "PLanMaster";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/Master/index"><i class="feather icon-home"></i></a></li>
+
+                                <li class="breadcrumb-item"><a href="#">Add Company </a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        @using (Html.BeginForm("Master", "PLanMaster", FormMethod.Post, new { @id = "signupForm" }))
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Add PLanMaster</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">PLans Name</label>
+                                    <input type="text" class="form-control" placeholder="PLans Name" required name="PLans">
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <button class="btn  btn-primary" type="submit" name="btnsave">Save</button>
+
+                        </div>
+                        <!-- Input group -->
+
+                    </div>
+                    <!-- [ form-element ] end -->
+                </div>
+                <!-- [ Main Content ] end -->
+
+            </div>
+        }
+    </div>
+</section>
+

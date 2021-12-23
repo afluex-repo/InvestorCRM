@@ -2,107 +2,73 @@
 
 @{
     ViewBag.Title = "CompanyMaster";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/Master_LayoutPage.cshtml";
 }
-@using (Html.BeginForm("CompanyMaster", "Master", FormMethod.Post, new { enctype = "multipart/form-data", @class = "needs-validation was-validated", @novalidate = "" }))
-{
-    <section class="pcoded-main-container">
-        <div class="pcoded-content">
-            <div class="page-header">
-                <div class="page-block">
-                    <div class="row align-items-center">
-                        <div class="col-md-12">
-                            <div class="page-header-title">
-                                <h5 class="m-b-10">Master</h5>
-                            </div>
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#!">Master</a></li>
-                                <li class="breadcrumb-item"><a href="#!">CompanyMaster</a></li>
+                                <li class="breadcrumb-item"><a href="/Master/index"><i class="feather icon-home"></i></a></li>
+
+                                <li class="breadcrumb-item"><a href="#">Add Company </a></li>
                             </ul>
                         </div>
+
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Basic Component</h5>
-                    </div>
-                    <div class="card-body">
-
-                        <h5 class="mt-5">Validation</h5>
-                        <hr>
-                            <div class="form-row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustom01">First name</label>
-                                    <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required="">
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustom02">Last name</label>
-                                    <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required="">
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustomUsername">Username</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroupPrepend">45645</span>
-                                        </div>
-                                        <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required="">
-                                        <div class="invalid-feedback">
-                                            Please choose a username.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom03">City</label>
-                                    <input type="text" class="form-control" id="validationCustom03" placeholder="City" required="">
-                                    <div class="invalid-feedback">
-                                        Please provide a valid city.
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="validationCustom04">State</label>
-                                    <input type="text" class="form-control" id="validationCustom04" placeholder="State" required="">
-                                    <div class="invalid-feedback">
-                                        Please provide a valid state.
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="validationCustom05">Zip</label>
-                                    <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required="">
-                                    <div class="invalid-feedback">
-                                        Please provide a valid zip.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required="">
-                                    <label class="form-check-label" for="invalidCheck">Agree to terms and conditions</label>
-                                    <div class="invalid-feedback">
-                                        You must agree before submitting.
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn  btn-primary" type="submit">Submit form</button>
-                    </div>
-                </div>
-                <!-- Input group -->
-
             </div>
         </div>
-    </section>
-}
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        @using (Html.BeginForm("CompanyMaster", "Master", FormMethod.Post, new { @id = "signupForm" }))
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        @if (@TempData["Error"] != null)
+                        {
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="float:right">
+                                <strong> @TempData["Error"]!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                        }
+                        <div class="card-header">
+                            <h5>CompanyMaster</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">Project Name</label>
+                                   @Html.DropDownListFor(m => m.FK_ProjectID, new SelectList(ViewBag.ddlprojectname, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">Company Name</label>
+                                    @Html.TextBoxFor(m=>m.CompanyName, new {@class="form-control", @placeholder="Company Name", @required= "required" })
+                                  </div>
 
+
+                            </div>
+
+                            <input class="btn  btn-primary" type="submit" name="btnsave" value="Save" />
+
+                           
+                        </div>
+                        <!-- Input group -->
+
+                    </div>
+                    <!-- [ form-element ] end -->
+                </div>
+                <!-- [ Main Content ] end -->
+
+            </div>
+        }
+    </div>
+</section>
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
