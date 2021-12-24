@@ -464,6 +464,7 @@
     <Content Include="Views\Master\Projectlist.cshtml" />
     <Content Include="Views\Master\CompanyList.cshtml" />
     <Content Include="Views\Master\DesignationList.cshtml" />
+    <Content Include="Views\Master\PlanList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
