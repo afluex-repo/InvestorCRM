@@ -4,10 +4,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-
+using InvestorsCRM.Models;
 namespace InvestorsCRM.Models
 {
-    public class Master
+    public class Master :Common
     {
        public string  CompanyName { get; set; }
         public string ProjectName { get; set; }
@@ -17,6 +17,8 @@ namespace InvestorsCRM.Models
         public string CreatedBy { get; set; }
         public string PK_ProjectID { get; set; }
         public  string PK_CompanyID { get; set; }
+        public string EmailId { get; set; }
+        public string Amount { get; set; }
         public List<Master> lstproject { get; set; }
         public List<Master> lstCompany { get; set; }
         public string DesignationName { get; set; }
