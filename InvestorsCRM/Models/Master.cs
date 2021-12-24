@@ -16,7 +16,9 @@ namespace InvestorsCRM.Models
         public string FK_ProjectID { get; set; }
         public string CreatedBy { get; set; }
         public string PK_ProjectID { get; set; }
+        public  string PK_CompanyID { get; set; }
         public List<Master> lstproject { get; set; }
+        public List<Master> lstCompany { get; set; }
 
         public DataSet InsertProject()
         {
@@ -45,13 +47,34 @@ namespace InvestorsCRM.Models
             DataSet ds = Connection.ExecuteQuery("GetProjectList",para);
             return ds;
         }
-        public DataSet updateprojectname()
+        public DataSet UpdateCompanyName()
         {
             SqlParameter[] para =
             {
-                new SqlParameter("@PK_ProjectID",PK_ProjectID),
-                 new SqlParameter("@ProjectName",ProjectName),
+                new SqlParameter("@PK_CompanyID",PK_CompanyID),
+                 new SqlParameter("@CompanyName",CompanyName),
+                  new SqlParameter("@FK_ProjectID",FK_ProjectID),
                   new SqlParameter("@createdby",CreatedBy),
+
+            };
+            DataSet ds = Connection.ExecuteQuery("UpdateCompanyName", para);
+            return ds;
+        }
+        public DataSet GetCompanyname()
+        {
+            SqlParameter[] para ={
+                  new SqlParameter("@PK_CompanyID",PK_CompanyID)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetCompanyName", para);
+            return ds;
+        }
+
+        public DataSet updateprojectname()
+        {
+            SqlParameter[] para ={
+                  new SqlParameter("@PK_ProjectID",PK_ProjectID),
+                  new SqlParameter("@ProjectName",ProjectName),
+                  new SqlParameter("@createdby",CreatedBy)
 
             };
             DataSet ds = Connection.ExecuteQuery("UpdateProjectName", para);
