@@ -26,7 +26,6 @@ namespace InvestorsCRM.Controllers
                 DataSet ds = obj.Login();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-
                     if (ds.Tables[0].Rows[0]["FK_Usertype"].ToString() == "1")
                     {
                         ViewBag.errormsg = "";
@@ -36,7 +35,6 @@ namespace InvestorsCRM.Controllers
                         Session["FK_UserTypeID"] = ds.Tables[0].Rows[0]["FK_Usertype"].ToString();
                         
                         return RedirectToAction("Index", "Master");
-
                     }
 
                     if (ds.Tables[0].Rows[0]["FK_Usertype"].ToString() != "1")
@@ -46,19 +44,14 @@ namespace InvestorsCRM.Controllers
                         Session["LoginID"] = ds.Tables[0].Rows[0]["LoginID"].ToString();
                         Session["Username"] = ds.Tables[0].Rows[0]["Username"].ToString();
                         Session["FK_UserTypeID"] = ds.Tables[0].Rows[0]["FK_Usertype"].ToString();
-
                         return RedirectToAction("Index", "Home");
-
                     }
-
                     else
                     {
                         ViewBag.errormsg = "";
                         TempData["Login"] = "Incorrect LoginId Or Password";
                         return RedirectToAction("Login");
-
                     }
-
                 }
                 else
                 {
@@ -74,9 +67,6 @@ namespace InvestorsCRM.Controllers
                 return RedirectToAction("Login", "Home");
 
             }
-
-
-          
         }
 
         public ActionResult ForgetPassword()

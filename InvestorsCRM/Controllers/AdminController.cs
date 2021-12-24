@@ -15,7 +15,6 @@ namespace InvestorsCRM.Controllers
         {
             return View();
         }
-      
         public ActionResult Registration()
         {
             return View();
@@ -28,7 +27,6 @@ namespace InvestorsCRM.Controllers
 
             return View();
         }
-
         public ActionResult ChangePassword()
         {
             return View();
