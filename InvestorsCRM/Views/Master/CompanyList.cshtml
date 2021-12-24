@@ -1,0 +1,86 @@
+﻿@model InvestorsCRM.Models.Master
+@{
+    ViewBag.Title = "CompanyList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="pcoded-main-container">
+
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/Master/index"><i class="feather icon-home"></i></a></li>
+                               <li class="breadcrumb-item"><a href="#"> Company List</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Company Master List</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-block">
+                            <div class="dt-responsive table-responsive">
+                                <table id="compact" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>S.N.</th>
+                                            <th>Company Name</th>
+                                            <th>Project Name</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstproject != null)
+                                            {
+
+                                                int i = 1;
+                                                foreach (var item in Model.lstproject)
+                                                {
+                                                    <tr>
+                                                        <td style="display:none">
+                                                            <input type="text" name="PK_CompanyID" value="PK_CompanyID" hidden="true" />
+                                                        </td>
+                                                        <td>@i</td>
+                                                        <td>@item.CompanyName</td>
+                                                        <td>@item.ProjectName</td>
+                                                        <td>
+                                                            <a href="/Master/CompanyMaster?PK_CompanyID=@item.PK_CompanyID" class="btn btn-default"><i class="feather icon-edit"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    i = i + 1;
+                                                }
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<script>
+    
+</script>
+
+

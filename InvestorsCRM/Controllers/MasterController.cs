@@ -84,70 +84,6 @@ namespace InvestorsCRM.Controllers
             }
             return View(model);
         }
-
-        public ActionResult CompanyMaster()
-        {
-            #region ddlprojectname
-
-            Master obj = new Master();
-            int count1 = 0;
-            List<SelectListItem> ddlprojectname = new List<SelectListItem>();
-            DataSet ds = obj.GetProjectName();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    if (count1 == 0)
-                    {
-                        ddlprojectname.Add(new SelectListItem { Text = "Select Site Type", Value = "0" });
-                    }
-                    ddlprojectname.Add(new SelectListItem { Text = r["ProjectName"].ToString(), Value = r["PK_ProjectID"].ToString() });
-                    count1 = count1 + 1;
-                }
-            }
-            ViewBag.ddlprojectname = ddlprojectname;
-            #endregion
-            return View();
-        }
-        [HttpPost]
-        [ActionName("CompanyMaster")]
-        [OnAction(ButtonName = "btnsave")]
-        public ActionResult CompanyMaster(Master obj)
-        {
-            obj.CreatedBy = Session["UserID"].ToString();
-
-            DataSet ds = obj.InsertCompany();
-            try
-            {
-                if (ds != null && ds.Tables.Count > 0)
-                {
-                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
-                    {
-                        TempData["Error"] = "Company Name is Successfully Added";
-                    }
-                    else
-                    {
-                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                TempData["Error"] = ex.Message;
-            }
-
-
-            return RedirectToAction("CompanyMaster", "Master");
-        }
-        public ActionResult DesignationMaster()
-        {
-            return View();
-        }
-        public ActionResult PLanMaster()
-        {
-            return View();
-        }
         [HttpPost]
         [ActionName("ProjectMaster")]
         [OnAction(ButtonName = "btnUpdate")]
@@ -186,7 +122,154 @@ namespace InvestorsCRM.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
+        public ActionResult CompanyMaster(string PK_CompanyID)
+        {
+            Master obj1 = new Master();
+            try
+            {
+                if (PK_CompanyID != null)
+                {
+                    obj1.PK_CompanyID = PK_CompanyID;
+                    DataSet ds1 = obj1.GetCompanyname();
+                    if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                    {
+                        obj1.CompanyName = ds1.Tables[0].Rows[0]["CompanyName"].ToString();
+                        obj1.PK_CompanyID = ds1.Tables[0].Rows[0]["PK_CompanyID"].ToString();
+                        obj1.ProjectName = ds1.Tables[0].Rows[0]["ProjectName"].ToString();
+                        obj1.FK_ProjectID = ds1.Tables[0].Rows[0]["PK_ProjectID"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            #region ddlprojectname
+
+            Master obj = new Master();
+            int count1 = 0;
+            List<SelectListItem> ddlprojectname = new List<SelectListItem>();
+            DataSet ds = obj.GetProjectName();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlprojectname.Add(new SelectListItem { Text = "Select Site Type", Value = "0" });
+                    }
+                    ddlprojectname.Add(new SelectListItem { Text = r["ProjectName"].ToString(), Value = r["PK_ProjectID"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+            ViewBag.ddlprojectname = ddlprojectname;
+            #endregion
+
+         
+
+            return View(obj1);
+        }
+
+        [HttpPost]
+        [ActionName("CompanyMaster")]
+        [OnAction(ButtonName = "btnsave")]
+        public ActionResult CompanyMaster(Master obj)
+        {
+            obj.CreatedBy = Session["UserID"].ToString();
+
+            DataSet ds = obj.InsertCompany();
+            try
+            {
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        TempData["Error"] = "Company Name is Successfully Added";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
 
 
+            return RedirectToAction("CompanyMaster", "Master");
+        }
+        public ActionResult CompanyList()
+        {
+            List<Master> lst = new List<Master>();
+            Master model = new Master();
+            DataSet ds = model.GetCompanyname();
+            if(ds!=null && ds.Tables[0].Rows.Count>0)
+            {
+                foreach(DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.CompanyName = r["CompanyName"].ToString();
+                    obj.PK_CompanyID = r["PK_CompanyID"].ToString();
+                    obj.ProjectName = r["ProjectName"].ToString();
+                    obj.PK_ProjectID = r["PK_ProjectID"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstproject = lst;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("CompanyMaster")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdateCompany( string PK_CompanyID, string CompanyName, string FK_ProjectID)
+        {
+            string FormName = "";
+            string Controller = "";
+            Master obj = new Master();
+            try
+            {
+                obj.PK_CompanyID = PK_CompanyID;
+                obj.CompanyName = CompanyName;
+                obj.FK_ProjectID = FK_ProjectID;
+                obj.CreatedBy = Session["UserID"].ToString();
+                DataSet ds = obj.UpdateCompanyName();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        FormName = "CompanyList";
+                        Controller = "Master";
+
+                        TempData["Updated"] = "Company is Successfully Updated!";
+                    }
+                    else
+                    {
+                        Session["CompanyName"] = CompanyName;
+                        FormName = "CompanyMaster";
+                        Controller = "Master";
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+        public ActionResult DesignationMaster()
+        {
+            return View();
+        }
+        public ActionResult PLanMaster()
+        {
+            return View();
+        }
+       
     }
 }
