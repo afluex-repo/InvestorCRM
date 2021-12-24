@@ -150,7 +150,7 @@ namespace InvestorsCRM.Controllers
 
             Master obj = new Master();
             int count1 = 0;
-            List<SelectListItem> ddlprojectname = new List<SelectListItem>();
+            List<SelectListItem> FK_ProjectID = new List<SelectListItem>();
             DataSet ds = obj.GetProjectName();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -158,13 +158,13 @@ namespace InvestorsCRM.Controllers
                 {
                     if (count1 == 0)
                     {
-                        ddlprojectname.Add(new SelectListItem { Text = "Select Site Type", Value = "0" });
+                        FK_ProjectID.Add(new SelectListItem {  Value = "0" });
                     }
-                    ddlprojectname.Add(new SelectListItem { Text = r["ProjectName"].ToString(), Value = r["PK_ProjectID"].ToString() });
+                    FK_ProjectID.Add(new SelectListItem { Text = r["ProjectName"].ToString(), Value = r["PK_ProjectID"].ToString() });
                     count1 = count1 + 1;
                 }
             }
-            ViewBag.ddlprojectname = ddlprojectname;
+            ViewBag.FK_ProjectID = FK_ProjectID;
             #endregion
 
          
@@ -177,6 +177,17 @@ namespace InvestorsCRM.Controllers
         [OnAction(ButtonName = "btnsave")]
         public ActionResult CompanyMaster(Master obj)
         {
+            
+            if (obj.FK_ProjectIDTO != null)
+            {
+                List<SelectListItem> ls = new List<SelectListItem>();
+                foreach (string st in obj.FK_ProjectIDTO)
+                {
+                  
+                    obj.FK_ProjectID = obj.FK_ProjectID + st;
+                }
+                obj.FK_ProjectID =  obj.FK_ProjectID.Remove(obj.FK_ProjectID.Length - 1, 1);
+            }
             obj.CreatedBy = Session["UserID"].ToString();
 
             DataSet ds = obj.InsertCompany();

@@ -371,6 +371,10 @@
     <Content Include="assets\js\plugins\jquery-ui.min.js" />
     <Content Include="assets\js\plugins\perfect-scrollbar.min.js" />
     <Content Include="assets\js\plugins\prism.js" />
+    <Content Include="assets\js\select2.full.js" />
+    <Content Include="assets\js\select2.full.min.js" />
+    <Content Include="assets\js\select2.js" />
+    <Content Include="assets\js\select2.min.js" />
     <Content Include="assets\js\uikit.js" />
     <Content Include="assets\js\uikit.min.js" />
     <Content Include="assets\js\vendor-all.js" />
