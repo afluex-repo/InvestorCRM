@@ -262,14 +262,231 @@ namespace InvestorsCRM.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
-        public ActionResult DesignationMaster()
+        public ActionResult DesignationMaster( string PK_DesignationID)
+        {
+            Master obj = new Master();
+            if(PK_DesignationID!=null)
+            {
+                obj.PK_DesignationID = PK_DesignationID;
+                DataSet ds = obj.GetDasignationList();
+                if(ds!=null && ds.Tables[0].Rows.Count>0 && ds.Tables.Count>0)
+                {
+                    obj.Percentage = ds.Tables[0].Rows[0]["Percentage"].ToString();
+                    obj.Designationame = ds.Tables[0].Rows[0]["DesignationName"].ToString();
+                    obj.PK_DesignationID = ds.Tables[0].Rows[0]["PK_DesignationID"].ToString();
+                }
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        [ActionName("DesignationMaster")]
+        [OnAction(ButtonName ="btnSave")]
+        public ActionResult DesignationMaster(Master Obj)
+        {
+            Obj.CreatedBy = Session["UserID"].ToString();
+            DataSet ds = Obj.InsertDesignation();
+            try
+            {
+                if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        TempData["Error"] = "Designation Name is Successfully Added";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception  ex)
+            {
+                TempData["Error"] = ex.Message;
+               // throw ex;
+            }
+            
+            return RedirectToAction("DesignationMaster","Master");
+        }
+        public ActionResult DesignationList()
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetDasignationList();
+            if(ds!=null && ds.Tables[0].Rows.Count>0 && ds.Tables.Count>0)
+            {
+                foreach(DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.Designationame = r["DesignationName"].ToString();
+                    obj.Percentage = r["Percentage"].ToString();
+                    obj.PK_DesignationID = r["PK_DesignationID"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDesignation = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult DesignationDelete(string PK_DesignationID)
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            model.PK_DesignationID = PK_DesignationID;
+            model.CreatedBy= Session["UserID"].ToString();
+            DataSet ds = model.DeleteDasignationList();
+            try
+            {
+                if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        TempData["Error"] = "Designation Name is Successfully Deleted";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                TempData["Error"] = ex.Message;
+            }
+
+            return RedirectToAction("DesignationList", "Master");
+        }
+        public ActionResult PLanMaster( string PK_PlanID)
+        {
+            Master obj = new Master();
+            try
+            {
+                obj.PK_PlanID = PK_PlanID;
+                DataSet ds = obj.GetPlan();
+                if (PK_PlanID != null)
+                {
+                 
+                    if(ds!=null && ds.Tables[0].Rows.Count>0 && ds.Tables.Count>0 )
+                    {
+                        obj.PK_PlanID = ds.Tables[0].Rows[0]["PK_PlanID"].ToString();
+                        obj.PlanName = ds.Tables[0].Rows[0]["PlanName"].ToString();
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+               
+                   
+
+            }
+            catch (Exception ex)
+            {
+
+                TempData["Error"] = ex.Message;
+            }
+          
+            return View(obj);
+        }
+        [HttpPost]
+        [ActionName("PLanMaster")]
+        [OnAction(ButtonName = "btnSave")]
+        public ActionResult PLanMaster(Master obj)
+        {
+
+            try
+            {
+                obj.CreatedBy = Session["UserID"].ToString();
+                DataSet ds = obj.SavePlan();
+                if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+                { 
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        TempData["Error"] = "Plan Name Has Been Added SuccessFully";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+               }
+              }
+            catch (Exception ex)
+            {
+
+                TempData["Error"] = ex.Message;
+            }
+
+            return RedirectToAction("PLanMaster", "Master");
+        }
+        public ActionResult PlanList()
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            DataSet Ds = model.GetPlan();
+            try
+            {
+                if (Ds!=null && Ds.Tables[0].Rows.Count>0 && Ds.Tables.Count>0)
+                {
+                   
+                    foreach(DataRow r in Ds.Tables[0].Rows)
+                    {
+                        Master obj = new Master();
+                        obj.PlanName = r["PlanName"].ToString();
+                        obj.PK_PlanID = r["PK_PlanID"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstPlan = lst;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return View(model);
+        }
+        [ActionName("PLanMaster")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdatePlan(string PK_PlanID, string PlanName)
+        {
+            string FormName = "";
+            string Controller = "";
+            Master obj = new Master();
+            try
+            {
+                obj.PK_PlanID = PK_PlanID;
+                obj.PlanName = PlanName;
+                obj.CreatedBy = Session["UserID"].ToString();
+                DataSet ds = obj.UpdatePlan();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        FormName = "PlanList";
+                        Controller = "Master";
+
+                        TempData["Updated"] = "Plan is Successfully Updated!";
+                    }
+                    else
+                    {
+                       
+                        FormName = "PlanMaster";
+                        Controller = "Master";
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+        public ActionResult ChangePassword()
         {
             return View();
         }
-        public ActionResult PLanMaster()
-        {
-            return View();
-        }
-       
+
+
     }
 }

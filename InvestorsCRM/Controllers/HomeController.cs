@@ -33,7 +33,7 @@ namespace InvestorsCRM.Controllers
                         Session["LoginID"] = ds.Tables[0].Rows[0]["LoginID"].ToString();
                         Session["Username"] = ds.Tables[0].Rows[0]["Username"].ToString();
                         Session["FK_UserTypeID"] = ds.Tables[0].Rows[0]["FK_Usertype"].ToString();
-
+                        
                         return RedirectToAction("Index", "Master");
                     }
 
