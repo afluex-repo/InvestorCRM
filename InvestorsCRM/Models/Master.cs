@@ -21,6 +21,14 @@ namespace InvestorsCRM.Models
         public string Amount { get; set; }
         public List<Master> lstproject { get; set; }
         public List<Master> lstCompany { get; set; }
+        public List<Master> lstDesignation { get; set; }
+        public List<Master> lstPlan { get; set; }
+        public string DesignationName { get; set; }
+        public string Percentage { get; set; }
+        public string PK_DesignationID { get; set; }
+        public string PK_PlanID { get; set; }
+        public string[] FK_ProjectIDTO { get; set; }
+        public List<ListProject> listProject { get; set; }
 
         public DataSet InsertProject()
         {
@@ -70,7 +78,6 @@ namespace InvestorsCRM.Models
             DataSet ds = Connection.ExecuteQuery("GetCompanyName", para);
             return ds;
         }
-
         public DataSet updateprojectname()
         {
             SqlParameter[] para ={
@@ -80,6 +87,78 @@ namespace InvestorsCRM.Models
 
             };
             DataSet ds = Connection.ExecuteQuery("UpdateProjectName", para);
+            return ds;
+        }
+        public DataSet InsertDesignation()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@DesignationName",DesignationName),
+                new SqlParameter("@Percentage",Percentage),
+                new SqlParameter("@CreatedBy",CreatedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("SaveDesignation", para);
+            return ds;
+        }
+
+        public DataSet GetDasignationList()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_DesignationID",PK_DesignationID)
+
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDesignationList", para);
+            return ds;
+        }
+
+        public class ListProject
+        {
+            public string ddlprojectname { get; set; }
+        }
+        public DataSet DeleteDasignationList()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_DesignationID",PK_DesignationID),
+                   new SqlParameter("@DeletedBy",CreatedBy)
+
+
+            };
+            DataSet ds = Connection.ExecuteQuery("DeleteDesignationList", para);
+            return ds;
+        }
+
+        public DataSet SavePlan()
+        {
+            SqlParameter[] para={
+                new SqlParameter("@PlanName ",PlanName),
+                 new SqlParameter("@CreatedBy ",CreatedBy)
+
+            };
+            DataSet ds = Connection.ExecuteQuery("SavePlan", para);
+            return ds;
+        }
+        public DataSet GetPlan()
+        {
+            SqlParameter[] para ={
+                new SqlParameter("@PK_PlanID ",PK_PlanID)
+               
+
+            };
+            DataSet ds = Connection.ExecuteQuery("GetPlan", para);
+            return ds;
+        }
+
+        public DataSet UpdatePlan()
+        {
+            SqlParameter[] para =
+            {
+               new  SqlParameter ("@Pk_PlanID",PK_PlanID),
+               new  SqlParameter ("@PlanName",PlanName),
+               new SqlParameter("@CreatedBy",CreatedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("UpdatePlan", para);
             return ds;
         }
     }

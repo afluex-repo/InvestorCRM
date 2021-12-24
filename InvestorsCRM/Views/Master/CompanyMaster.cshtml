@@ -42,14 +42,15 @@
                         </div>
                         <div class="card-body">
                             <div class="form-row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustom01">Project Name</label>
-                                   @Html.DropDownListFor(m => m.FK_ProjectID, new SelectList(ViewBag.ddlprojectname, "Value", "Text"), new { @class = "form-control" })
-                                </div>
+                                
                                 <div class="col-md-4 mb-3">
                                     <label for="validationCustom01">Company Name</label>
                                     @Html.TextBoxFor(m=>m.CompanyName, new {@class="form-control", @placeholder="Company Name", @required= "required" })
                                   </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">Project Name</label>
+                                   @Html.DropDownListFor(m => m.FK_ProjectID, new SelectList(ViewBag.ddlprojectname, "Value", "Text"), new { @class = "form-control" })
+                                </div>
                                 @Html.HiddenFor(m=>m.PK_CompanyID)
                               
                             </div>
