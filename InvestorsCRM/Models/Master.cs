@@ -42,7 +42,7 @@ namespace InvestorsCRM.Models
             SqlParameter[] para =
             {
                 new SqlParameter("@CompanyName",CompanyName),
-                 new SqlParameter("@CreatedBy",CreatedBy),
+                 new SqlParameter("@AddedBy",CreatedBy),
                  new SqlParameter("@FK_ProjectID",FK_ProjectID),
 
             };
