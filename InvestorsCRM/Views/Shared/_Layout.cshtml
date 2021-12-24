@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin</title>
+    <title>@Session["Username"]</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -33,7 +33,7 @@
                     <div class="main-menu-header">
                         <img class="img-radius" src="~/assets/images/user/avatar-2.jpg" alt="User-Profile-Image">
                         <div class="user-details">
-                            <span>Admin</span>
+                            <span>@Session["Username"]</span>
                             @*<div id="more-details">Afluex</div>*@
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         <label>Navigation</label>
                     </li>
                     <li class="nav-item">
-                        <a href="/Home/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                        <a href="/Master/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
                     </li>
                     <li class="nav-item pcoded-hasmenu">
                         <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Master</span></a>
@@ -203,15 +203,15 @@
                         <div class="dropdown-menu dropdown-menu-right profile-notification">
                             <div class="pro-head">
                                 <img src="~/assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
-                                <span>John Doe</span>
+                                <span>@Session["Username"]</span>
                                 <a href="auth-signin.html" class="dud-logout" title="Logout">
                                     <i class="feather icon-log-out"></i>
                                 </a>
                             </div>
                             <ul class="pro-body">
-                                <li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-                                <li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-                                <li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
+                              
+                                <li><a href="/Master/ChangePassword" class="dropdown-item"><i class="feather icon-mail"></i> Change Password</a></li>
+                                <li><a href="/Home/Login" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
                             </ul>
                         </div>
                     </div>

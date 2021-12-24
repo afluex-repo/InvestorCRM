@@ -21,8 +21,10 @@ namespace InvestorsCRM.Models
         public string Amount { get; set; }
         public List<Master> lstproject { get; set; }
         public List<Master> lstCompany { get; set; }
+        public List<Master> lstDesignation { get; set; }
         public string DesignationName { get; set; }
         public string Percentage { get; set; }
+        public string PK_DesignationID { get; set; }
 
         public DataSet InsertProject()
         {
@@ -94,5 +96,29 @@ namespace InvestorsCRM.Models
             DataSet ds = Connection.ExecuteQuery("SaveDesignation", para);
             return ds;
         }
+
+        public DataSet GetDasignationList()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_DesignationID",PK_DesignationID)
+
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDesignationList", para);
+            return ds;
+        }
+        public DataSet DeleteDasignationList()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_DesignationID",PK_DesignationID),
+                   new SqlParameter("@DeletedBy",CreatedBy)
+
+
+            };
+            DataSet ds = Connection.ExecuteQuery("DeleteDesignationList", para);
+            return ds;
+        }
+        
     }
 }

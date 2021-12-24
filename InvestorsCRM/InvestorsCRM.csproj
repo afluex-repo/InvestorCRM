@@ -454,7 +454,7 @@
     <Content Include="Views\Admin\Registration.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Admin\ChangePassword.cshtml" />
+    <Content Include="Views\Master\ChangePassword.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
     <Content Include="Views\Master\Index.cshtml" />
     <Content Include="Views\Master\ProjectMaster.cshtml" />
@@ -463,6 +463,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Master\Projectlist.cshtml" />
     <Content Include="Views\Master\CompanyList.cshtml" />
+    <Content Include="Views\Master\DesignationList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

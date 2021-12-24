@@ -262,9 +262,21 @@ namespace InvestorsCRM.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
-        public ActionResult DesignationMaster()
+        public ActionResult DesignationMaster( string PK_DesignationID)
         {
-            return View();
+            Master obj = new Master();
+            if(PK_DesignationID!=null)
+            {
+                obj.PK_DesignationID = PK_DesignationID;
+                DataSet ds = obj.GetDasignationList();
+                if(ds!=null && ds.Tables[0].Rows.Count>0 && ds.Tables.Count>0)
+                {
+                    obj.Percentage = ds.Tables[0].Rows[0]["Percentage"].ToString();
+                    obj.Designationame = ds.Tables[0].Rows[0]["DesignationName"].ToString();
+                    obj.PK_DesignationID = ds.Tables[0].Rows[0]["PK_DesignationID"].ToString();
+                }
+            }
+            return View(obj);
         }
         [HttpPost]
         [ActionName("DesignationMaster")]
@@ -295,10 +307,65 @@ namespace InvestorsCRM.Controllers
             
             return RedirectToAction("DesignationMaster","Master");
         }
+        public ActionResult DesignationList()
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetDasignationList();
+            if(ds!=null && ds.Tables[0].Rows.Count>0 && ds.Tables.Count>0)
+            {
+                foreach(DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.Designationame = r["DesignationName"].ToString();
+                    obj.Percentage = r["Percentage"].ToString();
+                    obj.PK_DesignationID = r["PK_DesignationID"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDesignation = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult DesignationDelete(string PK_DesignationID)
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            model.PK_DesignationID = PK_DesignationID;
+            model.CreatedBy= Session["UserID"].ToString();
+            DataSet ds = model.DeleteDasignationList();
+            try
+            {
+                if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        TempData["Error"] = "Designation Name is Successfully Deleted";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                TempData["Error"] = ex.Message;
+            }
+
+            return RedirectToAction("DesignationList", "Master");
+        }
         public ActionResult PLanMaster()
         {
             return View();
         }
-       
+
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+
     }
 }
