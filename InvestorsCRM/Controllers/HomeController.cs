@@ -19,21 +19,8 @@ namespace InvestorsCRM.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(UserLogin obj)
+        public ActionResult Login(Home obj)
         {
-            if (obj.LogingID == null)
-            {
-                ViewBag.errormsg = "";
-                TempData["Login"] = "Please Enter LoginId";
-                return RedirectToAction("Login");
-
-            }
-            if (obj.Psssword== null)
-            {
-                ViewBag.errormsg = "";
-                TempData["Login"] = "Please Enter Password";
-                return RedirectToAction("Login");
-            }
             try
             {
                 DataSet ds = obj.Login();

@@ -1,0 +1,107 @@
+﻿@model InvestorsCRM.Models.Master
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Registration", "Admin", FormMethod.Post, new { @id = "signupForm", @novalidate = "" }))
+{
+    <section class="pcoded-main-container">
+        <div class="pcoded-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">Dashboard Analytics</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-"></i></a></li>
+                                <li class="breadcrumb-item"><a href="#!">Registration</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>UserRegistration</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="LogingID">LoginId</label>
+                                    @Html.TextBoxFor(m => m.LogingID, new{@class="form-control",@placeholder="LoginId"})
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="Username">Name</label>
+                                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "Name" })
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="Designation">Designation</label>
+                                    <select class="form-control" name="FK_Usertype">
+                                        <option value="0">Select User Type</option>
+                                        <option values="1">User</option>
+                                        <option values="2">HR</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="Email">Email</label>
+                                @Html.TextBoxFor(m => m.EmailId, new { @class="form-control",@placeholder="Email"})
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="PanCard">Pan Card</label>
+                                    @Html.TextBoxFor(m => m.PanCard, new { @class = "form-control", @placeholder = "Pan Card" })
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="PanCard">Adhar Card</label>
+                                    @Html.TextBoxFor(m => m.AdharCard, new { @class = "form-control", @placeholder = "Adhar Card" })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="Pincode">Pincode</label>
+                                    @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @placeholder = "Pincode" })
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="PanCard">State</label>
+                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State" })
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="PanCard">Adhar Card</label>
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="Amount">Amount</label>
+                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount" })
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="asdf">User Type</label>
+                                    <select class="form-control" name="FK_Usertype">
+                                        <option value="0">Select User Type</option>
+                                        <option values="1">User</option>
+                                        <option values="2">HR</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="asdf">Upload Profile</label>
+                                    <input type="file" class="form-control" id="sdfa" name="Profile">
+                                </div>
+                            </div>
+                            <button class="btn  btn-primary" type="submit" name="btnsave">Submit </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+

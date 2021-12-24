@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace InvestorsCRM.Controllers
 {
-    public class AdminMasterController : BaseController
+    public class AdminController : BaseController
     {
         // GET: AdminMaster
         public ActionResult Index()
@@ -16,12 +16,12 @@ namespace InvestorsCRM.Controllers
             return View();
         }
       
-        public ActionResult UserRegistration()
+        public ActionResult Registration()
         {
             return View();
         }
        [HttpPost]
-       [ActionName("UserRegistration")]
+       [ActionName("Registration")]
        [OnAction(ButtonName ="btnsave")]
         public ActionResult SavrRegistration()
         { 
