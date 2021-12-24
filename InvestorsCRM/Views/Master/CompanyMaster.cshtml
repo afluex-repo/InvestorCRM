@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "CompanyMaster";
-    Layout = "~/Views/Shared/Master_LayoutPage.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <section class="pcoded-main-container">
     <div class="pcoded-content">
@@ -50,12 +50,26 @@
                                     <label for="validationCustom01">Company Name</label>
                                     @Html.TextBoxFor(m=>m.CompanyName, new {@class="form-control", @placeholder="Company Name", @required= "required" })
                                   </div>
-
-
+                                @Html.HiddenFor(m=>m.PK_CompanyID)
+                              
                             </div>
+                            @if (Model.PK_CompanyID != null)
+                            {
+                                <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" />
 
-                            <input class="btn  btn-primary" type="submit" name="btnsave" value="Save" />
+                            }
+                            else
+                            {
 
+
+                                <input class="btn  btn-primary" type="submit" name="btnsave" value="Save" />
+                            }
+
+                          
+
+
+                            <a href="/Master/CompanyMaster" class="btn btn-dark">Reset</a>
+                            <a href="/Master/CompanyList" class="btn btn-info">Back To List</a>
                            
                         </div>
                         <!-- Input group -->
