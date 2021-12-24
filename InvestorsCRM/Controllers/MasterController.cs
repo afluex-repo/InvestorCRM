@@ -266,6 +266,35 @@ namespace InvestorsCRM.Controllers
         {
             return View();
         }
+        [HttpPost]
+        [ActionName("DesignationMaster")]
+        [OnAction(ButtonName ="btnSave")]
+        public ActionResult DesignationMaster(Master Obj)
+        {
+            Obj.CreatedBy = Session["UserID"].ToString();
+            DataSet ds = Obj.InsertDesignation();
+            try
+            {
+                if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        TempData["Error"] = "Designation Name is Successfully Added";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception  ex)
+            {
+                TempData["Error"] = ex.Message;
+               // throw ex;
+            }
+            
+            return RedirectToAction("DesignationMaster","Master");
+        }
         public ActionResult PLanMaster()
         {
             return View();

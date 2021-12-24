@@ -1,9 +1,10 @@
-﻿
+﻿@model InvestorsCRM.Models.Master
 @{
     ViewBag.Title = "DesignationMaster";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@using (Html.BeginForm("DesignationMaster", "Master", FormMethod.Post, new { @id = "signupForm" }))
+{
 <section class="pcoded-main-container">
     <div class="pcoded-content">
         <!-- [ breadcrumb ] start -->
@@ -15,7 +16,7 @@
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/Master/index"><i class="feather icon-home"></i></a></li>
 
-                                <li class="breadcrumb-item"><a href="#">Add Company </a></li>
+                                <li class="breadcrumb-item"><a href="#">Add Designation Master </a></li>
                             </ul>
                         </div>
 
@@ -23,13 +24,10 @@
                 </div>
             </div>
         </div>
-        <!-- [ breadcrumb ] end -->
-        <!-- [ Main Content ] start -->
-        @using (Html.BeginForm("Master", "DesignationMaster", FormMethod.Post, new { @id = "signupForm" }))
-        {
-            <div class="row">
+        <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
+                        @TempData["Error"]
                         <div class="card-header">
                             <h5>Add DesignationMaster</h5>
                         </div>
@@ -37,27 +35,33 @@
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label for="validationCustom01">Designation Name</label>
-                                    <input type="text" class="form-control" placeholder="Designation Name" required name="Designation">
+                                    @Html.TextBoxFor(m=>m.DesignationName, new {@class="form-control", @placeholder="Designation Name", @required= "required"})
+                                  
+
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">Percentage</label>
+                                    @Html.TextBoxFor(m => m.Percentage, new { @class = "form-control", @placeholder = "Enter Percentage", @required = "required", @onkeypress =  " return isNumberKey(event);" })
+
 
                                 </div>
 
-
+                                </div>
+                                 <input type="submit" class="btn  btn-primary" name="btnSave" value="Save" />
                             </div>
-
-
-
-                            <button class="btn  btn-primary" type="submit" name="btnsave">Save</button>
-
-                        </div>
-                        <!-- Input group -->
-
-                    </div>
-                    <!-- [ form-element ] end -->
-                </div>
-                <!-- [ Main Content ] end -->
-
-            </div>
-        }
-    </div>
+                      </div>
+                  </div>
+             </div>
+      </div>
 </section>
+}
 
+<script>
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+</script>

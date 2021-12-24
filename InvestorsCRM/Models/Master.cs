@@ -19,6 +19,8 @@ namespace InvestorsCRM.Models
         public  string PK_CompanyID { get; set; }
         public List<Master> lstproject { get; set; }
         public List<Master> lstCompany { get; set; }
+        public string DesignationName { get; set; }
+        public string Percentage { get; set; }
 
         public DataSet InsertProject()
         {
@@ -68,7 +70,6 @@ namespace InvestorsCRM.Models
             DataSet ds = Connection.ExecuteQuery("GetCompanyName", para);
             return ds;
         }
-
         public DataSet updateprojectname()
         {
             SqlParameter[] para ={
@@ -78,6 +79,17 @@ namespace InvestorsCRM.Models
 
             };
             DataSet ds = Connection.ExecuteQuery("UpdateProjectName", para);
+            return ds;
+        }
+        public DataSet InsertDesignation()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@DesignationName",DesignationName),
+                new SqlParameter("@Percentage",Percentage),
+                new SqlParameter("@CreatedBy",CreatedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("SaveDesignation", para);
             return ds;
         }
     }
