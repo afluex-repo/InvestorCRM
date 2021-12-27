@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using InvestorsCRM.Models;
 using System.Data;
+using System.Web.UI.WebControls;
 
 namespace InvestorsCRM.Controllers
 {
@@ -175,19 +176,43 @@ namespace InvestorsCRM.Controllers
         [HttpPost]
         [ActionName("CompanyMaster")]
         [OnAction(ButtonName = "btnsave")]
-        public ActionResult CompanyMaster(Master obj)
+        public ActionResult CompanyMaster(Master obj)//, params ListControl[] controls)
         {
-            
+            List<SelectListItem> ls = new List<SelectListItem>();
+            DataTable dt = new DataTable();
             if (obj.FK_ProjectIDTO != null)
             {
-                List<SelectListItem> ls = new List<SelectListItem>();
+
                 foreach (string st in obj.FK_ProjectIDTO)
                 {
+                    foreach (DataRow dtRow in dt.Rows)
+
+                    {
+                        obj.FK_ProjectID = dtRow["FK_ProjectID"].ToString();
+                    } // obj.FK_ProjectID = obj.FK_ProjectID + st;
+                     
                   
-                    obj.FK_ProjectID = obj.FK_ProjectID + st;
+                   // ls.Add(obj);
                 }
-                obj.FK_ProjectID =  obj.FK_ProjectID.Remove(obj.FK_ProjectID.Length - 1, 1);
+             
             }
+          
+            //if (dt.Rows.Count > 0)
+            //{
+            //    foreach (ListControl ctrl in controls)
+            //    {
+
+            //        ctrl.Items.Clear();
+
+            //        foreach (DataRow dtRow in dt.Rows)
+            //        {
+            //           ctrl.Items.Add(new ListItem(dtRow["ProjectName"].ToString(), dtRow["FK_ProjectID"].ToString()));
+            //            obj.FK_ProjectID = dtRow["FK_ProjectID"].ToString();
+            //        }
+                    
+
+            //    }
+            //}
             obj.CreatedBy = Session["UserID"].ToString();
 
             DataSet ds = obj.InsertCompany();
@@ -496,6 +521,42 @@ namespace InvestorsCRM.Controllers
         public ActionResult ChangePassword()
         {
             return View();
+        }
+        [HttpPost]
+        [ActionName("ChangePassword")]
+        [OnAction(ButtonName = "btnsave")]
+        public ActionResult ChangePassword(Master obj)
+        {
+            obj.CreatedBy = Session["UserID"].ToString();
+
+            try
+            {
+                if (obj.NewPassword == obj.ConfirmPassword)
+                {
+                    obj.NewPassword = Crypto.Encrypt(obj.NewPassword);
+                    DataSet ds = obj.ChnagePassword();
+                    if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+                    {
+                        TempData["Error"] = "Your Password Has Been SuccessfFully Updated ";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["Error"] = "Your Password Has Not Match ";
+                }
+               
+            }
+            catch (Exception ex)
+            {
+
+                TempData["Error"] = ex.Message;
+            }
+           
+            return RedirectToAction("ChangePassword", "Master");
         }
 
 
