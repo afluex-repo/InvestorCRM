@@ -31,6 +31,8 @@ namespace InvestorsCRM.Models
         public string NewPassword { get; set; }
         public string OldPassword { get; set; }
         public string ConfirmPassword { get; set; }
+        public DataTable DtCompanyDetail { get; set;}
+        
         public List<ListProject> listProject { get; set; }
 
         public DataSet InsertProject()
@@ -46,7 +48,7 @@ namespace InvestorsCRM.Models
             {
                 new SqlParameter("@CompanyName",CompanyName),
                  new SqlParameter("@AddedBy",CreatedBy),
-                 new SqlParameter("@FK_ProjectID",FK_ProjectID),
+                 new SqlParameter("@DtCompanyDetail",DtCompanyDetail)
 
             };
             DataSet ds = Connection.ExecuteQuery("SaveCompany", para);

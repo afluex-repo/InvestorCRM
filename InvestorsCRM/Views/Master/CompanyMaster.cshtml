@@ -49,7 +49,7 @@
                                   </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="validationCustom01">Project Name</label>
-                                   @Html.DropDownListFor(m => m.FK_ProjectIDTO, new SelectList(ViewBag.FK_ProjectID, "Value", "Text"), new { @class = "form-control chosen-select", multiple = "multiple" })
+                                   @Html.DropDownListFor(m => m.FK_ProjectID, new SelectList(ViewBag.FK_ProjectID, "Value", "Text"), new { @class = "form-control chosen-select", multiple = "multiple" })
                                 </div>
                                 @Html.HiddenFor(m=>m.PK_CompanyID)
                               
@@ -57,12 +57,9 @@
                             @if (Model.PK_CompanyID != null)
                             {
                                 <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" />
-
                             }
                             else
                             {
-
-
                                 <input class="btn  btn-primary" type="submit" name="btnsave" value="Save" />
                             }
 
