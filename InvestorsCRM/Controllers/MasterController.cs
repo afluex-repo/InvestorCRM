@@ -69,7 +69,7 @@ namespace InvestorsCRM.Controllers
         {
             Master model = new Master();
             List<Master> lst1 = new List<Master>();
-            DataSet ds = model.GetProjectName();
+            DataSet ds = model.GetProjectList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
@@ -135,8 +135,8 @@ namespace InvestorsCRM.Controllers
                     {
                         obj1.CompanyName = ds1.Tables[0].Rows[0]["CompanyName"].ToString();
                         obj1.PK_CompanyID = ds1.Tables[0].Rows[0]["PK_CompanyID"].ToString();
-                        obj1.ProjectName = ds1.Tables[0].Rows[0]["ProjectName"].ToString();
-                        obj1.FK_ProjectID = ds1.Tables[0].Rows[0]["PK_ProjectID"].ToString();
+                      //  obj1.ProjectName = ds1.Tables[0].Rows[0]["ProjectName"].ToString();
+                      //  obj1.FK_ProjectID = ds1.Tables[0].Rows[0]["PK_ProjectID"].ToString();
                     }
                 }
             }
@@ -231,18 +231,13 @@ namespace InvestorsCRM.Controllers
                     Master obj = new Master();
                     obj.CompanyName = r["CompanyName"].ToString();
                     obj.PK_CompanyID = r["PK_CompanyID"].ToString();
-                    obj.ProjectName = r["ProjectName"].ToString();
-                    obj.PK_ProjectID = r["PK_ProjectID"].ToString();
                     lst.Add(obj);
                 }
                 model.lstproject = lst;
             }
             return View(model);
         }
-        [HttpPost]
-        [ActionName("CompanyMaster")]
-        [OnAction(ButtonName = "btnUpdate")]
-        public ActionResult UpdateCompany(string PK_CompanyID, string CompanyName, string FK_ProjectID)
+        public ActionResult DeleteCompany(string PK_CompanyID)
         {
             string FormName = "";
             string Controller = "";
@@ -250,10 +245,8 @@ namespace InvestorsCRM.Controllers
             try
             {
                 obj.PK_CompanyID = PK_CompanyID;
-                obj.CompanyName = CompanyName;
-                obj.FK_ProjectID = FK_ProjectID;
                 obj.CreatedBy = Session["UserID"].ToString();
-                DataSet ds = obj.UpdateCompanyName();
+                DataSet ds = obj.DeleteCompanytName();
                 if (ds != null && ds.Tables.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
@@ -261,11 +254,11 @@ namespace InvestorsCRM.Controllers
                         FormName = "CompanyList";
                         Controller = "Master";
 
-                        TempData["Updated"] = "Company is Successfully Updated!";
+                        TempData["Error"] = "Company is Deleted!";
                     }
                     else
                     {
-                        Session["CompanyName"] = CompanyName;
+                       
                         FormName = "CompanyMaster";
                         Controller = "Master";
                         TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
@@ -501,6 +494,110 @@ namespace InvestorsCRM.Controllers
         public ActionResult ChangePassword()
         {
             return View();
+        }
+
+        public ActionResult GetCompanyProject(string PK_CompanyID)
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            model.PK_CompanyID = PK_CompanyID;
+            DataSet ds = model.GetCompanyProjectName();
+            if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.ProjectName = r["ProjectName"].ToString();
+                    obj.FK_ProjectID = r["PK_ProjectID"].ToString();
+                    obj.PK_CompanyID = r["PK_CompanyID"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstCompanyproject = lst;
+            }
+            return View(model);
+        
+        }
+
+        public ActionResult DeleteCompanyProject(string FK_ProjectID)
+        {
+            string FormName = "";
+            string Controller = "";
+            Master obj = new Master();
+            try
+            {
+                obj.FK_ProjectID = FK_ProjectID;
+                obj.CreatedBy = Session["UserID"].ToString();
+                DataSet ds = obj.DeleteCompanytProject();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        FormName = "CompanyList";
+                        Controller = "Master";
+
+                        TempData["Error"] = "Project is Deleted!";
+                    }
+                    else
+                    {
+
+                        FormName = "CompanyList";
+                        Controller = "Master";
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+        [ActionName("CompanyMaster")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult updatecompanyProject(string PK_CompanyID, Master obj)
+        {
+             
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Fk_ProjectId", typeof(string));
+            if (obj.FK_ProjectIDTO != null)
+            {
+                string[] i1;
+                i1 = obj.FK_ProjectIDTO;
+                for (int i = 0; i < i1.Length; i++)
+                {
+                    /*string s = i1[i]; *//*Inside string type s variable should contain items values */
+                    string Fk_Siteid = i1[i];
+                    DataRow dr = dt.NewRow();
+                    dr = dt.NewRow();
+                    dr["Fk_ProjectId"] = Fk_Siteid;
+                    dt.Rows.Add(dr);
+                }
+            }
+            obj.dtCompanyDetails = dt;
+            obj.CreatedBy = Session["UserID"].ToString();
+            DataSet ds = obj.UpdateCompanyProject();
+            try
+            {
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        TempData["Error"] = "Company Name is Updated Successfully";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
+
+
+            return RedirectToAction("CompanyMaster", "Master");
         }
     }
 }

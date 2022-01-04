@@ -32,7 +32,7 @@ namespace InvestorsCRM.Models
         public string OldPassword { get; set; }
         public string ConfirmPassword { get; set; }
         public DataTable DtCompanyDetail { get; set;}
-        
+        public List<Master> lstCompanyproject { get; set; }
         public List<ListProject> listProject { get; set; }
         public DataTable dtCompanyDetails { get; set; }
 
@@ -55,12 +55,32 @@ namespace InvestorsCRM.Models
             DataSet ds = Connection.ExecuteQuery("SaveCompany", para);
             return ds;
         }
+        public DataSet UpdateCompanyProject()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_CompanyID",PK_CompanyID),
+                 new SqlParameter("@AddedBy",CreatedBy),
+                   new SqlParameter("@DtCompanyDetail",dtCompanyDetails)
+
+            };
+            DataSet ds = Connection.ExecuteQuery("updateCompanyProject", para);
+            return ds;
+        }
         public DataSet GetProjectName()
         {
             SqlParameter [] para={
-                  new SqlParameter("@FK_ProjectID",FK_ProjectID)
+                 // new SqlParameter("@FK_ProjectID",FK_ProjectID)
             };
-            DataSet ds = Connection.ExecuteQuery("GetProjectList",para);
+            DataSet ds = Connection.ExecuteQuery("ProjectForCompany", para);
+            return ds;
+        }
+        public DataSet GetProjectList()
+        {
+            SqlParameter[] para ={
+                 new SqlParameter("@FK_ProjectID",FK_ProjectID)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetProjectList", para);
             return ds;
         }
         public DataSet UpdateCompanyName()
@@ -80,6 +100,32 @@ namespace InvestorsCRM.Models
         {
             SqlParameter[] para ={
                   new SqlParameter("@PK_CompanyID",PK_CompanyID)
+            };
+            DataSet ds = Connection.ExecuteQuery("CompanyName", para);
+            return ds;
+        }
+        public DataSet DeleteCompanytName()
+        {
+            SqlParameter[] para ={
+                  new SqlParameter("@PK_CompanyID ",PK_CompanyID ),
+                   new SqlParameter("@deletedby",CreatedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("DeleteCompanyName", para);
+            return ds;
+        }
+        public DataSet DeleteCompanytProject()
+        {
+            SqlParameter[] para ={
+                  new SqlParameter("@FK_ProjectID",FK_ProjectID ),
+                   new SqlParameter("@deletedby",CreatedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("DeleteCompanyProject", para);
+            return ds;
+        }
+        public DataSet GetCompanyProjectName()
+        {
+            SqlParameter[] para ={
+                  new SqlParameter("@PK_CompanyID ",PK_CompanyID )
             };
             DataSet ds = Connection.ExecuteQuery("GetCompanyName", para);
             return ds;
