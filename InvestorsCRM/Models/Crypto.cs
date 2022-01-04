@@ -4,11 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
+using System.Threading.Tasks;
 
-namespace InvestorsCRM.Models
+namespace InvestorsCRM
 {
-    public class Crypto
+    public  class Crypto
     {
         public static string Encrypt(string clearText)
         {
@@ -58,10 +58,13 @@ namespace InvestorsCRM.Models
                     }
                 }
             }
-            catch (Exception ex)
-            { cipherText = ""; }
+            catch (Exception ex) { cipherText = ""; }
             return cipherText;
 
+        }
+        public static object Decrypt(object p)
+        {
+            throw new NotImplementedException();
         }
     }
 }

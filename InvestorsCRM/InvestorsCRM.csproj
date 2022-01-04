@@ -380,6 +380,7 @@
     <Content Include="assets\js\uikit.min.js" />
     <Content Include="assets\js\vendor-all.js" />
     <Content Include="assets\js\vendor-all.min.js" />
+    <Content Include="assets\trash.svg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -470,6 +471,7 @@
     <Content Include="Views\Master\CompanyList.cshtml" />
     <Content Include="Views\Master\DesignationList.cshtml" />
     <Content Include="Views\Master\PlanList.cshtml" />
+    <Content Include="Views\Master\GetCompanyProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
