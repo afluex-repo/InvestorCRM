@@ -28,6 +28,11 @@ namespace InvestorsCRM.Models
         public string PK_DesignationID { get; set; }
         public string PK_PlanID { get; set; }
         public string[] FK_ProjectIDTO { get; set; }
+        public string NewPassword { get; set; }
+        public string OldPassword { get; set; }
+        public string ConfirmPassword { get; set; }
+        public DataTable DtCompanyDetail { get; set;}
+        
         public List<ListProject> listProject { get; set; }
         public DataTable dtCompanyDetails { get; set; }
 
@@ -160,6 +165,17 @@ namespace InvestorsCRM.Models
                new SqlParameter("@CreatedBy",CreatedBy)
             };
             DataSet ds = Connection.ExecuteQuery("UpdatePlan", para);
+            return ds;
+        }
+        public DataSet ChnagePassword()
+        {
+            SqlParameter[] para =
+            {
+               new  SqlParameter ("@Password",NewPassword),
+            
+               new SqlParameter("@PK_AdminId",CreatedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("ChangePassword", para);
             return ds;
         }
     }
