@@ -23,6 +23,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -34,10 +35,12 @@
                         </div>
                     }
                     <div class="card-header">
-                        <h5>Designation Master List</h5>
+                        <h5>Designation List</h5>
+                        <a href="/Master/DesignationMaster" class="btn btn-info">Add New</a>
                     </div>
                     <div class="card-body">
                         <div class="card-block">
+
                             <div class="dt-responsive table-responsive">
                                 <table id="compact" class="table table-bordered">
                                     <thead>
@@ -60,14 +63,14 @@
                                                 {
                                                     <tr>
                                                         <td style="display:none">
-                                                            <input type="text" name="PK_DesignationID" value="PK_DesignationID" hidden="true" />
+                                                            <input type="text" name="PK_DesignationID" value="PK_DesignationID" hidden="hidden" />
                                                         </td>
                                                         <td>@i</td>
                                                         <td>@item.Designationame</td>
                                                         <td>@item.Percentage</td>
                                                         <td>
-                                                            @*<a href="/Master/DesignationMaster?PK_DesignationID=@item.PK_DesignationID" class="btn btn-default"><i class="feather icon-edit"></i></a>*@
-                                                            <a href="/Master/DesignationDelete?PK_DesignationID=@item.PK_DesignationID" class="btn btn-default">Delete &nbsp;<i class="feather icon-delete"></i></a>
+                                                            <a href="/Master/DesignationDelete?PK_DesignationID=@item.PK_DesignationID"  class="btn btn-default"><i class="bi bi-trash"></i><img src="~/assets/trash.svg" /></a>
+                                                     
                                                         </td>
                                                     </tr>
                                                     i = i + 1;
@@ -77,9 +80,6 @@
 
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="row">
-                                <a href="/Master/DesignationMaster" class="btn btn-info">Back To List</a>
                             </div>
                         </div>
                     </div>

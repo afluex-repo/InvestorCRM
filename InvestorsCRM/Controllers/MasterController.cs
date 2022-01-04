@@ -177,19 +177,24 @@ namespace InvestorsCRM.Controllers
         [OnAction(ButtonName = "btnsave")]
         public ActionResult CompanyMaster(Master obj)
         {
-            
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Fk_ProjectId", typeof(string));
             if (obj.FK_ProjectIDTO != null)
             {
-                List<SelectListItem> ls = new List<SelectListItem>();
-                foreach (string st in obj.FK_ProjectIDTO)
+                string[] i1;
+                i1 = obj.FK_ProjectIDTO;
+                for (int i = 0; i < i1.Length; i++)
                 {
-                  
-                    obj.FK_ProjectID = obj.FK_ProjectID + st;
+                    /*string s = i1[i]; *//*Inside string type s variable should contain items values */
+                    string Fk_Siteid = i1[i];
+                    DataRow dr = dt.NewRow();
+                    dr = dt.NewRow();
+                    dr["Fk_ProjectId"] = Fk_Siteid;
+                    dt.Rows.Add(dr);
                 }
-                obj.FK_ProjectID =  obj.FK_ProjectID.Remove(obj.FK_ProjectID.Length - 1, 1);
             }
+            obj.dtCompanyDetails = dt;
             obj.CreatedBy = Session["UserID"].ToString();
-
             DataSet ds = obj.InsertCompany();
             try
             {

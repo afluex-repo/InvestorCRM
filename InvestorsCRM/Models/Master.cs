@@ -29,6 +29,7 @@ namespace InvestorsCRM.Models
         public string PK_PlanID { get; set; }
         public string[] FK_ProjectIDTO { get; set; }
         public List<ListProject> listProject { get; set; }
+        public DataTable dtCompanyDetails { get; set; }
 
         public DataSet InsertProject()
         {
@@ -43,7 +44,7 @@ namespace InvestorsCRM.Models
             {
                 new SqlParameter("@CompanyName",CompanyName),
                  new SqlParameter("@AddedBy",CreatedBy),
-                 new SqlParameter("@FK_ProjectID",FK_ProjectID),
+                   new SqlParameter("@DtCompanyDetail",dtCompanyDetails)
 
             };
             DataSet ds = Connection.ExecuteQuery("SaveCompany", para);
