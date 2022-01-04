@@ -502,7 +502,5 @@ namespace InvestorsCRM.Controllers
         {
             return View();
         }
-
-
     }
 }

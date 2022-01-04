@@ -10,7 +10,6 @@ namespace InvestorsCRM
 {
     public  class Crypto
     {
-
         public static string Encrypt(string clearText)
         {
             try
@@ -63,7 +62,6 @@ namespace InvestorsCRM
             return cipherText;
 
         }
-
         public static object Decrypt(object p)
         {
             throw new NotImplementedException();
