@@ -96,7 +96,7 @@ namespace InvestorsCRM.Controllers
                     string mailbody = "";
                     try
                     {
-                        mailbody = "Dear  " + ds.Tables[0].Rows[0]["Username"].ToString() + "<br/>  <b>Login ID</b> :  " + model.LogingID + "<br/> <b>Passoword</b>  : " + Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
+                        mailbody = "Dear  " + ds.Tables[0].Rows[0]["Username"].ToString() + "<br/>  <b>Login ID</b> :  " + model.LoginID + "<br/> <b>Passoword</b>  : " + Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
 
 
                         System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient

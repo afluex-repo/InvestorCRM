@@ -5,6 +5,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using InvestorsCRM.Models;
+using System.Web.Mvc;
+
 namespace InvestorsCRM.Models
 {
     public class Master :Common
@@ -31,16 +33,81 @@ namespace InvestorsCRM.Models
         public string NewPassword { get; set; }
         public string OldPassword { get; set; }
         public string ConfirmPassword { get; set; }
-        public DataTable DtCompanyDetail { get; set;}
+       // public DataTable DtCompanyDetail { get; set;}
         public List<Master> lstCompanyproject { get; set; }
         public List<ListProject> listProject { get; set; }
         public DataTable dtCompanyDetails { get; set; }
+        public string SponsorName { get; set; }
+     
+        public string UserID { get; set; }
+        public string AssociateImage { get; set; }
+        public string Result { get; set; }
+        public string ddlprojectname { get; set; }
+        public string Agreement { get; set; }
+        public string FK_SponsorId { get; set; }
+        public string AdharNo { get; set; }
+        public string Mobile { get; set; }
+        public string PanNo { get; set; }
+        public string FirstName { get; set; }
+        public string BankAccount { get; set; }
+        public string BankName { get; set; }
+        public string IFSCCode { get; set; }
+        public string LastName { get; set; }
+        public string FatherName { get; set; }
+        public string  Address { get; set; }
+        public List<SelectListItem> ddlProject { get; set; }
+
+        public DataSet UserRegistration()
+        {
+            SqlParameter[] para ={
+            
+                                 new SqlParameter("@FK_SponsorId",FK_SponsorId),
+                                 //  new SqlParameter("@FK_UserID",UserID),
+                                   new SqlParameter("@CreatedBy",CreatedBy),
+                                   new SqlParameter("@name",Username),
+                                    new SqlParameter("@Password",Password),
+                                     new SqlParameter("@Amount",Amount),
+                                     new SqlParameter("@Pk_PlanID",PK_PlanID),
+                                      new SqlParameter("@agreementImage",Agreement),
+                                      new SqlParameter("@PanNo",PanNo),
+                                     new SqlParameter("@Mobile",Mobile),
+                                     new SqlParameter("@Email",EmailId),
+                                     new SqlParameter("@AdharNo",AdharNo),
+                                     new SqlParameter("@FK_ProjectID",FK_ProjectID),
+                                     new SqlParameter("@FK_CompanyID",PK_CompanyID),
+                                      new SqlParameter("@FatherName",FatherName),
+                                      new SqlParameter("@FirstName",FirstName),
+                                      new SqlParameter("@LastName",LastName),
+                                      new SqlParameter("@BankName",BankName),
+                                     new SqlParameter("@IFSCCode",IFSCCode),
+                                     new SqlParameter("@Address",Address),
+                                     new SqlParameter("@BankAccount",BankAccount),
+                                     new SqlParameter("@Pincode",Pincode),
+                                     new SqlParameter("@City",City),
+                                      new SqlParameter("@State",State)
+
+            };
+            DataSet ds = Connection.ExecuteQuery("SaveUserRegistration", para);                 //Connetion.ExecuteQuery();
+            return ds;
+        }
+        public DataSet GetStateCity()
+        {
+            SqlParameter[] para = { new SqlParameter("@Pincode", Pincode) };
+            DataSet ds = Connection.ExecuteQuery("GetStateCity", para);
+            return ds;
+        }
 
         public DataSet InsertProject()
         {
             SqlParameter[] para ={new SqlParameter ("@ProjectName",ProjectName),
                                   new SqlParameter("@CreatedBy",CreatedBy),};
             DataSet ds = Connection.ExecuteQuery("SaveProject", para);                 //Connetion.ExecuteQuery();
+            return ds;
+        }
+        public DataSet GetNameByLoginID()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginID) };
+            DataSet ds = Connection.ExecuteQuery("GetSponsorForCustomerRegistraton", para);
             return ds;
         }
         public DataSet InsertCompany()
@@ -104,6 +171,18 @@ namespace InvestorsCRM.Models
             DataSet ds = Connection.ExecuteQuery("CompanyName", para);
             return ds;
         }
+
+        public DataSet GetCompany()
+        {
+            //SqlParameter[] para ={
+            //      new SqlParameter("@PK_CompanyID",PK_CompanyID)
+            //};
+            DataSet ds = Connection.ExecuteQuery("CompanyName");
+            return ds;
+        }
+
+
+
         public DataSet DeleteCompanytName()
         {
             SqlParameter[] para ={
@@ -128,6 +207,15 @@ namespace InvestorsCRM.Models
                   new SqlParameter("@PK_CompanyID ",PK_CompanyID )
             };
             DataSet ds = Connection.ExecuteQuery("GetCompanyName", para);
+            return ds;
+        }
+
+        public DataSet GetCompanyProjectbyID()
+        {
+            SqlParameter[] para ={
+                  new SqlParameter("FK_CompanyId ",PK_CompanyID )
+            };
+            DataSet ds = Connection.ExecuteQuery("GetCompanyProjectname", para);
             return ds;
         }
         public DataSet updateprojectname()
@@ -201,7 +289,16 @@ namespace InvestorsCRM.Models
             DataSet ds = Connection.ExecuteQuery("GetPlan", para);
             return ds;
         }
+        public DataSet GetPlanName()
+        {
+            SqlParameter[] para ={
+                new SqlParameter("@PK_PlanID ",PK_PlanID)
 
+
+            };
+            DataSet ds = Connection.ExecuteQuery("GetPlan", para);
+            return ds;
+        }
         public DataSet UpdatePlan()
         {
             SqlParameter[] para =

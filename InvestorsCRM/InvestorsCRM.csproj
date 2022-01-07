@@ -472,9 +472,11 @@
     <Content Include="Views\Master\DesignationList.cshtml" />
     <Content Include="Views\Master\PlanList.cshtml" />
     <Content Include="Views\Master\GetCompanyProject.cshtml" />
+    <Content Include="Views\Master\Registration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Profile\Agreement\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
