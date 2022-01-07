@@ -17,14 +17,14 @@ namespace InvestorsCRM.Models
 
         public DataSet Login()
         {
-            SqlParameter[] para ={new SqlParameter ("@LoginID",base.LogingID),
-                                  new SqlParameter("@password",Psssword),};
+            SqlParameter[] para ={new SqlParameter ("@LoginID",base.LoginID),
+                                  new SqlParameter("@password",Password),};
             DataSet ds = Connection.ExecuteQuery("Login", para);                 //Connetion.ExecuteQuery();
             return ds;
         }
         public DataSet GetLoginDetails()
         {
-            SqlParameter[] para ={new SqlParameter ("@LoginID",base.LogingID),
+            SqlParameter[] para ={new SqlParameter ("@LoginID",base.LoginID),
                                   new SqlParameter("@EmailID",EmailId),};
             DataSet ds = Connection.ExecuteQuery("GetLoginDetails", para);                 //Connetion.ExecuteQuery();
             return ds;

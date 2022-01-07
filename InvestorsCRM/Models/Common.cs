@@ -7,8 +7,8 @@ namespace InvestorsCRM.Models
 {
     public class Common
     {
-        public string LogingID { get; set; }
-        public string Psssword { get; set; }
+        public string LoginID { get; set; }
+        public string Password { get; set; }
         public string Username { get; set; }
         public string PanCard { get; set; }
         public string AdharCard { get; set; }

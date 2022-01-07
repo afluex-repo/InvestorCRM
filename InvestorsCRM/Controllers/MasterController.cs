@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using InvestorsCRM.Models;
 using System.Data;
+using System.IO;
 
 namespace InvestorsCRM.Controllers
 {
@@ -167,7 +168,7 @@ namespace InvestorsCRM.Controllers
             ViewBag.FK_ProjectID = FK_ProjectID;
             #endregion
 
-
+            
 
             return View(obj1);
         }
@@ -599,5 +600,197 @@ namespace InvestorsCRM.Controllers
 
             return RedirectToAction("CompanyMaster", "Master");
         }
+
+        public ActionResult Registration()
+        {
+            int count1 = 0;
+            #region ddlprojectname
+
+            Master obj = new Master();
+            
+            List<SelectListItem> ddlprojectname = new List<SelectListItem>();
+            ddlprojectname.Add(new SelectListItem {Text="Select", Value = "0" });
+            ViewBag.ddlprojectname = ddlprojectname;
+            #endregion
+            #region plan
+            int count3 = 0;
+
+            List<SelectListItem> ddlplan = new List<SelectListItem>();
+            DataSet dPlan = obj.GetPlanName();
+            if (dPlan != null && dPlan.Tables.Count > 0 && dPlan.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dPlan.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlplan.Add(new SelectListItem { Value = "0" , Text="Select Plan"});
+                    }
+                    ddlplan.Add(new SelectListItem { Text = r["PlanName"].ToString(), Value = r["PK_PlanID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlplan = ddlplan;
+
+            #endregion
+            #region ddlCompanyname
+            int count2 = 0;
+            
+            List<SelectListItem> ddlcompanyname = new List<SelectListItem>();
+            DataSet ds11 = obj.GetCompany();
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    if (count2 == 0)
+                    {
+                        ddlcompanyname.Add(new SelectListItem { Value = "0" , Text="Select"});
+                    }
+                    ddlcompanyname.Add(new SelectListItem { Text = r["CompanyName"].ToString(), Value = r["PK_CompanyID"].ToString() });
+                    count2 = count2 + 1;
+                }
+            }
+            ViewBag.ddlcompanyname = ddlcompanyname;
+            #endregion
+            #region getComapny name
+
+            //DataSet dsa = obj.GetNameByLoginID();
+            //if (dsa != null && dsa.Tables[0].Rows.Count > 0)
+            //{
+            //  //  obj.Username = dsa.Tables[0].Rows[0]["Name"].ToString();
+            //    obj.LoginID = dsa.Tables[0].Rows[0]["LoginID"].ToString();
+            //    //obj.AssociateImage = dsa.Tables[0].Rows[0]["profilepic"].ToString();
+            //    //obj.FK_SponsorId= dsa.Tables[0].Rows[0]["PK_UserID"].ToString();
+
+
+            //}
+            //else
+            //{
+            //    obj.SponsorName = "";
+                
+            //}
+            #endregion
+            return View(obj);
+        }
+        [HttpPost]
+        [ActionName("Registration")]
+        [OnAction(ButtonName = "btnSave")]
+        public ActionResult Registration(HttpPostedFileBase postedFile, HttpPostedFileBase postedFile1, Master model)
+        {
+            try
+            {
+                Random rnd = new Random();
+                int ctrPasword = rnd.Next(111111, 999999);
+                model.Password = Crypto.Encrypt(ctrPasword.ToString());
+             
+                model.CreatedBy = Session["UserID"].ToString();
+                if (postedFile != null)
+                {
+                    model.Agreement = "/Profile/Agreement/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+                    postedFile.SaveAs(Path.Combine(Server.MapPath(model.Agreement)));
+                }
+                DataSet Ds = model.UserRegistration();
+                if(Ds!=null && Ds.Tables[0].Rows.Count>0 && Ds.Tables.Count>0 &&Ds.Tables[0].Rows[0]["MSG"].ToString()=="1")
+                    
+                    
+                {
+                    TempData["Error"] = "User Registration Is SuccessFully";
+                }
+                else
+                {
+                    TempData["Error"]= Ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                TempData["Error"] = ex.Message;
+            }
+            return RedirectToAction("Registration", "Master");
+        }
+        public ActionResult GetLoginName(string LoginID)
+        {
+            try
+            { 
+            Master obj = new Master();
+            obj.LoginID = LoginID;
+            DataSet ds = obj.GetNameByLoginID();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                    obj.Username = ds.Tables[0].Rows[0]["Name"].ToString();
+                    obj.FK_SponsorId = ds.Tables[0].Rows[0]["PK_UserID"].ToString();
+                    obj.AssociateImage = ds.Tables[0].Rows[0]["profilepic"].ToString();
+                    obj.Result = "yes";
+            }
+            else
+            {
+                    obj.SponsorName = "";
+                    obj.Result = "no";
+            }
+
+            return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+        public ActionResult GetStateCity(string Pincode)
+        {
+            try
+            {
+                Master model = new Master();
+                model.Pincode = Pincode;
+
+                #region GetStateCity
+                DataSet dsStateCity = model.GetStateCity();
+                if (dsStateCity != null && dsStateCity.Tables[0].Rows.Count > 0)
+                {
+                    model.State = dsStateCity.Tables[0].Rows[0]["State"].ToString();
+                    model.City = dsStateCity.Tables[0].Rows[0]["City"].ToString();
+                    model.Result = "yes";
+                }
+                else
+                {
+                    model.State = model.City = "";
+                    model.Result = "no";
+                }
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+        public ActionResult GetProjectName(string PK_CompanyID)
+        {
+            List<SelectListItem> ddlProject = new List<SelectListItem>();
+            Master obj = new Master();
+            obj.PK_CompanyID = PK_CompanyID;
+            DataSet dsblock = obj.GetCompanyProjectbyID();
+
+            #region ddlProject
+            if (dsblock != null && dsblock.Tables.Count > 0 && dsblock.Tables[0].Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dsblock.Tables[0].Rows)
+                {
+                    ddlProject.Add(new SelectListItem { Text = dr["ProjectName"].ToString(), Value = dr["FK_ProjectID"].ToString() });
+                }
+
+            }
+
+            obj.ddlProject = ddlProject;
+            #endregion
+
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
     }
 }

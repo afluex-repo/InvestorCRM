@@ -33,33 +33,38 @@
                         <div class="card-body">
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
-                                    <label for="LogingID">LoginId</label>
-                                    @Html.TextBoxFor(m => m.LogingID, new{@class="form-control",@placeholder="LoginId"})
+                                    <label for="LoginID">LoginId</label>
+                                    @Html.TextBoxFor(m => m.LoginID, new{@class="form-control",@placeholder="LoginId"})
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="Username">Name</label>
                                     @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "Name" })
                                 </div>
                                 <div class="col-md-4 mb-3">
+                                    <label for="Username">Sponcer ID</label>
+                                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "Name" })
+                                </div>
+                                @*<div class="col-md-4 mb-3">
                                     <label for="Designation">Designation</label>
                                     <select class="form-control" name="FK_Usertype">
                                         <option value="0">Select User Type</option>
                                         <option values="1">User</option>
                                         <option values="2">HR</option>
                                     </select>
-                                </div>
+                                </div>*@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
-                                    <label for="Email">Email</label>
+                                    <label for="Email">Amount</label>
                                 @Html.TextBoxFor(m => m.EmailId, new { @class="form-control",@placeholder="Email"})
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="PanCard">Pan Card</label>
+                                    <label for="PanCard">Plan</label>
                                     @Html.TextBoxFor(m => m.PanCard, new { @class = "form-control", @placeholder = "Pan Card" })
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="PanCard">Adhar Card</label>
+                                    <label for="PanCard">Company</label>
+                                    @Html.DropDownListFor(m => m.CompanyName, new SelectList(ViewBag.Company, "Value", "Text"), new { @class = "form-control chosen-select", multiple = "multiple" })
                                     @Html.TextBoxFor(m => m.AdharCard, new { @class = "form-control", @placeholder = "Adhar Card" })
                                 </div>
                             </div>
@@ -95,7 +100,8 @@
                                     <input type="file" class="form-control" id="sdfa" name="Profile">
                                 </div>
                             </div>
-                            <button class="btn  btn-primary" type="submit" name="btnsave">Submit </button>
+                            <input type="submit" class="btn  btn-primary"  name="btnsave" value="Save" />
+                         
                         </div>
                     </div>
                 </div>
