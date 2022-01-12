@@ -685,9 +685,10 @@ namespace InvestorsCRM.Controllers
                 model.CreatedBy = Session["UserID"].ToString();
                 if (postedFile != null)
                 {
-                    model.Agreement = "/Profile/Agreement/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+                    model.Agreement = "../Agreement/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
                     postedFile.SaveAs(Path.Combine(Server.MapPath(model.Agreement)));
                 }
+
                 DataSet Ds = model.UserRegistration();
                 if(Ds!=null && Ds.Tables[0].Rows.Count>0 && Ds.Tables.Count>0 &&Ds.Tables[0].Rows[0]["MSG"].ToString()=="1")
                     

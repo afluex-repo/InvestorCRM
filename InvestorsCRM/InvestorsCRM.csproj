@@ -475,8 +475,8 @@
     <Content Include="Views\Master\Registration.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Agreement\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Profile\Agreement\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
