@@ -1,0 +1,32 @@
+﻿@model InvestorsCRM.Models.Master
+
+@{
+    ViewBag.Title = "ConfirmRegistration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ConfirmRegistration", "Master", FormMethod.Post, new { @id = "signupForm", @novalidate = "" }))
+{
+    <section class="pcoded-main-container">
+        <div class="pcoded-content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        @*<div class="card-header">
+                            <h5>Registration List</h5>
+                            <a href="/Master/Registration" class="btn btn-info" style="margin-left:90%">Add New</a>
+                        </div>*@
+                        <div class="card-body">
+                            <div class="card-block">
+                                <label for="PanCard"><b>Name :</b> @Session["FullName"]</label><br />
+                                <label for="PanCard"><b>Login Id :</b> @Session["LoginId"]</label><br />
+                                <label for="PanCard"><b>Password : </b>@Session["Password"]</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </section>
+            }
+

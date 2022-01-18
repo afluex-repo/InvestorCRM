@@ -15,7 +15,7 @@
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/Master/index"><i class="feather icon-home"></i></a></li>
 
-                                <li class="breadcrumb-item"><a href="#">Add Company </a></li>
+                                <li class="breadcrumb-item"><a href="#" >Add Company </a></li>
                             </ul>
                         </div>
 
@@ -32,13 +32,13 @@
                     <div class="card">
                         @if (@TempData["Error"] != null)
                         {
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="float:right">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert" style="float:right">
                                 <strong> @TempData["Error"]!</strong>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             </div>
                         }
                         <div class="card-header">
-                            <h5>CompanyMaster</h5>
+                            <h5>Add Company </h5>
                         </div>
                         <div class="card-body">
                             <div class="form-row">
@@ -49,7 +49,7 @@
                                   </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="validationCustom01">Project Name</label>
-                                   @Html.DropDownListFor(m => m.FK_ProjectID, new SelectList(ViewBag.FK_ProjectID, "Value", "Text"), new { @class = "form-control chosen-select", multiple = "multiple" })
+                                   @Html.DropDownListFor(m => m.FK_ProjectIDTO, new SelectList(ViewBag.FK_ProjectID, "Value", "Text"), new { @class = "form-control chosen-select", multiple = "multiple" })
                                 </div>
                                 @Html.HiddenFor(m=>m.PK_CompanyID)
                               

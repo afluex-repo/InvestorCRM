@@ -19,14 +19,7 @@ namespace InvestorsCRM.Controllers
         {
             return View();
         }
-       [HttpPost]
-       [ActionName("Registration")]
-       [OnAction(ButtonName ="btnsave")]
-        public ActionResult SavrRegistration()
-        { 
-
-            return View();
-        }
+       
         public ActionResult ChangePassword()
         {
             return View();

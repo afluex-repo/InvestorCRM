@@ -18,6 +18,7 @@
 
 </head>
 <body class="">
+
     <!-- [ Pre-loader ] start -->
     <div class="loader-bg">
         <div class="loader-track">
@@ -31,11 +32,14 @@
 
                 <div class="">
                     <div class="main-menu-header">
-                        <img class="img-radius" src="~/assets/images/user/avatar-2.jpg" alt="User-Profile-Image">
-                        <div class="user-details">
-                            <span>@Session["Username"]</span>
+                        @*<img class="img-radius" src="~/assets/images/user/avatar-2.jpg" alt="User-Profile-Image">*@
+                        @*<i class="fa fa-user" style="font-size:36px"></i><span>@Session["Username"]</span>*@
+                       <div class="user-details">
+                            <img src="~/assets/images/logo.png" width="100" alt="" class="logo" style="background-color:white">
+                           
+                            @*<span>@Session["Username"]</span>*@
                             @*<div id="more-details">Afluex</div>*@
-                        </div>
+    </div>
                     </div>
                     @*<div class="collapse" id="nav-user-link">
                         <ul class="list-unstyled">
@@ -48,7 +52,7 @@
 
                 <ul class="nav pcoded-inner-navbar ">
                     <li class="nav-item pcoded-menu-caption">
-                        <label>Navigation</label>
+                        @*<label>Navigation</label>*@
                     </li>
                     <li class="nav-item">
                         <a href="/Master/Index" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
@@ -62,14 +66,12 @@
                             <li><a href="/Master/PLanMaster">Plan</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item pcoded-menu-caption">
-                        <label>UI Element</label>
-                    </li>
+                    
                     <li class="nav-item pcoded-hasmenu">
-                        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Basic</span></a>
+                        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">User Master</span></a>
                         <ul class="pcoded-submenu">
-                            <li><a href="bc_alert.html">Alert</a></li>
-                            <li><a href="bc_button.html">Button</a></li>
+                            <li><a href="/Master/Registration">Registration</a></li>
+                            @*<li><a href="bc_button.html">Button</a></li>
                             <li><a href="bc_badges.html">Badges</a></li>
                             <li><a href="bc_breadcrumb-pagination.html">Breadcrumb & paggination</a></li>
                             <li><a href="bc_card.html">Cards</a></li>
@@ -83,15 +85,15 @@
                             <li><a href="bc_typography.html">Typography</a></li>
                             <li><a href="bc_tooltip-popover.html">Tooltip & popovers</a></li>
                             <li><a href="bc_toasts.html">Toasts</a></li>
-                            <li><a href="bc_extra.html">Other</a></li>
+                            <li><a href="bc_extra.html">Other</a></li>*@
                         </ul>
                     </li>
-                    <li class="nav-item pcoded-menu-caption">
+                    @*<li class="nav-item pcoded-menu-caption">
                         <label>Forms &amp; table</label>
                     </li>
                     <li class="nav-item">
                         <a href="form_elements.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Forms</span></a>
-                    </li>
+                    </li>*@
                
 
                 </ul>
@@ -109,10 +111,12 @@
         <div class="m-header">
             <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
             <a href="#!" class="b-brand">
-                <!-- ========   change your logo hear   ============ -->
-                <img src="~/assets/images/logo.png" width="100" alt="" class="logo">
-                <img src="~/assets/images/logo-icon.png" alt="" class="logo-thumb">
-            </a>
+                <i class="fa fa-user" style="font-size:36px"></i>
+                    <span>@Session["Username"]</span>
+                    <!-- ========   change your logo hear   ============ -->
+                    @*<img src="~/assets/images/logo.png" width="100" alt="" class="logo" style="background-color:white">
+            <img src="~/assets/images/logo-icon.png" alt="" class="logo-thumb" style="background-color:white">*@
+</a>
             <a href="#!" class="mob-toggler">
                 <i class="feather icon-more-vertical"></i>
             </a>
@@ -132,7 +136,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li>
-                    <div class="dropdown">
+                    @*<div class="dropdown">
                         <a class="dropdown-toggle" href="#" data-toggle="dropdown">
                             <i class="icon feather icon-bell"></i>
                             <span class="badge badge-pill badge-danger">5</span>
@@ -193,7 +197,7 @@
                                 <a href="#!">show all</a>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                 </li>
                 <li>
                     <div class="dropdown drp-user">
@@ -202,9 +206,10 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-notification">
                             <div class="pro-head">
-                                <img src="~/assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+                                @*<img src="~/assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">*@
+                                <i class="fa fa-user" style="font-size:36px"></i>
                                 <span>@Session["Username"]</span>
-                                <a href="auth-signin.html" class="dud-logout" title="Logout">
+                                <a href="#" class="dud-logout" title="Logout">
                                     <i class="feather icon-log-out"></i>
                                 </a>
                             </div>

@@ -39,7 +39,7 @@
                             </div>
                         }
                         <div class="card-header">
-                            <h5>ProjectMaster</h5>
+                            <h5>Add Project </h5>
                         </div>
                         <div class="card-body">
                             <div class="form-row">
@@ -48,21 +48,24 @@
                                     @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @placeholder = "Project Name", @required = "required" })
 
                                 </div>
+                                <div class="col-md-6 mb-6" style="margin-top:28px;">
+                                    @if (Model.FK_ProjectID != null)
+                                    {
+                                        <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" />
+
+                                    }
+                                    else
+                                    {
+
+
+                              <input type="submit" name="btnsave" text="Save" class="btn btn-primary" value="Save" />
+                                    }
+
+
+                                    <a href="/Master/ProjectList" class="btn btn-info">Back To List</a>
+                                </div>
                             </div>
-                            @if (Model.FK_ProjectID != null)
-                            {
-                                <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" />
 
-                            }
-                            else
-                            {
-
-
-                                <input type="submit" name="btnsave" text="Save" class="btn btn-primary" value="Save" />
-                            }
-
-                            <a href="/Master/ProjectMaster" class="btn btn-dark">Reset</a>
-                            <a href="/Master/ProjectList" class="btn btn-info">Back To List</a>
                         </div>
                         <!-- Input group -->
 
