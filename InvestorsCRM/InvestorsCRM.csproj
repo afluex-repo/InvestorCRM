@@ -473,6 +473,8 @@
     <Content Include="Views\Master\PlanList.cshtml" />
     <Content Include="Views\Master\GetCompanyProject.cshtml" />
     <Content Include="Views\Master\Registration.cshtml" />
+    <Content Include="Views\Master\RegistrationList.cshtml" />
+    <Content Include="Views\Master\ConfirmRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Agreement\" />

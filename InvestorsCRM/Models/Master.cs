@@ -25,6 +25,7 @@ namespace InvestorsCRM.Models
         public List<Master> lstCompany { get; set; }
         public List<Master> lstDesignation { get; set; }
         public List<Master> lstPlan { get; set; }
+        public List<Master> lstRegistation { get; set; }
         public string DesignationName { get; set; }
         public string Percentage { get; set; }
         public string PK_DesignationID { get; set; }
@@ -51,45 +52,49 @@ namespace InvestorsCRM.Models
         public string FirstName { get; set; }
         public string BankAccount { get; set; }
         public string BankName { get; set; }
+        public string BranchName { get; set; }
         public string IFSCCode { get; set; }
         public string LastName { get; set; }
         public string FatherName { get; set; }
         public string  Address { get; set; }
+        public string TransPassword { get; set; }
+        public string FullName { get; set; }
         public List<SelectListItem> ddlProject { get; set; }
-
-        public DataSet UserRegistration()
+        
+        public DataSet Registration()
         {
             SqlParameter[] para ={
-            
-                                 new SqlParameter("@FK_SponsorId",FK_SponsorId),
-                                 //  new SqlParameter("@FK_UserID",UserID),
-                                   new SqlParameter("@CreatedBy",CreatedBy),
-                                   new SqlParameter("@name",Username),
-                                    new SqlParameter("@Password",Password),
-                                     new SqlParameter("@Amount",Amount),
-                                     new SqlParameter("@Pk_PlanID",PK_PlanID),
-                                      new SqlParameter("@agreementImage",Agreement),
+                                    new SqlParameter("@FirstName",FirstName),
+                                     new SqlParameter("@LastName",LastName),
+                                     new SqlParameter("@MobileNo",Mobile),
+                                      new SqlParameter("@EmailId",EmailId),
                                       new SqlParameter("@PanNo",PanNo),
-                                     new SqlParameter("@Mobile",Mobile),
-                                     new SqlParameter("@Email",EmailId),
-                                     new SqlParameter("@AdharNo",AdharNo),
-                                     new SqlParameter("@FK_ProjectID",FK_ProjectID),
-                                     new SqlParameter("@FK_CompanyID",PK_CompanyID),
-                                      new SqlParameter("@FatherName",FatherName),
-                                      new SqlParameter("@FirstName",FirstName),
-                                      new SqlParameter("@LastName",LastName),
-                                      new SqlParameter("@BankName",BankName),
-                                     new SqlParameter("@IFSCCode",IFSCCode),
+                                     new SqlParameter("@AddharNo",AdharNo),
+                                     new SqlParameter("@AccoutnNo",BankAccount),
+                                     new SqlParameter("@BankName",BankName),
+                                     new SqlParameter("@BranchName",BranchName),
+                                     new SqlParameter("@IFSC",IFSCCode),
+                                      new SqlParameter("@PinCode",Pincode),
+                                      new SqlParameter("@City",City),
+                                      new SqlParameter("@State",State),
                                      new SqlParameter("@Address",Address),
-                                     new SqlParameter("@BankAccount",BankAccount),
-                                     new SqlParameter("@Pincode",Pincode),
-                                     new SqlParameter("@City",City),
-                                      new SqlParameter("@State",State)
-
+                                     new SqlParameter("@Password",Password),
+                                        new SqlParameter("@TransPassword",Password),
+                                     new SqlParameter("@AddedBy",CreatedBy),
             };
-            DataSet ds = Connection.ExecuteQuery("SaveUserRegistration", para);                 //Connetion.ExecuteQuery();
+            DataSet ds = Connection.ExecuteQuery("Registration", para);
             return ds;
         }
+
+        public DataSet GetRegistartionDeatils()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginID)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetRegistartionDeatils",para);
+            return ds;
+        }
+
         public DataSet GetStateCity()
         {
             SqlParameter[] para = { new SqlParameter("@Pincode", Pincode) };

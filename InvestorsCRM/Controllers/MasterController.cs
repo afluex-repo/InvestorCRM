@@ -603,113 +603,124 @@ namespace InvestorsCRM.Controllers
 
         public ActionResult Registration()
         {
-            int count1 = 0;
-            #region ddlprojectname
-
-            Master obj = new Master();
-            
-            List<SelectListItem> ddlprojectname = new List<SelectListItem>();
-            ddlprojectname.Add(new SelectListItem {Text="Select", Value = "0" });
-            ViewBag.ddlprojectname = ddlprojectname;
-            #endregion
-            #region plan
-            int count3 = 0;
-
-            List<SelectListItem> ddlplan = new List<SelectListItem>();
-            DataSet dPlan = obj.GetPlanName();
-            if (dPlan != null && dPlan.Tables.Count > 0 && dPlan.Tables[0].Rows.Count > 0)
-            {
-                foreach (DataRow r in dPlan.Tables[0].Rows)
-                {
-                    if (count3 == 0)
-                    {
-                        ddlplan.Add(new SelectListItem { Value = "0" , Text="Select Plan"});
-                    }
-                    ddlplan.Add(new SelectListItem { Text = r["PlanName"].ToString(), Value = r["PK_PlanID"].ToString() });
-                    count3 = count3 + 1;
-                }
-            }
-            ViewBag.ddlplan = ddlplan;
-
-            #endregion
-            #region ddlCompanyname
-            int count2 = 0;
-            
-            List<SelectListItem> ddlcompanyname = new List<SelectListItem>();
-            DataSet ds11 = obj.GetCompany();
-            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
-            {
-                foreach (DataRow r in ds11.Tables[0].Rows)
-                {
-                    if (count2 == 0)
-                    {
-                        ddlcompanyname.Add(new SelectListItem { Value = "0" , Text="Select"});
-                    }
-                    ddlcompanyname.Add(new SelectListItem { Text = r["CompanyName"].ToString(), Value = r["PK_CompanyID"].ToString() });
-                    count2 = count2 + 1;
-                }
-            }
-            ViewBag.ddlcompanyname = ddlcompanyname;
-            #endregion
-            #region getComapny name
-
-            //DataSet dsa = obj.GetNameByLoginID();
-            //if (dsa != null && dsa.Tables[0].Rows.Count > 0)
-            //{
-            //  //  obj.Username = dsa.Tables[0].Rows[0]["Name"].ToString();
-            //    obj.LoginID = dsa.Tables[0].Rows[0]["LoginID"].ToString();
-            //    //obj.AssociateImage = dsa.Tables[0].Rows[0]["profilepic"].ToString();
-            //    //obj.FK_SponsorId= dsa.Tables[0].Rows[0]["PK_UserID"].ToString();
-
-
-            //}
-            //else
-            //{
-            //    obj.SponsorName = "";
-                
-            //}
-            #endregion
-            return View(obj);
+            return View();
         }
+
         [HttpPost]
         [ActionName("Registration")]
         [OnAction(ButtonName = "btnSave")]
-        public ActionResult Registration(HttpPostedFileBase postedFile, HttpPostedFileBase postedFile1, Master model)
+        public ActionResult Registration(Master model)
         {
             try
             {
                 Random rnd = new Random();
-                int ctrPasword = rnd.Next(111111, 999999);
-                model.Password = Crypto.Encrypt(ctrPasword.ToString());
-             
+                string GetPasword = rnd.Next(111111, 999999).ToString();
+                model.Password = Crypto.Encrypt(GetPasword);
                 model.CreatedBy = Session["UserID"].ToString();
-                if (postedFile != null)
+                DataSet ds = model.Registration();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    model.Agreement = "../Agreement/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
-                    postedFile.SaveAs(Path.Combine(Server.MapPath(model.Agreement)));
-                }
-
-                DataSet Ds = model.UserRegistration();
-                if(Ds!=null && Ds.Tables[0].Rows.Count>0 && Ds.Tables.Count>0 &&Ds.Tables[0].Rows[0]["MSG"].ToString()=="1")
-                    
-                    
-                {
-                    TempData["Error"] = "User Registration Is SuccessFully";
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Registration saved successfully";
+                        Session["FullName"] = ds.Tables[0].Rows[0]["FullName"].ToString();
+                        Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                        Session["Password"] = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
                 }
                 else
                 {
-                    TempData["Error"]= Ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
-
 
             }
             catch (Exception ex)
             {
 
-                TempData["Error"] = ex.Message;
+                TempData["msg"] = ex.Message;
             }
-            return RedirectToAction("Registration", "Master");
+            return RedirectToAction("ConfirmRegistration", "Master");
         }
+      
+        public ActionResult RegistrationList()
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetRegistartionDeatils();
+            if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.LoginID = r["LoginId"].ToString();
+                    obj.Password =Crypto.Decrypt(r["Password"].ToString());
+                    obj.FullName = r["FullName"].ToString();
+                    obj.Mobile = r["Mobile"].ToString();
+                    obj.EmailId = r["Email"].ToString();
+                    obj.PanNo = r["PanNumber"].ToString();
+                    obj.AdharNo = r["AdharNumber"].ToString();
+                    obj.BankAccount = r["MemberAccNo"].ToString();
+                    obj.BankName = r["MemberBankName"].ToString();
+                    obj.BranchName = r["MemberBranch"].ToString();
+                    obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.Pincode = r["PinCode"].ToString();
+                    obj.City = r["City"].ToString();
+                    obj.State = r["State"].ToString();
+                    obj.Address = r["Address"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstRegistation = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("RegistrationList")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult RegistrationList(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetRegistartionDeatils();
+            if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.LoginID = r["LoginId"].ToString();
+                    obj.Password = Crypto.Decrypt(r["Password"].ToString());
+                    obj.FullName = r["FullName"].ToString();
+                    obj.Mobile = r["Mobile"].ToString();
+                    obj.EmailId = r["Email"].ToString();
+                    obj.PanNo = r["PanNumber"].ToString();
+                    obj.AdharNo = r["AdharNumber"].ToString();
+                    obj.BankAccount = r["MemberAccNo"].ToString();
+                    obj.BankName = r["MemberBankName"].ToString();
+                    obj.BranchName = r["MemberBranch"].ToString();
+                    obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.Pincode = r["PinCode"].ToString();
+                    obj.City = r["City"].ToString();
+                    obj.State = r["State"].ToString();
+                    obj.Address = r["Address"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstRegistation = lst;
+            }
+            return View(model);
+        }
+
+
+
+
+        public ActionResult ConfirmRegistration()
+        {
+            return View();
+        }
+        
+
         public ActionResult GetLoginName(string LoginID)
         {
             try

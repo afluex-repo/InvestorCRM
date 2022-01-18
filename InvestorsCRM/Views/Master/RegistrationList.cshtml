@@ -1,0 +1,121 @@
+﻿@model InvestorsCRM.Models.Master
+
+@{
+    ViewBag.Title = "RegistrationList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("RegistrationList", "Master", FormMethod.Post, new { @id = "signupForm", @novalidate = "" }))
+{
+    <section class="pcoded-main-container">
+        <div class="pcoded-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/Master/Registration"><i class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="#"> Registration List</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="Username">Login Id</label>
+                                    @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @placeholder = "Login ID" })
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <input type="submit" style="margin-top:30px;" class="btn  btn-success" name="btnSearch" value="Search" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Registration List</h5>
+                            <a href="/Master/Registration" class="btn btn-info" style="margin-left:90%">Add New</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-block">
+                                <div class="dt-responsive table-responsive">
+                                    <table id="compact" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>S.N.</th>
+                                                <th>Login ID</th>
+                                                <th>Password</th>
+                                                <th>Name</th>
+                                                <th>Mobile</th>
+                                                <th>Email Id</th>
+                                                <th>Pan No</th>
+                                                <th>Adhar No</th>
+                                                <th>Bank Account</th>
+                                                <th>BankName</th>
+                                                <th>Branch Name</th>
+                                                <th>IFSC Code</th>
+                                                <th>Pin code</th>
+                                                <th>City</th>
+                                                <th>State</th>
+                                                <th>Address</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.lstRegistation != null)
+                                                {
+
+                                                    int i = 1;
+                                                    foreach (var item in Model.lstRegistation)
+                                                    {
+                                                        <tr>
+                                                            <td>@i</td>
+                                                            <td>@item.LoginID</td>
+                                                            <td>@item.Password</td>
+                                                            <td>@item.FullName</td>
+                                                            <td>@item.Mobile</td>
+                                                            <td>@item.EmailId</td>
+                                                            <td>@item.PanNo</td>
+                                                            <td>@item.AdharNo</td>
+                                                            <td>@item.BankAccount</td>
+                                                            <td>@item.BankName</td>
+                                                            <td>@item.BranchName</td>
+                                                            <td>@item.IFSCCode</td>
+                                                            <td>@item.Pincode</td>
+                                                            <td>@item.City</td>
+                                                            <td>@item.State</td>
+                                                            <td>@item.Address</td>
+                                                        </tr>
+                                                        i = i + 1;
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
