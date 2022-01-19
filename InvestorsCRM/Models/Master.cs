@@ -26,6 +26,7 @@ namespace InvestorsCRM.Models
         public List<Master> lstDesignation { get; set; }
         public List<Master> lstPlan { get; set; }
         public List<Master> lstRegistation { get; set; }
+        public List<Master> lstInvestor { get; set; }
         public string DesignationName { get; set; }
         public string Percentage { get; set; }
         public string PK_DesignationID { get; set; }
@@ -45,6 +46,7 @@ namespace InvestorsCRM.Models
         public string Result { get; set; }
         public string ddlprojectname { get; set; }
         public string Agreement { get; set; }
+        public string Image { get; set; }
         public string FK_SponsorId { get; set; }
         public string AdharNo { get; set; }
         public string Mobile { get; set; }
@@ -326,5 +328,53 @@ namespace InvestorsCRM.Models
             DataSet ds = Connection.ExecuteQuery("ChangePassword", para);
             return ds;
         }
+
+        public DataSet UserRegistration()
+        {
+            SqlParameter[] para ={
+
+                                 new SqlParameter("@FK_SponsorId",FK_SponsorId),
+                                 //  new SqlParameter("@FK_UserID",UserID),
+                                   new SqlParameter("@CreatedBy",CreatedBy),
+                                   new SqlParameter("@name",Username),
+                                    new SqlParameter("@Password",Password),
+                                     new SqlParameter("@Amount",Amount),
+                                     new SqlParameter("@Pk_PlanID",PK_PlanID),
+                                      new SqlParameter("@agreementImage",Image),
+                                      new SqlParameter("@PanNo",PanNo),
+                                     new SqlParameter("@Mobile",Mobile),
+                                     new SqlParameter("@Email",EmailId),
+                                     new SqlParameter("@AdharNo",AdharNo),
+                                     new SqlParameter("@FK_ProjectID",FK_ProjectID),
+                                     new SqlParameter("@FK_CompanyID",PK_CompanyID),
+                                      new SqlParameter("@FatherName",FatherName),
+                                      new SqlParameter("@FirstName",FirstName),
+                                      new SqlParameter("@LastName",LastName),
+                                      new SqlParameter("@BankName",BankName),
+                                     new SqlParameter("@IFSCCode",IFSCCode),
+                                     new SqlParameter("@Address",Address),
+                                     new SqlParameter("@BankAccount",BankAccount),
+                                     new SqlParameter("@Pincode",Pincode),
+                                     new SqlParameter("@City",City),
+                                      new SqlParameter("@State",State)
+
+            };
+            DataSet ds = Connection.ExecuteQuery("SaveUserRegistration", para);                 //Connetion.ExecuteQuery();
+            return ds;
+        }
+
+        public DataSet GetInvestorDetails()
+        {
+            SqlParameter[] para =
+            {
+               new  SqlParameter ("@LoginId",LoginID)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetInvestorDetails", para);
+            return ds;
+        }
+
+        
+
+
     }
 }

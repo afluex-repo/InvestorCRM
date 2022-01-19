@@ -475,8 +475,11 @@
     <Content Include="Views\Master\Registration.cshtml" />
     <Content Include="Views\Master\RegistrationList.cshtml" />
     <Content Include="Views\Master\ConfirmRegistration.cshtml" />
+    <Content Include="Views\Master\InvestorRegistration.cshtml" />
+    <Content Include="Views\Master\InvestorList.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AgreementUploadFile\" />
     <Folder Include="Agreement\" />
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
