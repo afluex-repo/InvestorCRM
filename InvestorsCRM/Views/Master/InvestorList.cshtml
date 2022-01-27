@@ -43,7 +43,6 @@
                                     <a href="/Master/InvestorRegistration" class="btn btn-info" style="margin-left:70%;margin-top:30px;">Add New</a>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -57,7 +56,7 @@
                         <div class="card-body">
                             <div class="card-block">
                                 <div class="dt-responsive table-responsive">
-                                    <table id="compact" class="table table-bordered">
+                                    <table id="compact" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>S.N.</th>
@@ -69,10 +68,10 @@
                                                 <th>Email Id</th>
                                                 <th>Pan No</th>
                                                 <th>Adhar No</th>
-                                                <th>Bank Account</th>
+                                                @*<th>Bank Account</th>
                                                 <th>BankName</th>
                                                 <th>Branch Name</th>
-                                                <th>IFSC Code</th>
+                                                <th>IFSC Code</th>*@
                                                 <th>Pin code</th>
                                                 <th>City</th>
                                                 <th>State</th>
@@ -86,7 +85,6 @@
                                             {
                                                 if (Model.lstInvestor != null)
                                                 {
-
                                                     int i = 1;
                                                     foreach (var item in Model.lstInvestor)
                                                     {
@@ -100,17 +98,18 @@
                                                             <td>@item.EmailId</td>
                                                             <td>@item.PanNo</td>
                                                             <td>@item.AdharNo</td>
-                                                            <td>@item.BankAccount</td>
+                                                            @*<td>@item.BankAccount</td>
                                                             <td>@item.BankName</td>
                                                             <td>@item.BranchName</td>
-                                                            <td>@item.IFSCCode</td>
+                                                            <td>@item.IFSCCode</td>*@
                                                             <td>@item.Pincode</td>
                                                             <td>@item.City</td>
                                                             <td>@item.State</td>
                                                             <td>
                                                                 <a href="@item.Image" download>
-                                                                    <i class="fa fa-file-pdf-o" style="font-size:25px;color:red">
-                                                                        <i class="mdi mdi-download" style="font-size:25px;color:red"></i>
+                                                                    <i class="fa fa-file-pdf-o" style="font-size:25px;color:black">
+                                                                        @*<i class="mdi mdi-download" style="font-size:25px;color:black"></i>*@
+                                                                        <i class="fa fa-download" aria-hidden="true" style="font-size:25px;color:black"></i>
                                                                     </i>
                                                                 </a>
                                                             </td>
