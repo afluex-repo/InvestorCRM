@@ -329,7 +329,7 @@ namespace InvestorsCRM.Models
             return ds;
         }
 
-        public DataSet UserRegistration()
+        public DataSet InvestorRegistration()
         {
             SqlParameter[] para ={
 

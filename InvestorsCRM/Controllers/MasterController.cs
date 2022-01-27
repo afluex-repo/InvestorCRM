@@ -891,10 +891,10 @@ namespace InvestorsCRM.Controllers
                     model.Image = "../AgreementUploadFile/" + Guid.NewGuid() + Path.GetExtension(PostedFile.FileName);
                     PostedFile.SaveAs(Path.Combine(Server.MapPath(model.Image)));
                 }
-                DataSet Ds = model.UserRegistration();
+                DataSet Ds = model.InvestorRegistration();
                 if (Ds != null && Ds.Tables[0].Rows.Count > 0 && Ds.Tables.Count > 0 && Ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
                 {
-                    TempData["Error"] = "User Registration Save SuccessFully";
+                    TempData["Error"] = "Investor Registration Save SuccessFully";
                 }
                 else
                 {
