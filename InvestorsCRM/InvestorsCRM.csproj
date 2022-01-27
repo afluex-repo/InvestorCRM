@@ -264,6 +264,7 @@
     <Content Include="assets\images\gallery-grid\masonry-6.jpg" />
     <Content Include="assets\images\gallery-grid\masonry-7.jpg" />
     <Content Include="assets\images\gallery-grid\masonry-8.jpg" />
+    <Content Include="assets\images\HmGreenCity.png" />
     <Content Include="assets\images\hover-effect\triangle.svg" />
     <Content Include="assets\images\hover-effect\triangle2.svg" />
     <Content Include="assets\images\light-box\l1.jpg" />
@@ -432,6 +433,7 @@
     <Content Include="assets\json\cities.json" />
     <Content Include="assets\json\citynames.json" />
     <Content Include="assets\json\file-upload.php" />
+    <None Include="Properties\PublishProfiles\Investors.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
