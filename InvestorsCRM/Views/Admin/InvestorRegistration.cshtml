@@ -157,6 +157,12 @@
         $("#divload").css({ 'display': '' });
         return true;
     }
+
+    $('#JoiningFromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
     function getStateCity() {
 
         var pincode = $('#Pincode').val();

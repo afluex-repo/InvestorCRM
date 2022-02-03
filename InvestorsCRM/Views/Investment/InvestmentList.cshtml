@@ -1,12 +1,12 @@
 ﻿@model InvestorsCRM.Models.Master
-
 @{
-    ViewBag.Title = "InvestorList";
+    ViewBag.Title = "InvestmentList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-@using (Html.BeginForm("InvestorList", "Master", FormMethod.Post, new { @id = "signupForm", @novalidate = "" }))
+@using (Html.BeginForm("InvestmentList", "Investment", FormMethod.Post, new { @id = "signupForm", @novalidate = "" }))
 {
     <section class="pcoded-main-container">
         <div class="pcoded-content">
@@ -17,7 +17,7 @@
                         <div class="col-md-12">
                             <div class="page-header-title">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/Master/Registration"><i class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="/Master/Index"><i class="feather icon-home"></i></a></li>
                                     <li class="breadcrumb-item"><a href="#">Investor List</a></li>
                                 </ul>
                             </div>
@@ -48,7 +48,7 @@
                                     <input type="submit" style="margin-top:30px;" class="btn  btn-success" name="btnSearch" value="Search" />
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <a href="/Master/InvestmentForm" class="btn btn-info" style="margin-left:70%;margin-top:30px;">Add New</a>
+                                    <a href="/Investment/InvestmentForm" class="btn btn-info" style="margin-left:70%;margin-top:30px;">Add New</a>
                                 </div>
                             </div>
                         </div>
@@ -67,8 +67,8 @@
                                     <table id="compact" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                 <th>S.N.</th>
-                                                 <th>Investor</th>
+                                                <th>S.N.</th>
+                                                <th>Investor</th>
                                                 <th>Password</th>
                                                 <th>Sponsor</th>
                                                 <th>Mobile</th>
@@ -104,7 +104,7 @@
                                                                     </i>
                                                                 </a>
                                                             </td>
-                                                      
+
                                                             <td>@item.Address</td>
                                                         </tr>
                                                         i = i + 1;
@@ -122,5 +122,4 @@
         </div>
     </section>
 }
-
 

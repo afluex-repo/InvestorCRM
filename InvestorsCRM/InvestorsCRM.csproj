@@ -208,6 +208,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvestmentController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Filters\SimpleAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -477,9 +478,11 @@
     <Content Include="Views\Master\Registration.cshtml" />
     <Content Include="Views\Master\RegistrationList.cshtml" />
     <Content Include="Views\Master\ConfirmRegistration.cshtml" />
-    <Content Include="Views\Master\InvestmentForm.cshtml" />
+    <Content Include="Views\Investment\InvestmentForm.cshtml" />
     <Content Include="Views\Master\InvestorList.cshtml" />
     <Content Include="Views\Admin\InvestorRegistration.cshtml" />
+    <Content Include="Views\Admin\Registration.cshtml" />
+    <Content Include="Views\Investment\InvestmentList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgreementUploadFile\" />

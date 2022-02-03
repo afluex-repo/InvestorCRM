@@ -6,7 +6,7 @@
 }
 
 
-@using (Html.BeginForm("InvestmentForm", "Master", FormMethod.Post, new { @id = "signupForm", @novalidate = "", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("InvestmentForm", "Investment", FormMethod.Post, new { @id = "signupForm", @novalidate = "", enctype = "multipart/form-data" }))
 {
     <section class="pcoded-main-container">
         <div class="pcoded-content">
@@ -45,13 +45,13 @@
                                         </label>
                                         @if (Model.PK_InvestmentId == null)
                                         {
-                                            @Html.TextBoxFor(m => m.InvestorId, new { @class = "form-control", @Placeholder = "Investor ID", @onchange = "return GetSponsorName();" })
+                                            @Html.TextBoxFor(m => m.InvestorId, new { @class = "form-control", @Placeholder = "Investor ID", @onchange = "return getSponsorName();"})
 
 
                                         }
                                         else
                                         {
-                                            @Html.TextBoxFor(m => m.InvestorId, new { @class = "form-control", @Placeholder = "Investor ID", @onchange = "return GetSponsorName();", @readonly = "d" })
+                                            @Html.TextBoxFor(m => m.InvestorId, new { @class = "form-control", @Placeholder = "Investor ID", @onchange = "return getSponsorName();", @readonly = "true" })
 
                                         }
                                         @Html.HiddenFor(m => m.UserID)
@@ -69,12 +69,7 @@
                                     <label for="LoginID">Sponsor Id<span style="color:red">*</span></label>
                                     @if (Model.UserID == null)
                                     {
-                                        @Html.TextBoxFor(m => m.LoginID, new
-                                   {
-                                       @class = "form-control",
-                                       @Placeholder = "Login ID",
-                                       @onchange = "return GetLoginName();",
-                                       @required = "required"
+                                        @Html.TextBoxFor(m => m.LoginID, new {@class = "form-control",  @Placeholder = "Login ID", @onchange = "return GetLoginName();", @required = "required"
                                    })
                                     }
                                     else
@@ -92,7 +87,7 @@
                                 </div>
                           
                             </div>
-                            <div class="form-row">
+                            <div class="form-row" style="display:none">
                                 <div class="col-md-4 mb-3">
                                     <label for="Email">PinCode <span style="color:red">*</span> </label>
                                     @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6", @required = "required" })
@@ -107,7 +102,7 @@
                                 </div>
 
                             </div>
-                            <div class="form-row">
+                            <div class="form-row" style="display:none">
                                 <div class="col-md-4 mb-3">
                                     <label for="PanCard">Mobile No.<span style="color:red">*</span></label>
                                     @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @placeholder = "Mobile No.", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
@@ -120,7 +115,8 @@
                                     <label for="Email">Pan No<span style="color:red">*</span></label>
                                     @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @placeholder = "PanNo", @maxlength = "10", @onchange = "return validatePan()" })
                                 </div>
-                                
+                            </div>
+                            <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label for="Pincode">Comapany Name<span style="color:red">*</span></label>
                                     @Html.DropDownListFor(m => m.PK_CompanyID, new SelectList(ViewBag.ddlcompanyname, "Value", "Text"), new { @class = "form-control", @placeholder = "Comapany Name", @onchange = "return GetProjectName();", @required = "required" })
@@ -166,7 +162,7 @@
                                 </div>
                             </div>
                             
-                            <div class="form-row">
+                            <div class="form-row" style="display:none">
                                 <div class="col-md-4 mb-3">
                                     <label for="PanCard">Adhar No</label>
                                     @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @placeholder = "Adhar No,", @maxlength = "12", @onkeypress = "return isNumberOrDecimal(event);" })
@@ -196,8 +192,8 @@
                                         @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code" })
                                     </div>
                                 </div>*@
-                            <input type="submit" class="btn  btn-primary" name="btnSave" onclick="return validateform();" value="Save" />
-                            <a href="/Master/InvestorList" class="btn btn-info">Back To List</a>
+                            <input type="submit" class="btn  btn-primary mb-2" name="btnSave" onclick="return validateform();" value="Save" />
+                            <a href="/Investment/InvestmentList" class="btn btn-info">Back To List</a>
                         </div>
                     </div>
                 </div>
@@ -205,30 +201,35 @@
         </div>
     </section>
 }
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 
 <script>
     function getSponsorName() {
+        debugger;
         $("#divload").css({ 'display': '' });
         var InvestorId = $('#InvestorId').val();
         $.ajax({
-            url: '/Master/GetSponsorName', type: 'post', dataType: 'json',
+            url: '/Investment/GetSponsorName', type: 'post', dataType: 'json',
             data: { 'InvestorId': InvestorId },
             success: function (data) {
-
+                debugger;
                 $("#divload").css({ 'display': 'none' });
                 if (data.Result == "yes") {
+                    debugger;
                     $("#SponsorName").val(data.SponsorName);
-                    $("#InvestorId").val(data.LoginId);
+                    $("#InvestorId").val(data.InvestorId);
                     $("#Investorname").val(data.Investorname);
                     $("#UserID").val(data.InvestorId);
-                    $("#SponsorName").val(data.SponsorName);
+                    $("#LoginID").val(data.LoginID);
                     $("#UserID").val(data.UserID);
-                    $("#SponsorName").val(data.SponsorName);
-                    $("#UserID").val(data.UserID);
-                    $("#SponsorName").val(data.SponsorName);
-                    $("#UserID").val(data.UserID);
-                    $("#SponsorName").val(data.SponsorName);
-                    $("#UserID").val(data.UserID);
+                    $("#FK_SponsorId").val(data.FK_SponsorId);
+                    //$("#UserID").val(data.UserID);
+                    //$("#SponsorName").val(data.SponsorName);
+                    //$("#UserID").val(data.UserID);
+                    //$("#SponsorName").val(data.SponsorName);
+                    //$("#UserID").val(data.UserID);
                     $("#SponsorName").removeClass('errortext');
                     $("#SponsorID").removeClass('errortext');
                 }
@@ -236,7 +237,6 @@
                     alert("Invalid Sponsor ID");
                     $("#SponsorName").val('');
                     document.getElementById('AssociateImage').src = '';
-
                     $("#SponsorName").addClass('errortext');
                     $("#SponsorID").addClass('errortext');
                     $('#SponsorID').focus();
@@ -367,46 +367,46 @@
             $('#LoginID').focus();
             return false;
         }
-        if ($('#FirstName').val() == '') {
-            $("#FirstName").addClass('errortext');
-            $('#FirstName').focus();
-            return false;
-        }
+        //if ($('#FirstName').val() == '') {
+        //    $("#FirstName").addClass('errortext');
+        //    $('#FirstName').focus();
+        //    return false;
+        //}
         //if ($('#LastName').val() == '') {
         //    $("#LastName").addClass('errortext');
         //    $('#LastName').focus();
         //    return false;
         //}
-        if ($('#Mobile').val() == '') {
-            $("#Mobile").addClass('errortext');
-            $('#Mobile').focus();
-            return false;
-        }
-        if ($('#PanNo').val() == '') {
-            $("#PanNo").addClass('errortext');
-            $('#PanNo').focus();
-            return false;
-        }
+        //if ($('#Mobile').val() == '') {
+        //    $("#Mobile").addClass('errortext');
+        //    $('#Mobile').focus();
+        //    return false;
+        //}
+        //if ($('#PanNo').val() == '') {
+        //    $("#PanNo").addClass('errortext');
+        //    $('#PanNo').focus();
+        //    return false;
+        //}
         if ($('#Amount').val() == '') {
             $("#Amount").addClass('errortext');
             $('#Amount').focus();
             return false;
         }
-        if ($('#PK_CompanyID').val() == '0') {
-            $("#PK_CompanyID").addClass('errortext');
-            $('#PK_CompanyID').focus();
-            return false;
-        }
+        //if ($('#PK_CompanyID').val() == '0') {
+        //    $("#PK_CompanyID").addClass('errortext');
+        //    $('#PK_CompanyID').focus();
+        //    return false;
+        //}
         if ($('#FK_ProjectID').val() == '0') {
             $("#FK_ProjectID").addClass('errortext');
             $('#FK_ProjectID').focus();
             return false;
         }
-        if ($('#Pincode').val() == '') {
-            $("#Pincode").addClass('errortext');
-            $('#Pincode').focus();
-            return false;
-        }
+        //if ($('#Pincode').val() == '') {
+        //    $("#Pincode").addClass('errortext');
+        //    $('#Pincode').focus();
+        //    return false;
+        //}
         if ($('#Fk_Paymentid').val() == '0') {
             $('#Fk_Paymentid').addClass('errrortext');
             $('#Fk_Paymentid').focus();
@@ -642,9 +642,15 @@
             $("#PanNo").addClass('errortext');
         }
     }
+    $('#TransactionDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
 
-
-
+   
+        //$("#TransactionDate").datepicker({ dateFormat: "dd-mm-yy" }).val()
+   
 
     function onlyAlphabets(e, t) {
         try {

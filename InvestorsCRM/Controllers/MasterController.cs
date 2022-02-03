@@ -645,43 +645,7 @@ namespace InvestorsCRM.Controllers
             }
             return RedirectToAction("ConfirmRegistration", "Master");
         }
-        public ActionResult GetSponsorName(string InvestorId)
-        {
-            try
-            {
-                Master model = new Master();
-                model.LoginID = InvestorId;
-
-                #region GetSiteRate
-                DataSet dsSponsorName = model.GetSponsorName();
-                if (dsSponsorName != null && dsSponsorName.Tables[0].Rows.Count > 0)
-                {
-                  
-                    model.InvestorId = dsSponsorName.Tables[0].Rows[0]["PK_UserID"].ToString();
-                    model.PanNo = dsSponsorName.Tables[0].Rows[0]["PanNumber"].ToString();
-                    model.Pincode = dsSponsorName.Tables[0].Rows[0]["PinCode"].ToString();
-                    model.State = dsSponsorName.Tables[0].Rows[0]["State"].ToString();
-                    model.City = dsSponsorName.Tables[0].Rows[0]["City"].ToString();
-                    model.Mobile = dsSponsorName.Tables[0].Rows[0]["Mobile"].ToString();
-                    model.EmailId = dsSponsorName.Tables[0].Rows[0]["Email"].ToString();
-                    model.SponsorName = dsSponsorName.Tables[0].Rows[0]["SponsorName"].ToString();
-                    model.FK_SponsorId = dsSponsorName.Tables[0].Rows[0]["Fk_sponsorid"].ToString();
-                    model.Investorname = dsSponsorName.Tables[0].Rows[0]["Name"].ToString();
-                    model.Result = "yes";
-                }
-                else
-                {
-                    model.SponsorName = "";
-                    model.Result = "no";
-                }
-                #endregion
-                return Json(model, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return View(ex.Message);
-            }
-        }
+       
         public ActionResult RegistrationList()
         {
             Master model = new Master();
@@ -931,43 +895,7 @@ namespace InvestorsCRM.Controllers
             return View(obj);
         }
 
-        [HttpPost]
-        [ActionName("InvestmentForm")]
-        [OnAction(ButtonName = "btnSave")]
-        public ActionResult InvestmentForm(Master model,HttpPostedFileBase PostedFile)
-        {
-            try
-            {
-                Random rnd = new Random();
-                int ctrPasword = rnd.Next(111111, 999999);
-                model.Password = Crypto.Encrypt(ctrPasword.ToString());
-                model.CreatedBy = Session["UserID"].ToString();
-                
-                if (PostedFile != null)
-                {
-                    model.Image = "../AgreementUploadFile/" + Guid.NewGuid() + Path.GetExtension(PostedFile.FileName);
-                    PostedFile.SaveAs(Path.Combine(Server.MapPath(model.Image)));
-                }
-                DataSet Ds = model.InvestorRegistration();
-                if (Ds != null && Ds.Tables[0].Rows.Count > 0 && Ds.Tables.Count > 0 && Ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
-                {
-                    TempData["Error"] = "Investor Registration Save SuccessFully";
-                }
-                else
-                {
-                    TempData["Error"] = Ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                }
-                
-            }
-            catch (Exception ex)
-            {
-
-                TempData["Error"] = ex.Message;
-            }
-            return RedirectToAction("InvestmentForm", "Master");
-        }
-
-
+       
 
       
         public ActionResult InvestorList()

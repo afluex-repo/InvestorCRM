@@ -40,7 +40,7 @@ namespace InvestorsCRM.Models
         public List<ListProject> listProject { get; set; }
         public DataTable dtCompanyDetails { get; set; }
         public string SponsorName { get; set; }
-     
+  
         public string UserID { get; set; }
         public string AssociateImage { get; set; }
         public string Result { get; set; }
@@ -374,9 +374,32 @@ namespace InvestorsCRM.Models
                                       new SqlParameter("@State",State)
 
             };
-            DataSet ds = Connection.ExecuteQuery("SaveUserRegistration", para);                 //Connetion.ExecuteQuery();
+            DataSet ds = Connection.ExecuteQuery("InvestmentForm", para);                 //Connetion.ExecuteQuery();
             return ds;
         }
+        public DataSet InvestmentForm()
+        {
+            SqlParameter[] para ={
+
+                                 new SqlParameter("@PK_InvestorID",UserID),
+                                    new SqlParameter("@FK_UserID",UserID),
+                                   new SqlParameter("@FK_SponsorID",FK_SponsorId),
+                                    new SqlParameter("@Amount",Amount),
+                                     new SqlParameter("@FK_PlanID",PK_PlanID),
+                                     new SqlParameter("@FK_ProjectID",FK_ProjectID),
+                                      new SqlParameter("@Agreement",Image),
+                                      new SqlParameter("@FK_CompanyID",PK_CompanyID),
+                                     new SqlParameter("@CreatedBy",UserID),
+                                     new SqlParameter("@PaymentMode",Fk_Paymentid),
+                                     new SqlParameter("@TransactionNo",TransactionNo),
+                                     new SqlParameter("@TransactionDate",TransactionDate),
+                                     new SqlParameter("@BankName",BankName),
+                                      new SqlParameter("@BranchName",BranchName),
+            };
+            DataSet ds = Connection.ExecuteQuery("InvestmentForm", para);                 //Connetion.ExecuteQuery();
+            return ds;
+        }
+
 
         public DataSet GetInvestorDetails()
         {
