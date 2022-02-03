@@ -1,11 +1,10 @@
-﻿@model InvestorsCRM.Models.Master
+﻿@model InvestorsCRM.Models.Admin
+
 @{
-    ViewBag.Title = "Registration";
+    ViewBag.Title = "InvestorRegistration";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-@using (Html.BeginForm("Registration", "Master", FormMethod.Post, new { @id = "signupForm", @novalidate = "" }))
+@using (Html.BeginForm("InvestorRegistration", "Admin", FormMethod.Post, new { @id = "signupForm", @novalidate = "" }))
 {
     <section class="pcoded-main-container">
         <div class="pcoded-content">
@@ -18,7 +17,7 @@
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/Master/index"><i class="feather icon-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="#!">Admin</a></li>
-                                <li class="breadcrumb-item"><a href="#!">User Registration</a></li>
+                                <li class="breadcrumb-item"><a href="#!">Investor Registration</a></li>
                             </ul>
                         </div>
                     </div>
@@ -28,7 +27,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>User Registration</h5>
+                            <h5>Investor Registration</h5>
                             <p style="color:red;">
                                 @TempData["msg"]
                             </p>
@@ -37,17 +36,15 @@
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label for="LoginID">Sponsor Id<span style="color:red">*</span></label>
-                                  @if (Model.UserID == null)
-                                  {
-                                    @Html.TextBoxFor(m => m.LoginID, new {@class = "form-control", @Placeholder = "Login ID", @onchange = "return GetLoginName();", @required = "required" })
-                                  }
-                                  else
-                                  {
+                                    @if (Model.UserID == null)
+                                    {
+                                        @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @Placeholder = "Login ID", @onchange = "return GetLoginName();", @required = "required" })
+                                    }
+                                    else
+                                    {
                                         @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @Placeholder = "Sponsor ID", @readonly = "readonly", @required = "required" })
 
                                     }
-                                    @*@Html.HiddenFor(m => m.UserID)*@
-
                                     @Html.HiddenFor(m => m.FK_SponsorId)
 
                                 </div>
@@ -55,7 +52,7 @@
                                     <label for="Username">Sponsor Name</label>
                                     @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "Name", @readonly = "readonly", @required = "required" })
                                 </div>
-                                
+
                             </div>
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
@@ -68,7 +65,7 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="PanCard">Mobile No<span style="color:red">*</span></label>
-                                    @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control",@maxlength="10", @placeholder = "Mobile No",@onkeypress = "return isNumberKey(event);" })
+                                    @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @maxlength = "10", @placeholder = "Mobile No", @onkeypress = "return isNumberKey(event);" })
                                 </div>
                             </div>
                             <div class="form-row">
@@ -110,7 +107,7 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="PanCard">City</label>
-                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City",@readonly=true })
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City", @readonly = true })
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="PanCard">State </label>
@@ -122,14 +119,14 @@
                                 </div>
                             </div>
                             <input type="submit" class="btn  btn-success" name="btnSave" onclick="return validateform();" value="Save" />
-                           
-                                <a href="/Master/RegistrationList" class="btn btn-info">Back To List</a>
-                          
+
+                            <a href="/Master/RegistrationList" class="btn btn-info">Back To List</a>
+
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
     </section>
 }
 
@@ -187,7 +184,7 @@
             }
         });
     }
-    
+
     function onlyAlphabets(e, t) {
         try {
             if (window.event) {
@@ -272,3 +269,4 @@
         background-color: #ffffff !important;
     }
 </style>
+

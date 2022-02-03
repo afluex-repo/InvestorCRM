@@ -610,7 +610,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/12/2022 13:42:39</publishTime>
     </File>
     <File Include="bin/InvestorsCRM.dll">
-      <publishTime>01/12/2022 13:56:46</publishTime>
+      <publishTime>01/27/2022 14:00:58</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>01/12/2022 13:42:39</publishTime>
@@ -855,6 +855,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Master/CompanyMaster.cshtml">
       <publishTime>01/12/2022 13:42:38</publishTime>
     </File>
+    <File Include="Views/Master/ConfirmRegistration.cshtml">
+      <publishTime>01/27/2022 13:14:34</publishTime>
+    </File>
     <File Include="Views/Master/DesignationList.cshtml">
       <publishTime>01/12/2022 13:42:38</publishTime>
     </File>
@@ -866,6 +869,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Master/Index.cshtml">
       <publishTime>01/12/2022 13:42:38</publishTime>
+    </File>
+    <File Include="Views/Master/InvestorList.cshtml">
+      <publishTime>01/27/2022 13:46:30</publishTime>
+    </File>
+    <File Include="Views/Master/InvestorRegistration.cshtml">
+      <publishTime>01/27/2022 13:47:19</publishTime>
     </File>
     <File Include="Views/Master/PlanList.cshtml">
       <publishTime>01/12/2022 13:42:38</publishTime>
@@ -880,10 +889,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/12/2022 13:42:38</publishTime>
     </File>
     <File Include="Views/Master/Registration.cshtml">
-      <publishTime>01/12/2022 13:42:38</publishTime>
+      <publishTime>01/27/2022 13:14:34</publishTime>
+    </File>
+    <File Include="Views/Master/RegistrationList.cshtml">
+      <publishTime>01/27/2022 13:14:34</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/12/2022 13:53:21</publishTime>
+      <publishTime>01/27/2022 13:45:42</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>01/12/2022 13:42:38</publishTime>

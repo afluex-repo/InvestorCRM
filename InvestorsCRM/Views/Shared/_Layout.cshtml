@@ -14,7 +14,28 @@
     <!-- vendor css -->
     <link rel="stylesheet" href="~/assets/css/style.css">
 
+    <style>
+            .pcoded-navbar .main-menu-header {
+        background: #2c3e50;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        height: 100px;
+        align-items: center;
+    }
 
+    .user-details {
+        background-color: white;
+        padding: 7px;
+        border-radius: 8px;
+    }
+
+    .pcoded-navbar .main-menu-header .user-details {
+        cursor: pointer;
+        display: inline-block;
+     
+    }
+    </style>
 
 </head>
 <body class="">
@@ -70,7 +91,7 @@
                     <li class="nav-item pcoded-hasmenu">
                         <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">User Master</span></a>
                         <ul class="pcoded-submenu">
-                            <li><a href="/Master/Registration">Registration</a></li>
+                            <li><a href="/Master/Registration">User Registration</a></li>
                             @*<li><a href="bc_button.html">Button</a></li>
                             <li><a href="bc_badges.html">Badges</a></li>
                             <li><a href="bc_breadcrumb-pagination.html">Breadcrumb & paggination</a></li>
@@ -88,14 +109,31 @@
                             <li><a href="bc_extra.html">Other</a></li>*@
                         </ul>
                     </li>
-                    @*<li class="nav-item pcoded-menu-caption">
-                        <label>Forms &amp; table</label>
+                   
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Investor</span></a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="/Admin/InvestorRegistration">Investor Registration</a></li>
+                            <li><a href="/Master/InvestorList">Investor List</a></li>
+                          
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="form_elements.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Forms</span></a>
-                    </li>*@
-               
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Investment</span></a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="/Master/InvestmentForm">Investment</a></li>
+                            <li><a href="/Master/InvestmentList">Investor List</a></li>
 
+                        </ul>
+                    </li>
+                 
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Team</span></a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="#">Level Tree Team</a></li>
+
+                        </ul>
+                    </li>
                 </ul>
 
                 
