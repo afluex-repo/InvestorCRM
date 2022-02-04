@@ -38,14 +38,13 @@ namespace InvestorsCRM.Controllers
                         Session["Username"] = ds.Tables[0].Rows[0]["Username"].ToString();
                         Session["FK_UserTypeID"] = ds.Tables[0].Rows[0]["FK_Usertype"].ToString();
                         //Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
-
                         return RedirectToAction("Index", "Master");
                     }
 
                     if (ds.Tables[0].Rows[0]["FK_Usertype"].ToString() != "1")
                     {
                         ViewBag.errormsg = "";
-                        Session["UserID"] = ds.Tables[0].Rows[0]["PK_AdminId"].ToString();
+                        Session["UserID"] = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
                         Session["LoginID"] = ds.Tables[0].Rows[0]["LoginID"].ToString();
                         Session["Username"] = ds.Tables[0].Rows[0]["Username"].ToString();
                         Session["FK_UserTypeID"] = ds.Tables[0].Rows[0]["FK_Usertype"].ToString();
