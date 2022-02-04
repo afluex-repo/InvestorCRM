@@ -28,13 +28,20 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
+                        @if (@TempData["update"] != null)
+                        {
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="float:right">
+                                <strong> @TempData["update"]!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                        }
                         <div class="card-header">
                         </div>
                         <div class="card-body">
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
-                                    <label for="Username">Login Id</label>
-                                    @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @placeholder = "Login ID" })
+                                    <label for="Username">Investor ID </label>
+                                    @Html.TextBoxFor(m => m.PK_InvestorID, new { @class = "form-control", @placeholder = "Login ID" })
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="Username">From Date</label>
@@ -68,34 +75,44 @@
                                         <thead>
                                             <tr>
                                                 <th>S.N.</th>
-                                                <th>Investor</th>
-                                                <th>Password</th>
-                                                <th>Sponsor</th>
-                                                <th>Mobile</th>
-                                                <th>Email Id</th>
-                                                <th>Pan No</th>
+                                                 <th>Investor Name</th>
+                                                <th>Sponsor LoginId</th>
                                                 <th>Amount</th>
+                                                <th>Transaction No</th>
+                                                <th>Transaction Date</th>
+                                                <th>Bank Name</th>
+                                                <th>Branch Name</th>
+                                                <th>Payment Mode</th>
+                                                <th>Project Name</th>
+                                                <th>Company Name</th>
+                                                <th>PlanName</th>
                                                 <th>Agreement</th>
-                                                <th>Address</th>
+                                                <th>InvestmentDate </th>
+                                                <th>Action </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @if (Model != null)
                                             {
-                                                if (Model.lstInvestor != null)
+                                                if (Model.lstInvestment != null)
                                                 {
                                                     int i = 1;
-                                                    foreach (var item in Model.lstInvestor)
+                                                    foreach (var item in Model.lstInvestment)
                                                     {
                                                         <tr>
                                                             <td>@i</td>
+                                                            @*<td>@item.LoginID</td>*@
                                                             <td>@item.FullName</td>
-                                                            <td>@item.Password</td>
                                                             <td>@item.FK_SponsorId</td>
-                                                            <td>@item.Mobile</td>
-                                                            <td>@item.EmailId</td>
-                                                            <td>@item.PanNo</td>
                                                             <td>@item.Amount</td>
+                                                            <td>@item.TransactionNo</td>
+                                                            <td>@item.TransactionDate</td>
+                                                            <td>@item.BankName</td>
+                                                            <td>@item.BranchName</td>
+                                                            <td>@item.Fk_Paymentid</td>
+                                                            <td>@item.ProjectName</td>
+                                                            <td>@item.CompanyName</td>
+                                                            <td>@item.PlanName</td>
                                                             <td>
                                                                 <a href="@item.Image" download>
                                                                     <i class="fa fa-file-pdf-o" style="font-size:25px;color:black">
@@ -104,8 +121,11 @@
                                                                     </i>
                                                                 </a>
                                                             </td>
-
-                                                            <td>@item.Address</td>
+                                                            <td>@item.InvestmentDate</td>
+                                                            <td style="display:none">
+                                                                @*<input type="text" name="PK_InvestmentId" value="PK_InvestmentId" hidden="true" />*@
+                                                            </td>
+                                                            <td><a href="/Investment/InvestmentForm?Id=@item.UserID" class="btn btn-default"><i class="fa fa-eye" style="font-size:20px"></i></a></td>
                                                         </tr>
                                                         i = i + 1;
                                                     }

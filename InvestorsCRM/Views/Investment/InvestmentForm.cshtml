@@ -42,15 +42,20 @@
                                     <div class="form-group">
                                         <label for="LoginID">
                                             Investor ID <span style="color: red">*</span>
+
+                                            <input type="hidden" name="UserID" id="UserID" value="@Model.UserID" />
+
                                         </label>
-                                        @if (Model.PK_InvestmentId == null)
+                                        @if (Model.UserID == null)
                                         {
                                             @Html.TextBoxFor(m => m.InvestorId, new { @class = "form-control", @Placeholder = "Investor ID", @onchange = "return getSponsorName();"})
+
 
 
                                         }
                                         else
                                         {
+                                          
                                             @Html.TextBoxFor(m => m.InvestorId, new { @class = "form-control", @Placeholder = "Investor ID", @onchange = "return getSponsorName();", @readonly = "true" })
 
                                         }
@@ -137,6 +142,10 @@
                                     <label for="Email">Amount <span style="color:red">*</span></label>
                                     @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberOrDecimal(event);" })
                                 </div>
+                                <div class="col-md-3">
+                                    <label for="TransactionDate" id="lbltdate">Investment Date</label>
+                                    @Html.TextBoxFor(m => m.InvestmentDate, new { @class = "form-control", @placeholder = "Transaction Date" ,@readonly="true"})
+                                </div>
                                 <div class="col-md-4">
                                     <label for="Fk_Paymentid">Payment Mode</label>
                                     @Html.DropDownListFor(m => m.Fk_Paymentid, new SelectList(ViewBag.ddlPayment, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode();" })
@@ -150,7 +159,7 @@
                                 </div>
                                 <div class="col-md-3" id="divtrdate">
                                     <label for="TransactionDate" id="lbltdate">TransactionDate</label>
-                                    @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date" })
+                                    @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = "true" })
                                 </div>
                                 <div class="col-md-3" id="divbankname">
                                     <label for="BankName" id="lblbank">Bank Name</label>
@@ -175,9 +184,9 @@
 
                             @*<div class="form-row">
                                 </div>*@
+                            @Html.HiddenFor(m => m.PK_InvestorID)
 
-
-
+                           
                             @*<div class="form-row">
                                     <div class="col-md-4 mb-3">
                                         <label for="Email">Bank Account No </label>
@@ -192,9 +201,21 @@
                                         @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code" })
                                     </div>
                                 </div>*@
-                            <input type="submit" class="btn  btn-primary mb-2" name="btnSave" onclick="return validateform();" value="Save" />
-                            <a href="/Investment/InvestmentList" class="btn btn-info">Back To List</a>
-                        </div>
+                            <div class="col-md-4 mb-3">
+                                @if (Model.UserID != null)
+                                {
+                                    <input type="submit" class="btn  btn-primary mb-2" name="btnUpdate"  value="Update" >
+
+                                }
+                                else
+                                {
+                                    <input type="submit" class="btn  btn-primary mb-2" name="btnSave" onclick="return validateform();" value="Save" />
+                                }
+                                <a href="/Investment/InvestmentList" class="btn btn-info">Back To List</a>
+                            </div>
+
+                            </div>
+
                     </div>
                 </div>
             </div>
@@ -604,8 +625,8 @@
         $("#divload").css({ 'display': '' });
         var PK_CompanyID = $('#PK_CompanyID').val();
         $.ajax({
-            url: '/Master/GetProjectName', type: 'post', dataType: 'json',
-            data: { 'PK_CompanyID': PK_CompanyID },
+            url: '/Investment/GetProjectName', type: 'post', dataType: 'json',
+            data: {'PK_CompanyID': PK_CompanyID },
             success: function (data) {
                 $("#divload").css({ 'display': 'none' });
                 $("#FK_ProjectID").html(""); // clear before appending new list
@@ -648,7 +669,12 @@
         changeMonth: true
     });
 
-   
+    $('#InvestmentDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate:0,
+        changeYear: true,
+        changeMonth: true
+    });
         //$("#TransactionDate").datepicker({ dateFormat: "dd-mm-yy" }).val()
    
 
