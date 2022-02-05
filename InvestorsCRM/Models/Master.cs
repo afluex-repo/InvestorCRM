@@ -118,7 +118,6 @@ namespace InvestorsCRM.Models
             DataSet ds = Connection.ExecuteQuery("GetStateCity", para);
             return ds;
         }
-
         public DataSet InsertProject()
         {
             SqlParameter[] para ={new SqlParameter ("@ProjectName",ProjectName),

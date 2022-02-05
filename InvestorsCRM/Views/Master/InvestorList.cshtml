@@ -46,12 +46,11 @@
                                     <label for="Username">To Date</label>
                                     @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "ToDate", @readonly = "true" })
                                 </div>
-                                <div class="col-md-1 mb-3">
+                                <div class="col-md-3 mb-3" style="margin-top: 30px;">
                                     <input type="submit"  class="btn  btn-success" name="btnSearch" value="Search" />
-                                </div>
-                                <div class="col-md-2 mb-3">
                                     <a href="/Admin/InvestorRegistration" class="btn btn-info" margin-top:30px;">Add New</a>
                                 </div>
+                              
                             </div>
                             <div class="card-block">
                                 <div class="dt-responsive table-responsive">
@@ -68,6 +67,7 @@
                                                 <th>Amount</th>
                                                 <th>Agreement</th>
                                                 <th>Address</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -97,6 +97,12 @@
                                                             </td>
                                                       
                                                             <td>@item.Address</td>
+                                                            <td>
+                                                                <a href="/Investment/InvestmentForm?Id=@item.UserID" class="btn btn-default"><i class="fa fa-eye" style="font-size:20px"></i></a>
+                                                                <a href="/Master/DeleteCompany?PK_CompanyID=@item.PK_CompanyID" class="btn btn-default">
+                                                                    <i class="bi bi-trash"></i><img src="~/assets/trash.svg" />
+                                                                </a>
+                                                            </td>
                                                         </tr>
                                                         i = i + 1;
                                                     }
