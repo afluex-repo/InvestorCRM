@@ -17,7 +17,7 @@
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/Master/index"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#!">Investor Registration</a></li>
+                                <li class="breadcrumb-item"><a href="#!">Investment Registration</a></li>
                             </ul>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                             </div>
                         }
                         <div class="card-header">
-                            <h5>Investor Registration</h5>
+                            <h5>Investment Registration</h5>
                         </div>
                         <div class="card-body">
                             <div class="form-row">
@@ -42,22 +42,15 @@
                                     <div class="form-group">
                                         <label for="LoginID">
                                             Investor ID <span style="color: red">*</span>
-
                                             <input type="hidden" name="UserID" id="UserID" value="@Model.UserID" />
-
-                                        </label>
+                                         </label>
                                         @if (Model.UserID == null)
                                         {
-                                            @Html.TextBoxFor(m => m.InvestorId, new { @class = "form-control", @Placeholder = "Investor ID", @onchange = "return getSponsorName();"})
-
-
-
+                                             @Html.TextBoxFor(m => m.InvestorId, new { @class = "form-control", @Placeholder = "Investor ID", @onchange = "return getSponsorName();"})
                                         }
                                         else
                                         {
-                                          
-                                            @Html.TextBoxFor(m => m.InvestorId, new { @class = "form-control", @Placeholder = "Investor ID", @onchange = "return getSponsorName();", @readonly = "true" })
-
+                                             @Html.TextBoxFor(m => m.InvestorId, new { @class = "form-control", @Placeholder = "Investor ID", @onchange = "return getSponsorName();", @readonly = "true" })
                                         }
                                         @Html.HiddenFor(m => m.UserID)
                                     </div>

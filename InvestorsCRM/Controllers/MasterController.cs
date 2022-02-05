@@ -658,6 +658,7 @@ namespace InvestorsCRM.Controllers
                     obj.LoginID = r["LoginId"].ToString();
                     obj.Password =Crypto.Decrypt(r["Password"].ToString());
                     obj.FullName = r["FullName"].ToString();
+                    obj.SponsorName = r["SponsorLoginId"].ToString();
                     obj.Mobile = r["Mobile"].ToString();
                     obj.EmailId = r["Email"].ToString();
                     obj.PanNo = r["PanNumber"].ToString();
@@ -666,9 +667,9 @@ namespace InvestorsCRM.Controllers
                     obj.BankName = r["MemberBankName"].ToString();
                     obj.BranchName = r["MemberBranch"].ToString();
                     obj.IFSCCode = r["IFSCCode"].ToString();
-                    obj.Pincode = r["PinCode"].ToString();
-                    obj.City = r["City"].ToString();
-                    obj.State = r["State"].ToString();
+                    obj.UserID = r["PK_UserId"].ToString();
+                   // obj.City = r["City"].ToString();
+                  //  obj.State = r["State"].ToString();
                     obj.Address = r["Address"].ToString();
                     lst.Add(obj);
                 }
@@ -700,9 +701,9 @@ namespace InvestorsCRM.Controllers
                     obj.BankName = r["MemberBankName"].ToString();
                     obj.BranchName = r["MemberBranch"].ToString();
                     obj.IFSCCode = r["IFSCCode"].ToString();
-                    obj.Pincode = r["PinCode"].ToString();
-                    obj.City = r["City"].ToString();
-                    obj.State = r["State"].ToString();
+                    obj.UserID = r["PK_UserId"].ToString();
+                    obj.SponsorName = r["SponsorLoginId"].ToString();
+                    // obj.State = r["State"].ToString();
                     obj.Address = r["Address"].ToString();
                     lst.Add(obj);
                 }

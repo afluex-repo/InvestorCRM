@@ -18,7 +18,7 @@
                             <div class="page-header-title">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/Master/Index"><i class="feather icon-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="#">Investor List</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Investment List</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -66,12 +66,12 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Investor List</h5>
+                            <h5>Investment List</h5>
                         </div>
                         <div class="card-body">
                             <div class="card-block">
                                 <div class="dt-responsive table-responsive">
-                                    <table id="compact" class="table table-bordered table-striped">
+                                    <table class="table table-bordered table-striped table-md" data-page-length='25' id="tableExport" style="width:100%;" >
                                         <thead>
                                             <tr>
                                                 <th>S.N.</th>
@@ -157,4 +157,28 @@
         changeMonth: true
     });
 </script>
+<script>
+    $(document).ready(function () {
+        $('#tableExport').after('<div id="nav"></div>');
+        var rowsShown = 10;
+        var rowsTotal = $('#tableExport tbody tr').length;
+        var numPages = rowsTotal / rowsShown;
+        for (i = 0; i < numPages; i++) {
+            var pageNum = i + 1;
+            $('#nav').append('<a href="#" rel="' + i + '">' + pageNum + '</a> ');
+        }
+        $('#tableExport tbody tr').hide();
+        $('#tableExport tbody tr').slice(0, rowsShown).show();
+        $('#nav a:first').addClass('active');
+        $('#nav a').bind('click', function () {
 
+            $('#nav a').removeClass('active');
+            $(this).addClass('active');
+            var currPage = $(this).attr('rel');
+            var startItem = currPage * rowsShown;
+            var endItem = startItem + rowsShown;
+            $('#tableExport tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
+            css('display', 'table-row').animate({ opacity: 1 }, 300);
+        });
+    });
+</script>

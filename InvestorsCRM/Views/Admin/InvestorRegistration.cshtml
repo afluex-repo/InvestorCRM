@@ -119,8 +119,7 @@
                                 </div>
                             </div>
                             <input type="submit" class="btn  btn-success" name="btnSave" onclick="return validateform();" value="Save" />
-
-                            <a href="/Master/RegistrationList" class="btn btn-info">Back To List</a>
+                             <a href="/Master/InvestorList" class="btn btn-info">Back To List</a>
 
                         </div>
                     </div>
@@ -129,7 +128,6 @@
         </div>
     </section>
 }
-
 <script>
     function validateform() {
         $("#divload").css({ 'display': 'none' });
@@ -164,7 +162,6 @@
         changeMonth: true
     });
     function getStateCity() {
-
         var pincode = $('#Pincode').val();
         $.ajax({
             url: '/Master/GetStateCity', type: 'post', dataType: 'json',
@@ -190,7 +187,6 @@
             }
         });
     }
-
     function onlyAlphabets(e, t) {
         try {
             if (window.event) {
@@ -261,10 +257,8 @@
                     $("#LoginID").addClass('errortext');
                     $('#LoginID').focus();
                     $('#LoginID').val('');
-
                 }
             }
-
         });
     }
 </script>
