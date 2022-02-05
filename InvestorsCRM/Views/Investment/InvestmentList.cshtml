@@ -45,11 +45,11 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="Username">From Date</label>
-                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date" })
+                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date", @readonly = "true" })
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="Username">To Date</label>
-                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "ToDate" })
+                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "ToDate", @readonly = "true" })
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <input type="submit" style="margin-top:30px;" class="btn  btn-success" name="btnSearch" value="Search" />
@@ -142,4 +142,19 @@
         </div>
     </section>
 }
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script>
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+</script>
 
