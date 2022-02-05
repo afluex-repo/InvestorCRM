@@ -24,29 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-header">
-                        </div>
-                        <div class="card-body">
-                            <div class="form-row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="Username">Login Id</label>
-                                    @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @placeholder = "Login ID" })
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <input type="submit" style="margin-top:30px;" class="btn  btn-success" name="btnSearch" value="Search" />
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <a href="/Master/Registration" class="btn btn-info" style="margin-left:70%;margin-top:30px;">Add New</a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+          
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -54,16 +32,41 @@
                             <h5>Registration List</h5>
                         </div>
                         <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="Username">Login Id</label>
+                                    @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @placeholder = "Login ID" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="Username">Sponsor Id</label>
+                                    @Html.TextBoxFor(m => m.FK_SponsorId, new { @class = "form-control", @placeholder = "Sponsor Id" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="Username">From Date</label>
+                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date", @readonly = "true" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="Username">To Date</label>
+                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "ToDate", @readonly = "true" })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3 mb-3">
+                                    <input type="submit" class="btn  btn-success" name="btnSearch" value="Search" />
+                                    <a href="/Master/Registration" class="btn btn-info">Add New</a>
+                                </div>
+
+                            </div>
                             <div class="card-block">
                                 <div class="dt-responsive table-responsive">
                                     <table id="compact" class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>S.N.</th>
-                                                <th>Login ID</th>
+                                                <th>Investor ID</th>
+                                                <th>Sponsor Name</th>
                                                 <th>Password</th>
-                                                <th>Name</th>
-                                                <th>Mobile</th>
+                                                 <th>Mobile</th>
                                                 <th>Email Id</th>
                                                 <th>Pan No</th>
                                                 <th>Adhar No</th>
@@ -71,10 +74,8 @@
                                                 <th>BankName</th>
                                                 <th>Branch Name</th>
                                                 <th>IFSC Code</th>
-                                                <th>Pin code</th>
-                                                <th>City</th>
-                                                <th>State</th>
-                                                <th>Address</th>
+                                                 <th>Address</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -86,11 +87,11 @@
                                                     int i = 1;
                                                     foreach (var item in Model.lstRegistation)
                                                     {
-                                                        <tr>
+                                                         <tr>
                                                             <td>@i</td>
-                                                            <td>@item.LoginID</td>
-                                                            <td>@item.Password</td>
                                                             <td>@item.FullName</td>
+                                                            <td>@item.SponsorName</td>
+                                                            <td>@item.Password</td>
                                                             <td>@item.Mobile</td>
                                                             <td>@item.EmailId</td>
                                                             <td>@item.PanNo</td>
@@ -99,10 +100,13 @@
                                                             <td>@item.BankName</td>
                                                             <td>@item.BranchName</td>
                                                             <td>@item.IFSCCode</td>
-                                                            <td>@item.Pincode</td>
-                                                            <td>@item.City</td>
-                                                            <td>@item.State</td>
                                                             <td>@item.Address</td>
+                                                            <td>
+                                                             <a href="/Master/Registration?UserID=@item.EncryptKey" class="btn btn-default"><i class="fa fa-eye" style="font-size:20px"></i></a>
+                                                                <a href="/Master/DeleteCompany?PK_CompanyID=@item.PK_CompanyID" class="btn btn-default">
+                                                                    <i class="bi bi-trash"></i><img src="~/assets/trash.svg" />
+                                                                </a>
+                                                            </td>
                                                         </tr>
                                                         i = i + 1;
                                                     }
@@ -119,5 +123,20 @@
         </div>
     </section>
 }
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script>
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+</script>
 
 

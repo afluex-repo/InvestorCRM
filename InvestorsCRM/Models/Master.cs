@@ -102,7 +102,11 @@ namespace InvestorsCRM.Models
         public DataSet GetRegistartionDeatils()
         {
             SqlParameter[] para = {
-                new SqlParameter("@LoginId", LoginID)
+                new SqlParameter("@LoginId", LoginID),
+                 new SqlParameter("@SponsorLoginId", FK_SponsorId),
+                  new SqlParameter("@FromDate", FromDate),
+                   new SqlParameter("@ToDate", ToDate)
+
             };
             DataSet ds = Connection.ExecuteQuery("GetRegistartionDeatils",para);
             return ds;
@@ -114,7 +118,6 @@ namespace InvestorsCRM.Models
             DataSet ds = Connection.ExecuteQuery("GetStateCity", para);
             return ds;
         }
-
         public DataSet InsertProject()
         {
             SqlParameter[] para ={new SqlParameter ("@ProjectName",ProjectName),
