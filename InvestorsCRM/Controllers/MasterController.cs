@@ -136,8 +136,7 @@ namespace InvestorsCRM.Controllers
                     {
                         obj1.CompanyName = ds1.Tables[0].Rows[0]["CompanyName"].ToString();
                         obj1.PK_CompanyID = ds1.Tables[0].Rows[0]["PK_CompanyID"].ToString();
-                      //  obj1.ProjectName = ds1.Tables[0].Rows[0]["ProjectName"].ToString();
-                      //  obj1.FK_ProjectID = ds1.Tables[0].Rows[0]["PK_ProjectID"].ToString();
+              
                     }
                 }
             }
