@@ -36,7 +36,7 @@ namespace InvestorsCRM.Controllers
                     obj.TransactionDate = r["TransactionDate"].ToString();
                     obj.BankName = r["BankName"].ToString();
                     obj.BranchName = r["BranchName"].ToString();
-                    obj.Fk_Paymentid = r["PK_paymentID"].ToString();
+                    obj.Fk_Paymentid = r["PaymentMode"].ToString();
                     obj.ProjectName = r["ProjectName"].ToString();
                     obj.CompanyName = r["CompanyName"].ToString();
                     obj.PlanName = r["PlanName"].ToString();
@@ -71,7 +71,7 @@ namespace InvestorsCRM.Controllers
                     obj.TransactionDate = r["TransactionDate"].ToString();
                     obj.BankName = r["BankName"].ToString();
                     obj.BranchName = r["BranchName"].ToString();
-                    obj.Fk_Paymentid = r["PK_paymentID"].ToString();
+                    obj.Fk_Paymentid = r["PaymentMode"].ToString();
                     obj.ProjectName = r["ProjectName"].ToString();
                     obj.CompanyName = r["CompanyName"].ToString();
                     obj.PlanName = r["PlanName"].ToString();
@@ -90,7 +90,10 @@ namespace InvestorsCRM.Controllers
             //List<SelectListItem> ddlprojectname = new List<SelectListItem>();
 
             Master obj = new Master();
-            if(Id != null)
+            List<SelectListItem> ddlprojectname = new List<SelectListItem>();
+            ddlprojectname.Add(new SelectListItem { Text = "Select", Value = "0" });
+            ViewBag.ddlprojectname = ddlprojectname;
+            if (Id != null)
             {
                 obj.UserID = Crypto.Decrypt(Id);
                 DataSet dsid = obj.GetSponsorForInvestmentid();
@@ -114,13 +117,22 @@ namespace InvestorsCRM.Controllers
                     obj.PK_InvestorID = dsid.Tables[0].Rows[0]["PK_InvestorID"].ToString();
                     obj.Image=dsid.Tables[0].Rows[0]["Agreement"].ToString();
                 }
-       
-            }
+                List<SelectListItem> ddlProject = new List<SelectListItem>();
+                DataSet dsblock = obj.GetProjectList();
 
-            List<SelectListItem> ddlprojectname = new List<SelectListItem>();
-            ddlprojectname.Add(new SelectListItem { Text = "Select", Value = "0" });
-            ViewBag.ddlprojectname = ddlprojectname;
-           
+
+                if (dsblock != null && dsblock.Tables.Count > 0 && dsblock.Tables[0].Rows.Count > 0)
+                {
+
+                    foreach (DataRow dr in dsblock.Tables[0].Rows)
+                    {
+                        ddlProject.Add(new SelectListItem { Text = dr["ProjectName"].ToString(), Value = dr["PK_ProjectID"].ToString() });
+                    }
+
+                }
+
+                ViewBag.ddlprojectname = ddlProject;
+            }
             #region plan
             int count3 = 0;
 
@@ -159,10 +171,6 @@ namespace InvestorsCRM.Controllers
                 }
             }
             ViewBag.ddlcompanyname = ddlcompanyname;
-            #endregion
-            #region getComapny name
-
-         
             #endregion
             #region PaymentMode
             Common com = new Common();
