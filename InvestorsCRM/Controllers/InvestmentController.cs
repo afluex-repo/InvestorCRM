@@ -114,35 +114,7 @@ namespace InvestorsCRM.Controllers
                     obj.PK_InvestorID = dsid.Tables[0].Rows[0]["PK_InvestorID"].ToString();
                     obj.Image=dsid.Tables[0].Rows[0]["Agreement"].ToString();
                 }
-                //if (dsid != null && obj.PK_CompanyID == dsid.Tables[0].Rows[0]["FK_CompanyID"].ToString())
-                //{
-
-                //    List<SelectListItem> FK_ProjectID = new List<SelectListItem>();
-                //    obj.PK_CompanyID = dsid.Tables[0].Rows[0]["FK_CompanyID"].ToString();
-                //    DataSet dsblock = obj.GetCompanyProjectbyID();
-
-                //    #region ddlProject
-                //    if (dsblock != null && dsblock.Tables.Count > 0 && dsblock.Tables[0].Rows.Count > 0)
-                //    {
-                     
-                //        foreach (DataRow dr in dsblock.Tables[0].Rows)
-                //        {
-                //            //ddlprojectname.Add(new SelectListItem { Text = dr["ProjectName"].ToString(), Value = dr["FK_ProjectID"].ToString() });
-                //            int count3 = 0;
-                //            if (count3 == 0)
-                //            {
-                //               // ddlprojectname.Add(new SelectListItem { Value = "0", Text = "Select Project" });
-                //            }
-                //            FK_ProjectID.Add(new SelectListItem { Text = dr["ProjectName"].ToString(), Value = dr["FK_ProjectID"].ToString() });
-                //            count3 = count3 + 1;
-                //        }
-
-                //    }
-
-                //    obj.ddlprojectname = FK_ProjectID;
-                   
-
-                //}
+       
             }
 
             List<SelectListItem> ddlprojectname = new List<SelectListItem>();
@@ -281,8 +253,6 @@ namespace InvestorsCRM.Controllers
             {
                 Master model = new Master();
                 model.LoginID = (InvestorId);
-               // model.LoginID = InvestorId;
-
                 #region GetSiteRate
                 DataSet dsSponsorName = model.GetSponsorName();
                 if (dsSponsorName != null && dsSponsorName.Tables[0].Rows.Count > 0)
