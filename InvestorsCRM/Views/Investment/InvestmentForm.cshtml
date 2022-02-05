@@ -135,12 +135,12 @@
                                     <label for="Email">Amount <span style="color:red">*</span></label>
                                     @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberOrDecimal(event);" })
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="TransactionDate" id="lbltdate">Investment Date</label>
+                                <div class="col-md-4 mb-3">
+                                    <label >Investment Date <span style="color:red">*</span></label>
                                     @Html.TextBoxFor(m => m.InvestmentDate, new { @class = "form-control", @placeholder = "Transaction Date" ,@readonly="true"})
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="Fk_Paymentid">Payment Mode</label>
+                                    <label for="Fk_Paymentid">Payment Mode <span style="color:red">*</span></label>
                                     @Html.DropDownListFor(m => m.Fk_Paymentid, new SelectList(ViewBag.ddlPayment, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode();" })
 
                                 </div>
@@ -194,7 +194,7 @@
                                         @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code" })
                                     </div>
                                 </div>*@
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-4 mb-3 mt-3">
                                 @if (Model.UserID != null)
                                 {
                                     <input type="submit" class="btn  btn-primary mb-2" name="btnUpdate"  value="Update" >
@@ -204,7 +204,7 @@
                                 {
                                     <input type="submit" class="btn  btn-primary mb-2" name="btnSave" onclick="return validateform();" value="Save" />
                                 }
-                                <a href="/Investment/InvestmentList" class="btn btn-info">Back To List</a>
+                                <a href="/Investment/InvestmentList" class="btn btn-info mb-2">Back To List</a>
                             </div>
 
                             </div>
@@ -220,6 +220,9 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 
 <script>
+    $(document).ready(function () {
+        CheckPayMode();
+    });
     function getSponsorName() {
         debugger;
         $("#divload").css({ 'display': '' });

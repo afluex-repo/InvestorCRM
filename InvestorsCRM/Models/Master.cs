@@ -454,6 +454,10 @@ namespace InvestorsCRM.Models
                  new  SqlParameter ("@TransactionDate",TransactionDate),
              new  SqlParameter ("@BankName",BankName),
                new  SqlParameter ("@BranchName",BranchName),
+               new SqlParameter("@InvestmentDate",InvestmentDate),
+               new SqlParameter("@FK_ProjectID",FK_ProjectID),
+               new SqlParameter("@FK_CompanyID",PK_CompanyID),
+                   new SqlParameter("@FK_PlanID",PK_PlanID)
 
             };
             DataSet ds = Connection.ExecuteQuery("UPDATEInvestment", para);
