@@ -398,7 +398,7 @@ namespace InvestorsCRM.Models
                                      new SqlParameter("@BankName",BankName),
                                       new SqlParameter("@BranchName",BranchName),
             };
-            DataSet ds = Connection.ExecuteQuery("SaveInvestment", para);                 //Connetion.ExecuteQuery();
+            DataSet ds = Connection.ExecuteQuery("SaveInvestment", para);   
             return ds;
         }
 
