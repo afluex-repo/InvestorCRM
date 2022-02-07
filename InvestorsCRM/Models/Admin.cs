@@ -58,5 +58,41 @@ namespace InvestorsCRM.Models
             DataSet ds = Connection.ExecuteQuery("InvestorRegistration", para);
             return ds;
         }
+
+        public DataSet GetInvestorDetails()
+        {
+            SqlParameter[] para =
+            {
+               new  SqlParameter ("@LoginId",LoginID)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetInvestorDetails", para);
+            return ds;
+        }
+
+        public DataSet UpdateRegistration()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@FirstName",FirstName),
+                                     new SqlParameter("@LastName",LastName),
+                                     new SqlParameter("@MobileNo",Mobile),
+                                      new SqlParameter("@EmailId",EmailId),
+                                      new SqlParameter("@PanNo",PanNo),
+                                     new SqlParameter("@AddharNo",AdharNo),
+                                     new SqlParameter("@AccoutnNo",BankAccount),
+                                     new SqlParameter("@BankName",BankName),
+                                     new SqlParameter("@BranchName",BranchName),
+                                     new SqlParameter("@IFSC",IFSCCode),
+                                      new SqlParameter("@PinCode",Pincode),
+                                      new SqlParameter("@City",City),
+                                      new SqlParameter("@State",State),
+                                     new SqlParameter("@Address",Address),
+                                     new SqlParameter("@AddedBy",CreatedBy),
+                                      new SqlParameter("@Pk_UserId",UserID),
+
+            };
+            DataSet ds = Connection.ExecuteQuery("UpdateInvestorRegistration", para);
+            return ds;
+        }
+
     }
 }

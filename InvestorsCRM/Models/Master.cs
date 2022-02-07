@@ -98,7 +98,30 @@ namespace InvestorsCRM.Models
             DataSet ds = Connection.ExecuteQuery("Registration", para);
             return ds;
         }
-
+        public DataSet UpdateRegistration()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@FirstName",FirstName),
+                                     new SqlParameter("@LastName",LastName),
+                                     new SqlParameter("@MobileNo",Mobile),
+                                      new SqlParameter("@EmailId",EmailId),
+                                      new SqlParameter("@PanNo",PanNo),
+                                     new SqlParameter("@AddharNo",AdharNo),
+                                     new SqlParameter("@AccoutnNo",BankAccount),
+                                     new SqlParameter("@BankName",BankName),
+                                     new SqlParameter("@BranchName",BranchName),
+                                     new SqlParameter("@IFSC",IFSCCode),
+                                      new SqlParameter("@PinCode",Pincode),
+                                      new SqlParameter("@City",City),
+                                      new SqlParameter("@State",State),
+                                     new SqlParameter("@Address",Address),
+                                     new SqlParameter("@UserID",UserID),
+                                     new SqlParameter("@AddedBy",CreatedBy),
+                                   
+            };
+            DataSet ds = Connection.ExecuteQuery("UpdateRegistration", para);
+            return ds;
+        }
         public DataSet GetRegistartionDeatils()
         {
             SqlParameter[] para = {
@@ -460,6 +483,23 @@ namespace InvestorsCRM.Models
 
             };
             DataSet ds = Connection.ExecuteQuery("UPDATEInvestment", para);
+            return ds;
+        }
+
+        public DataSet DeleteRegistration()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@AddedBy",CreatedBy),
+                 new SqlParameter("@UserID", UserID),
+                
+
+            };
+            DataSet ds = Connection.ExecuteQuery("DeleteRegistration", para);
+            return ds;
+        }
+        public DataSet DashBoardDetails()
+        {
+            DataSet ds = Connection.ExecuteQuery("GetDashBoardDetails");
             return ds;
         }
     }
