@@ -31,6 +31,13 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>Investor List</h5>
+                            @if (@TempData["msg"] != null)
+                            {
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="float:right">
+                                    <strong> @TempData["msg"]!</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                            }
                         </div>
                         <div class="card-body">
                             <div class="form-row">
@@ -38,6 +45,7 @@
                                     <label for="Username">Login Id</label>
                                     @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @placeholder = "Login ID" })
                                 </div>
+                                @Html.HiddenFor(m=>m.LoginID)
                                 <div class="col-md-3 mb-3">
                                     <label for="Username">From Date</label>
                                     @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date", @readonly = "true" })
@@ -82,11 +90,14 @@
                                                             <td>@i</td>
                                                             <td>@item.FullName</td>
                                                             <td>@item.Password</td>
-                                                            <td>@item.FK_SponsorId</td>
+                                                            <td>@item.SponsorName</td>
                                                             <td>@item.Mobile</td>
                                                             <td>@item.EmailId</td>
                                                             <td>@item.PanNo</td>
                                                             <td>@item.Amount</td>
+                                                            <td style="display:none">@item.UserID</td>
+                                                            <td style="display:none">@item.LoginID</td>
+                                                            
                                                             <td>
                                                                 <a href="@item.Image" download>
                                                                     <i class="fa fa-file-pdf-o" style="font-size:25px;color:black">
@@ -98,10 +109,8 @@
                                                       
                                                             <td>@item.Address</td>
                                                             <td>
-                                                                <a href="/Investment/InvestmentForm?Id=@item.UserID" class="btn btn-default"><i class="fa fa-eye" style="font-size:20px"></i></a>
-                                                                <a href="/Master/DeleteCompany?PK_CompanyID=@item.PK_CompanyID" class="btn btn-default">
-                                                                    <i class="bi bi-trash"></i><img src="~/assets/trash.svg" />
-                                                                </a>
+                                                                <a href="/Admin/InvestorRegistration?Id=@item.LoginID" class="btn btn-default"><i class="fa fa-eye" style="font-size:20px"></i></a>
+                                                                
                                                             </td>
                                                         </tr>
                                                         i = i + 1;

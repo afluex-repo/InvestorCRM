@@ -46,6 +46,7 @@
 
                                     }
                                     @Html.HiddenFor(m => m.FK_SponsorId)
+                                  
 
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -120,7 +121,17 @@
                                     @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
                                 </div>
                             </div>
-                            <input type="submit" class="btn  btn-success" name="btnSave" onclick="return validateform();" value="Save" />
+                            @Html.HiddenFor(m => m.UserID)
+                            @if (Model.UserID != null)
+                            {
+                                <input type="submit" class="btn  btn-primary mb-2" name="btnUpdate" value="Update" onclick="return validateform();">
+
+                            }
+                            else
+                            {
+                                <input type="submit" class="btn  btn-success" name="btnSave" onclick="return validateform();" value="Save" />
+                            }
+                           
                              <a href="/Master/InvestorList" class="btn btn-info">Back To List</a>
 
                         </div>

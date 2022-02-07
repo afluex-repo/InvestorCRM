@@ -18,7 +18,6 @@ namespace InvestorsCRM.Controllers
             
             List<Master> lst = new List<Master>();
             Master model = new Master();
-
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.InvestmentList();
@@ -53,7 +52,6 @@ namespace InvestorsCRM.Controllers
         public ActionResult InvestmentList(Master model)
         {
             List<Master> lst = new List<Master>();
-          
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.InvestmentList();
