@@ -12,6 +12,10 @@ namespace InvestorsCRM.Controllers
 {
     public class MasterController : BaseController
     {
+        public ActionResult Home()
+        {
+            return View();
+        }
         public ActionResult Index()
         {
             Master model = new Master();

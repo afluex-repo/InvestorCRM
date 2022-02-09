@@ -6,77 +6,65 @@
 
 @using (Html.BeginForm("PLanMaster", "Master", FormMethod.Post, new { @id = "signupForm" }))
 {
-<section class="pcoded-main-container">
-    <div class="pcoded-content">
-        <!-- [ breadcrumb ] start -->
-        <div class="page-header">
-            <div class="page-block">
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <div class="page-header-title">
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/Master/index"><i class="feather icon-home"></i></a></li>
-
-                                <li class="breadcrumb-item"><a href="#">Add Plan </a></li>
-                            </ul>
+    <div class="page-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    @if (@TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="float:right">
+                            <strong> @TempData["Error"]!</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         </div>
+                    }
+                    <div class="card-header">
+                        <h5>Add PLan</h5>
+                        <div class="card-header-right">
+                            <i class="icofont icofont-rounded-down"></i>
+                            <i class="icofont icofont-refresh"></i>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                @*<form class="animation-type">*@
+                                <div class="container">
+                                    <div class="row ">
+                                        <div class="col-lg-4">
+                                            <div class="m-b-1">
+                                                 <label for="validationCustom01">PLans Name</label>
+                                                @Html.TextBoxFor(m => m.PlanName, new
+                                           {
+                                               @class = "form-control",
+                                               @placeholder = "Plan Name",
+                                               @required = "required"
+                                           })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 " style="margin-top:25px">
+                                            @if (Model.PK_PlanID != null)
+                                            {
+                                                <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" />
 
+                                            }
+                                            else
+                                            {
+                                                <input type="submit" class="btn  btn-primary" name="btnSave" value="Save" />
+                                            }
+                                            <a href="/Master/PlanMaster" class="btn btn-dark">Reset</a>
+                                             <a href="/Master/PlanList" class="btn btn-info">Back To List</a>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!-- Animation card end -->
             </div>
         </div>
-        <!-- [ breadcrumb ] end -->
-        <!-- [ Main Content ] start -->
-       
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        @if (@TempData["Error"] != null)
-                        {
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="float:right">
-                                <strong> @TempData["Error"]!</strong>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-                        }
-                        <div class="card-header">
-                            <h5>Add PLan</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustom01">PLans Name</label>
-                                    @Html.TextBoxFor(m=>m.PlanName, new {@class="form-control", @placeholder="Plan Name", @required= "required"
-                               })
-                                  
-                                </div>
-
-
-                            </div>
-
-                            @if (Model.PK_PlanID != null)
-                            {
-                                <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" />
-                            }
-                            else
-                            {
-                                <input type="submit" class="btn  btn-primary" name="btnSave" value="Save" />
-                            }
-                            <a href="/Master/PlanMaster" class="btn btn-dark">Reset</a>
-                            <a href="/Master/PlanList" class="btn btn-info">Back To List</a>
-
-                          
-
-                        </div>
-                        <!-- Input group -->
-
-                    </div>
-                    <!-- [ form-element ] end -->
-                </div>
-                <!-- [ Main Content ] end -->
-
-            </div>
-        
     </div>
-</section>
+        
 }
 
