@@ -13,10 +13,10 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <ul class="breadcrumb">
+                            @*<ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/Master/index"><i class="feather icon-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="/Master/CompanyMaster">CompanyProject/ </a>Project List</li>
-                            </ul>
+                            </ul>*@
                         </div>
 
                     </div>
@@ -34,27 +34,30 @@
                         </div>
                     }
                     <div class="card-header">
-                        <h5>Company Project List</h5>
+                        <h6>Company Project List</h6>
                     </div>
                   
                     <div class="card-body">
-                        @Html.HiddenFor(m => m.PK_CompanyID)
-                        <a href="/Master/CompanyMaster?PK_CompanyID=@Model.PK_CompanyID" class="btn btn-info">
-                            <i class="fa fa-plus" aria-hidden="true"></i>Add More Project
-                        </a>
                         <div class="card-block">
-                            <div class="dt-responsive table-responsive">
-                                <table id="compact" class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>S.N.</th>
-                                            <th>Project Name</th>
-                                            <th>Action</th>
+                            <div class="row">
+                                @Html.HiddenFor(m => m.PK_CompanyID)
+                                <a href="/Master/CompanyMaster?PK_CompanyID=@Model.PK_CompanyID" class="btn btn-info">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>Add More Project
+                                </a>
+                            </div>
+                            <div class="row">
+                                <div class="dt-responsive table-responsive">
+                                    <table id="compact" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>S.N.</th>
+                                                <th>Project Name</th>
+                                                <th>Action</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if (Model != null)
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
                                         {
                                             if (Model.lstCompanyproject != null)
                                             {
@@ -62,28 +65,29 @@
                                                 int i = 1;
                                                 foreach (var item in Model.lstCompanyproject)
                                                 {
-                                                    <tr>
-                                                        <td style="display:none">
-                                                            <input type="text" name="FK_ProjectID" value="FK_ProjectID" hidden="true" />
-                                                          
-                                                        </td>
-                                                        <td>@i</td>
-                                                        <td>@item.ProjectName</td>
+                                            <tr>
+                                                <td style="display:none">
+                                                    <input type="text" name="FK_ProjectID" value="FK_ProjectID" hidden="true" />
 
-                                                        <td>
-                                                            <a href="/Master/DeleteCompanyProject?FK_ProjectID=@item.FK_ProjectID" class="btn btn-default">
-                                                                <i class="bi bi-trash"></i><img src="~/assets/trash.svg" />
-                                                          
-                                                            </a>
-                                                        </td>
-                                                    </tr>
+                                                </td>
+                                                <td>@i</td>
+                                                <td>@item.ProjectName</td>
+
+                                                <td>
+                                                    <a href="/Master/DeleteCompanyProject?FK_ProjectID=@item.FK_ProjectID" class="btn btn-danger">
+                                                        <i class="icofont icofont-ui-delete"></i>
+
+                                                    </a>
+                                                </td>
+                                            </tr>
                                                     i = i + 1;
                                                 }
                                             }
                                         }
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

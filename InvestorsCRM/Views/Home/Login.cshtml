@@ -7,68 +7,124 @@
 
 <html>
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="">
-    <meta name="author" content="Phoenixcoded" />
+    <meta name="description" content="Phoenixcoded">
+    <meta name="keywords" content=", Flat ui, Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="author" content="Phoenixcoded">
     <!-- Favicon icon -->
-    <link rel="icon" href="~/assets/images/favicon.png" type="image/x-icon">
-<link rel="stylesheet" href="~/assets/css/style.css">
+
+    <link rel="icon" href="~/assets/images/favicon.ico" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="~/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/icon/themify-icons/themify-icons.css">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="~/assets/icon/icofont/css/icofont.css">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/style.css">
+    <!--color css-->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/color/color-1.css" id="color" />
+    <!-- Favicon icon -->
+    @*<link rel="icon" href="~/~/assets/images/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="~/~/assets/css/style.css">*@
 </head>
 <body>
-    
-    <div class="auth-wrapper">
+
 @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "signupForm" }))
 {
-        <div class="auth-content text-center">
-            <img src="~/assets/images/HmGreenCity.png" alt="" class="img-fluid mb-4" style="width:105px;">
-            <div class="card borderless">
-                <div class="row align-items-center ">
-                    
-                    <div class="col-md-12">
-                        <div class="card-body">
-                            @if (@TempData["Login"] != null)
-                            {
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <strong> @TempData["Login"]!</strong>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      
+
+    <section class="login p-fixed d-flex text-center bg-primary common-img-bg">
+        <!-- Container-fluid starts -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Authentication card start -->
+                    <div class="login-card card-block auth-body">
+                       
+                            <div class="text-center">
+                                <img src="~/assets/images/HmGreenCity.png" alt="" class="img-fluid mb-4" style="width:105px;">
+                            </div>
+                            <div class="auth-box">
+                                <div class="row m-b-20">
+                                    <div class="col-md-12">
+                                        @if (@TempData["Login"] != null)
+                                        {
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <strong> @TempData["Login"]!</strong>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            </div>
+                                        }
+                                        <h3 class="text-left txt-primary">Sign In</h3>
+                                    </div>
                                 </div>
-                            }
-                            <h4 class="mb-3 f-w-400">Login</h4>
-                            <a href="#!" class="b-brand">
-                                <!-- ========   change your logo hear   ============ -->
-                              
-                                @*<img src="~/assets/images/logo-icon.png" alt="" class="logo-thumb">*@
-                            </a>
-                            <hr>
-                            <div class="form-group mb-3">
-                                @Html.TextBoxFor(m => m.LoginID, new { @Placeholder = "Login Id", @required = "required", @class = "form-control" })
-                                
-                            </div>
-                            <div class="form-group mb-4">
-                                @Html.PasswordFor(m => m.Password, new { @Placeholder = "Psssword", @required = "required", @class = "form-control" })
+                                <hr />
+                                <div class="input-group">
+                                   @Html.TextBoxFor(m => m.LoginID, new { @Placeholder = "Login Id", @required = "required", @class = "form-control" })
+                                    <span class="md-line"></span>
+                                </div>
+                                <div class="input-group">
+                                    @Html.PasswordFor(m => m.Password, new { @Placeholder = "Psssword", @required = "required", @class = "form-control" })
+                                    <span class="md-line"></span>
+                                </div>
+                                <div class="row m-t-25 text-left">
+                                    <div class="col-sm-7 col-xs-12">
+                                        <div class="checkbox-fade fade-in-primary">
+                                            <label>
+                                                <input type="checkbox" value="">
+                                                <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                                <span class="text-inverse">Remember me</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 col-xs-12 forgot-phone text-right">
+                                        <a href="/home/ForgetPassword" class="text-right f-w-600 text-inverse"> Forgot Your Password?</a>
+                                    </div>
+                                </div>
+                                <div class="row m-t-30">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-block btn-primary mb-4" type="submit" name="btnsave">Signin</button>
+                                    </div>
+                                </div>
+                                <hr />
                                
+
                             </div>
-                         
-                            <button class="btn btn-block btn-primary mb-4" type="submit" name="btnsave">Signin</button>
-                            <hr>
-                            <p class="mb-2 text-muted">Forgot password? <a href="/home/ForgetPassword" class="f-w-400">Reset</a></p>
-                           
-                        </div>
+                      
+                        <!-- end of form -->
                     </div>
+                    <!-- Authentication card end -->
                 </div>
+                <!-- end of col-sm-12 -->
             </div>
+            <!-- end of row -->
         </div>
+        <!-- end of container-fluid -->
+    </section>
 }
-    </div>
-    <!-- [ auth-signin ] end -->
-    <!-- Required Js -->
-    <script src="assets/js/vendor-all.min.js"></script>
-    <script src="assets/js/plugins/bootstrap.min.js"></script>
-    <script src="assets/js/pcoded.min.js"></script>
+
+    <script type="text/javascript" src="~/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/bower_components/tether/dist/js/tether.min.js"></script>
+    <script type="text/javascript" src="~/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="~/bower_components/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="~/bower_components/modernizr/modernizr.js"></script>
+    <script type="text/javascript" src="~/bower_components/modernizr/feature-detects/css-scrollbars.js"></script>
+    <!-- i18next.min.js -->
+    <script type="text/javascript" src="~/bower_components/i18next/i18next.min.js"></script>
+    <script type="text/javascript" src="~/bower_components/i18next-xhr-backend/i18nextXHRBackend.min.js"></script>
+    <script type="text/javascript" src="~/bower_components/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+    <script type="text/javascript" src="~/bower_components/jquery-i18next/jquery-i18next.min.js"></script>
+    <!-- Custom js -->
+    <script type="text/javascript" src="~/assets/js/script.js"></script>
+    <!--color js-->
+    <script type="text/javascript" src="~/assets/js/common-pages.js"></script>
 
 
 
