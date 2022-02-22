@@ -16,7 +16,7 @@ namespace InvestorsCRM.Models
             try
 
             {
-                // connectionString = "Data Source=164.52.211.92,1232;Initial Catalog=HMGreenCityCRMDb; User Id=hmgreencitycrmuser; Password=Pa$$w0rd@123)(*; Integrated Security=false;";
+               // connectionString = "Data Source=164.52.211.92,1232;Initial Catalog=HMGreenCityCRMDb; User Id=hmgreencitycrmuser; Password=Pa$$w0rd@123)(*; Integrated Security=false;";
                 connectionString = "Data Source=164.52.211.92,1232;Initial Catalog=investorscrmdb; User Id=investoruser; Password=investor@#193; Integrated Security=false;";
             }
             catch (Exception)

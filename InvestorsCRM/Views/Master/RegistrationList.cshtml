@@ -79,6 +79,7 @@
                                         <th>S.N.</th>
                                         <th>Investor ID</th>
                                         <th>Sponsor Name</th>
+                                        <th>Designation</th>
                                         <th>Password</th>
                                         <th>Mobile</th>
                                         <th>Email Id</th>
@@ -106,6 +107,7 @@
                                                     <td>@i</td>
                                                     <td>@item.FullName</td>
                                                     <td>@item.SponsorName</td>
+                                                    <td>@item.DesignationName</td>
                                                     <td>@item.Password</td>
                                                     <td>@item.Mobile</td>
                                                     <td>@item.EmailId</td>
@@ -117,7 +119,6 @@
                                                     <td>@item.IFSCCode</td>
                                                     <td>@item.Address</td>
                                                     <td style="display:none">@item.UserID</td>
-
                                                     <td>
                                                         <a href="/Master/Registration?ID=@item.EncryptKey" class="btn btn-primary"><i class="icofont icofont-pencil-alt-5"></i></a>
                                                         <a href="/Master/DeleteRegistration?ID=@item.UserID" class="btn btn-danger">
