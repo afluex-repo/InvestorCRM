@@ -644,6 +644,26 @@ namespace InvestorsCRM.Controllers
                         obj.Address = ds1.Tables[0].Rows[0]["Address"].ToString();
                 }
             }
+            
+            #region ddlDesignation
+            int count = 0;
+            List<SelectListItem> ddlDesignation = new List<SelectListItem>();
+            DataSet ds = obj.GetDesignationName();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlDesignation.Add(new SelectListItem { Text = "--Select--", Value = "" });
+                    }
+                    ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
+                    count = count + 1;
+                }
+            }
+            ViewBag.ddlDesignation = ddlDesignation;
+            #endregion
+
             return View(obj);
         }
 
@@ -733,6 +753,7 @@ namespace InvestorsCRM.Controllers
                     // obj.City = r["City"].ToString();
                     //  obj.State = r["State"].ToString();
                     obj.Address = r["FullAddress"].ToString();
+                    obj.DesignationName = r["DesignationName"].ToString();
                     lst.Add(obj);
                 }
                 model.lstRegistation = lst;
@@ -780,6 +801,8 @@ namespace InvestorsCRM.Controllers
         }
         public ActionResult GetLoginName(string LoginID)
         {
+            int count = 0;
+            List<Master> lst = new List<Master>();
             try
             { 
             Master obj = new Master();
@@ -791,7 +814,19 @@ namespace InvestorsCRM.Controllers
                     obj.FK_SponsorId = ds.Tables[0].Rows[0]["PK_UserID"].ToString();
                     obj.AssociateImage = ds.Tables[0].Rows[0]["profilepic"].ToString();
                     obj.Result = "yes";
-            }
+                    DataSet ds1 = obj.GetDesignationName();
+                    if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in ds1.Tables[0].Rows)
+                        {
+                            Master model = new Master();
+                            model.FK_DesignationID = r["PK_DesignationID"].ToString();
+                            model.DesignationName = r["DesignationName"].ToString();
+                            lst.Add(model);
+                        }
+                    }
+                   obj.lstDesignation= lst;
+                }
             else
             {
                     obj.SponsorName = "";

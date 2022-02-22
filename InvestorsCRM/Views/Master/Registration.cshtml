@@ -24,130 +24,143 @@
                     </div>
                 </div>
             </div>
-            </div>
-            <div class="page-body">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <!-- HTML5 Export Buttons table start -->
-                        <div class="card">
-                            <div class="card-header table-card-header">
-                                <div class="card-header-right">
-                                    <i class="icofont icofont-rounded-down"></i>
-                                    <i class="icofont icofont-refresh"></i>
-                                </div>
+        </div>
+        <div class="page-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- HTML5 Export Buttons table start -->
+                    <div class="card">
+                        <div class="card-header table-card-header">
+                            <div class="card-header-right">
+                                <i class="icofont icofont-rounded-down"></i>
+                                <i class="icofont icofont-refresh"></i>
                             </div>
-                            <div class="card-block">
+                        </div>
+                        <div class="card-block">
+                            <div class="row">
+                                <p style="color:red;">
+                                    @TempData["msg"]
+                                </p>
+                            </div>
+                            <div class="card-body">
                                 <div class="row">
-                                    <p style="color:red;">
-                                        @TempData["msg"]
-                                    </p>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="LoginID">Sponsor Id<span style="color:red">*</span></label>
+                                        @if (Model.UserID == null)
+                                        {
+                                            @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @Placeholder = "Login ID", @onchange = "return GetLoginName();", @required = "required" })
+                                        }
+                                        else
+                                        {
+                                            @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @Placeholder = "Sponsor ID", @readonly = "readonly", @required = "required" })
+
+                                        }
+                                        @Html.HiddenFor(m => m.UserID)
+
+                                        @Html.HiddenFor(m => m.FK_SponsorId)
+
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="Username">Sponsor Name</label>
+                                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "Name", @readonly = "readonly", @required = "required" })
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="Username">Designation</label>
+                                            <select id="FK_DesignationID" name="FK_DesignationID" class="form-control">
+                                                <option value="0">--Select--</option>
+                                            </select>
+                                       
+                                        @*@Html.DropDownListFor(m => m.FK_DesignationID, new { } "--Select--", new { @class = "form-control" })*@
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="LoginID">Sponsor Id<span style="color:red">*</span></label>
-                                            @if (Model.UserID == null)
-                                            {
-                                                @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @Placeholder = "Login ID", @onchange = "return GetLoginName();", @required = "required" })
-                                            }
-                                            else
-                                            {
-                                                @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @Placeholder = "Sponsor ID", @readonly = "readonly", @required = "required" })
 
-                                            }
-                                            @Html.HiddenFor(m => m.UserID)
-
-                                            @Html.HiddenFor(m => m.FK_SponsorId)
-
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="Username">Sponsor Name</label>
-                                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "Name", @readonly = "readonly", @required = "required" })
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="Username">First Name<span style="color:red">*</span></label>
-                                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name", @onkeypress = "return onlyAlphabets();" })
-                                        </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="Username">First Name<span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name", @onkeypress = "return onlyAlphabets();" })
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="Email">Last Name</label>
-                                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name", @onkeypress = "return onlyAlphabets();" })
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="PanCard">Mobile No<span style="color:red">*</span></label>
-                                            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @maxlength = "10", @placeholder = "Mobile No", @onkeypress = "return isNumberKey(event);" })
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="PanCard">Email Id</label>
-                                            @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", @placeholder = "Email Id" })
-                                        </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="Email">Last Name</label>
+                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name", @onkeypress = "return onlyAlphabets();" })
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="PanCard">Pan No<span style="color:red">*</span></label>
-                                            @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @placeholder = "Pan No", @maxlength = "10", @onchange = "return validatePan()" })
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="PanCard">Adhar No</label>
-                                            @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @maxlength = "12", @placeholder = "Adhar No", @onkeypress = "return isNumberKey(event);" })
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="PanCard">Account No</label>
-                                            @Html.TextBoxFor(m => m.BankAccount, new { @class = "form-control", @placeholder = "Account No", @onkeypress = "return isNumberKey(event);" })
-                                        </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="PanCard">Mobile No<span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @maxlength = "10", @placeholder = "Mobile No", @onkeypress = "return isNumberKey(event);" })
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="Bank">Bank Name</label>
-                                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name", @onkeypress = "return onlyAlphabets();" })
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="Branch">Branch Name</label>
-                                            @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="IFSC">IFSC Code</label>
-                                            @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="Email">Pin Code <span style="color:red">*</span> </label>
-                                            @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @maxlength = "6", @Placeholder = "Pin code", @onchange = "return getStateCity();", @onkeypress = "return isNumberKey(event);" })
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="PanCard">City</label>
-                                            @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City", @readonly = true })
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="PanCard">State </label>
-                                            @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State", @readonly = true })
-                                        </div>
-                                        <div class="col-md-8 mb-3">
-                                            <label for="Address">Address </label>
-                                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
-                                        </div>
-                                    </div>
-
-                                    @if (Model.UserID != null)
-                                    {
-                                        <input type="submit" class="btn  btn-primary mb-2" name="btnUpdate" value="Update" onclick="return validateform();">
-
-                                    }
-                                    else
-                                    {
-                                        <input type="submit" class="btn  btn-success" name="btnSave" onclick="return validateform();" value="Save" />
-                                    }
-                                    <a href="/Master/RegistrationList" class="btn btn-info">Back To List</a>
 
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="PanCard">Email Id</label>
+                                        @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", @placeholder = "Email Id" })
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="PanCard">Pan No<span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @placeholder = "Pan No", @maxlength = "10", @onchange = "return validatePan()" })
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="PanCard">Adhar No</label>
+                                        @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @maxlength = "12", @placeholder = "Adhar No", @onkeypress = "return isNumberKey(event);" })
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="PanCard">Account No</label>
+                                        @Html.TextBoxFor(m => m.BankAccount, new { @class = "form-control", @placeholder = "Account No", @onkeypress = "return isNumberKey(event);" })
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="Bank">Bank Name</label>
+                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name", @onkeypress = "return onlyAlphabets();" })
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="Branch">Branch Name</label>
+                                        @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="IFSC">IFSC Code</label>
+                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code" })
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="Email">Pin Code <span style="color:red">*</span> </label>
+                                        @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @maxlength = "6", @Placeholder = "Pin code", @onchange = "return getStateCity();", @onkeypress = "return isNumberKey(event);" })
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="PanCard">City</label>
+                                        @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City", @readonly = true })
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="PanCard">State </label>
+                                        @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State", @readonly = true })
+                                    </div>
+                                    <div class="col-md-8 mb-3">
+                                        <label for="Address">Address </label>
+                                        @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
+                                    </div>
+                                </div>
+
+                                @if (Model.UserID != null)
+                                {
+                                    <input type="submit" class="btn  btn-primary mb-2" name="btnUpdate" value="Update" onclick="return validateform();">
+
+                                }
+                                else
+                                {
+                                    <input type="submit" class="btn  btn-success" name="btnSave" onclick="return validateform();" value="Save" />
+                                }
+                                <a href="/Master/RegistrationList" class="btn btn-info">Back To List</a>
+
                             </div>
                         </div>
                     </div>
                 </div>
-              </div>
-</section>
+            </div>
+        </div>
+    </section>
 }
 
 <script>
@@ -204,7 +217,7 @@
             }
         });
     }
-    
+
     function onlyAlphabets(e, t) {
         try {
             if (window.event) {
@@ -259,6 +272,7 @@
             url: '/Master/GetLoginName', type: 'post', dataType: 'json',
             data: { 'LoginID': LoginID },
             success: function (data) {
+                debugger;
                 $("#divload").css({ 'display': 'none' });
                 if (data.Result == "yes") {
                     $("#Username").val(data.Username);
@@ -266,6 +280,16 @@
                     $("#FK_SponsorId").val(data.FK_SponsorId);
                     $("#Username").removeClass('errortext');
                     $("#Username").removeClass('errortext');
+                    if (data.lstDesignation != null) {
+                        $("#FK_DesignationID").html(""); // clear before appending new list
+                        $("#FK_DesignationID").empty();
+                        $("#FK_DesignationID").append(
+                              $('<option></option>').val(0).html('Select'));
+                        $.each(data.lstDesignation, function (index, des) {
+                            $("#FK_DesignationID").append(
+                                  $('<option></option>').val(des.FK_DesignationID).html(des.DesignationName));
+                        });
+                    }
                 }
                 else if (data.Result == "no") {
                     alert("Invalid LoginID");
