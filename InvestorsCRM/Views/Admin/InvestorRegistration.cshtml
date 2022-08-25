@@ -46,6 +46,7 @@
 
                                     }
                                     @Html.HiddenFor(m => m.FK_SponsorId)
+                                  
 
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -120,9 +121,18 @@
                                     @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
                                 </div>
                             </div>
-                            <input type="submit" class="btn  btn-success" name="btnSave" onclick="return validateform();" value="Save" />
+                            @Html.HiddenFor(m => m.UserID)
+                            @if (Model.UserID != null)
+                            {
+                                <input type="submit" class="btn  btn-primary mb-2" name="btnUpdate" value="Update" onclick="return validateform();">
 
-                            <a href="/Master/RegistrationList" class="btn btn-info">Back To List</a>
+                            }
+                            else
+                            {
+                                <input type="submit" class="btn  btn-success" name="btnSave" onclick="return validateform();" value="Save" />
+                            }
+                           
+                             <a href="/Master/InvestorList" class="btn btn-info">Back To List</a>
 
                         </div>
                     </div>
@@ -131,7 +141,6 @@
         </div>
     </section>
 }
-
 <script>
     function validateform() {
         $("#divload").css({ 'display': 'none' });
@@ -166,7 +175,6 @@
         changeMonth: true
     });
     function getStateCity() {
-
         var pincode = $('#Pincode').val();
         $.ajax({
             url: '/Master/GetStateCity', type: 'post', dataType: 'json',
@@ -192,7 +200,6 @@
             }
         });
     }
-
     function onlyAlphabets(e, t) {
         try {
             if (window.event) {
@@ -263,10 +270,8 @@
                     $("#LoginID").addClass('errortext');
                     $('#LoginID').focus();
                     $('#LoginID').val('');
-
                 }
             }
-
         });
     }
 </script>

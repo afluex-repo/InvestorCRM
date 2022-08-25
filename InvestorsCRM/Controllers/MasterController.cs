@@ -14,7 +14,19 @@ namespace InvestorsCRM.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            Master model = new Master();
+            DataSet ds = model.DashBoardDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.TotalUser= ds.Tables[0].Rows[0]["TotalUsers"].ToString();
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                ViewBag.Totalinvesment = ds.Tables[1].Rows[0]["TotalInvestment"].ToString();
+                ViewBag.TotalInvestor = ds.Tables[1].Rows[0]["TotalInvestor"].ToString();
+            }
+
+                return View(model);
         }
         public ActionResult ProjectMaster(string FK_ProjectID)
         {
@@ -24,7 +36,7 @@ namespace InvestorsCRM.Controllers
                 if (FK_ProjectID != null)
                 {
                     obj.FK_ProjectID = FK_ProjectID;
-                    DataSet ds = obj.GetProjectName();
+                    DataSet ds = obj.GetProjectList();
                     if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                     {
                         obj.ProjectName = ds.Tables[0].Rows[0]["ProjectName"].ToString();
@@ -600,9 +612,35 @@ namespace InvestorsCRM.Controllers
             return RedirectToAction("CompanyMaster", "Master");
         }
 
-        public ActionResult Registration(Master model)
+        public ActionResult Registration(string ID)
         {
-            return View(model);
+            List<Master> lst = new List<Master>();
+            Master obj = new Master();
+            if (ID != null)
+            {
+                obj.LoginID = Crypto.Decrypt(ID);
+                DataSet ds1 = obj.GetRegistartionDeatils();
+                if (ds1 != null && ds1.Tables[0].Rows.Count > 0 && ds1.Tables.Count > 0)
+                {
+                        obj.LoginID = ds1.Tables[0].Rows[0]["LoginId"].ToString();
+                        obj.FirstName = ds1.Tables[0].Rows[0]["FirstName"].ToString();
+                        obj.Username = ds1.Tables[0].Rows[0]["SponsorLoginId"].ToString();
+                        obj.Mobile = ds1.Tables[0].Rows[0]["Mobile"].ToString();
+                        obj.EmailId = ds1.Tables[0].Rows[0]["Email"].ToString();
+                        obj.PanNo = ds1.Tables[0].Rows[0]["PanNumber"].ToString();
+                        obj.AdharNo = ds1.Tables[0].Rows[0]["AdharNumber"].ToString();
+                        obj.BankAccount = ds1.Tables[0].Rows[0]["MemberAccNo"].ToString();
+                        obj.BankName = ds1.Tables[0].Rows[0]["MemberBankName"].ToString();
+                        obj.BranchName = ds1.Tables[0].Rows[0]["MemberBranch"].ToString();
+                        obj.IFSCCode = ds1.Tables[0].Rows[0]["IFSCCode"].ToString();
+                        obj.UserID = ds1.Tables[0].Rows[0]["PK_UserId"].ToString();
+                        obj.City = ds1.Tables[0].Rows[0]["City"].ToString();
+                        obj.State = ds1.Tables[0].Rows[0]["State"].ToString();
+                        obj.Pincode = ds1.Tables[0].Rows[0]["Pincode"].ToString();
+                        obj.Address = ds1.Tables[0].Rows[0]["Address"].ToString();
+                }
+            }
+            return View(obj);
         }
 
         [HttpPost]
@@ -644,11 +682,30 @@ namespace InvestorsCRM.Controllers
             }
             return RedirectToAction("ConfirmRegistration", "Master");
         }
-       
+        [HttpPost]
+        [ActionName("Registration")]
+        [OnAction (ButtonName="btnUpdate")]
+        public ActionResult UpdateRegistration(Master model)
+        {
+            model.CreatedBy = Session["UserID"].ToString();
+           // model.UserID = Crypto.Decrypt(model.UserID);
+            DataSet Ds = model.UpdateRegistration();
+            if (Ds != null && Ds.Tables[0].Rows.Count > 0 && Ds.Tables.Count > 0 && Ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+            {
+                TempData["update"] = "Registration Updated SuccessFully";
+            }
+            else
+            {
+                TempData["update"] = Ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+            }
+
+            return RedirectToAction("RegistrationList", "Master");
+        }
         public ActionResult RegistrationList()
         {
             Master model = new Master();
             List<Master> lst = new List<Master>();
+           
             DataSet ds = model.GetRegistartionDeatils();
             if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
             {
@@ -656,8 +713,9 @@ namespace InvestorsCRM.Controllers
                 {
                     Master obj = new Master();
                     obj.LoginID = r["LoginId"].ToString();
-                    obj.Password =Crypto.Decrypt(r["Password"].ToString());
+                    obj.Password = Crypto.Decrypt(r["Password"].ToString());
                     obj.FullName = r["FullName"].ToString();
+                    obj.SponsorName = r["SponsorLoginId"].ToString();
                     obj.Mobile = r["Mobile"].ToString();
                     obj.EmailId = r["Email"].ToString();
                     obj.PanNo = r["PanNumber"].ToString();
@@ -666,14 +724,16 @@ namespace InvestorsCRM.Controllers
                     obj.BankName = r["MemberBankName"].ToString();
                     obj.BranchName = r["MemberBranch"].ToString();
                     obj.IFSCCode = r["IFSCCode"].ToString();
-                    obj.Pincode = r["PinCode"].ToString();
-                    obj.City = r["City"].ToString();
-                    obj.State = r["State"].ToString();
-                    obj.Address = r["Address"].ToString();
+                    obj.UserID = r["PK_UserId"].ToString();
+                    obj.EncryptKey = Crypto.Encrypt(r["LoginId"].ToString());
+                    // obj.City = r["City"].ToString();
+                    //  obj.State = r["State"].ToString();
+                    obj.Address = r["FullAddress"].ToString();
                     lst.Add(obj);
                 }
                 model.lstRegistation = lst;
             }
+
             return View(model);
         }
 
@@ -700,26 +760,20 @@ namespace InvestorsCRM.Controllers
                     obj.BankName = r["MemberBankName"].ToString();
                     obj.BranchName = r["MemberBranch"].ToString();
                     obj.IFSCCode = r["IFSCCode"].ToString();
-                    obj.Pincode = r["PinCode"].ToString();
-                    obj.City = r["City"].ToString();
-                    obj.State = r["State"].ToString();
-                    obj.Address = r["Address"].ToString();
+                    obj.UserID = r["PK_UserId"].ToString();
+                    obj.SponsorName = r["SponsorLoginId"].ToString();
+                    obj.EncryptKey = Crypto.Encrypt(r["PK_UserId"].ToString());
+                    obj.Address = r["FullAddress"].ToString();
                     lst.Add(obj);
                 }
                 model.lstRegistation = lst;
             }
             return View(model);
         }
-
-
-
-
         public ActionResult ConfirmRegistration()
         {
             return View();
         }
-        
-
         public ActionResult GetLoginName(string LoginID)
         {
             try
@@ -775,7 +829,6 @@ namespace InvestorsCRM.Controllers
                 return View(ex.Message);
             }
         }
-
         public ActionResult GetProjectName(string PK_CompanyID)
         {
             List<SelectListItem> ddlProject = new List<SelectListItem>();
@@ -799,12 +852,9 @@ namespace InvestorsCRM.Controllers
 
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
-        
         public ActionResult InvestmentForm()
         {
 
-    
             #region ddlprojectname
 
             Master obj = new Master();
@@ -893,10 +943,6 @@ namespace InvestorsCRM.Controllers
             #endregion
             return View(obj);
         }
-
-       
-
-      
         public ActionResult InvestorList()
         {
             Master model = new Master();
@@ -907,7 +953,8 @@ namespace InvestorsCRM.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Master obj = new Master();
-                    obj.FK_SponsorId = r["FK_SponsorId"].ToString();
+                    obj.SponsorName = r["FK_SponsorId"].ToString();
+                    obj.FK_SponsorId = r["SponsorId"].ToString();
                     obj.LoginID = r["LoginId"].ToString();
                     obj.Password = Crypto.Decrypt(r["Password"].ToString());
                     obj.FullName = r["InvestorName"].ToString();
@@ -944,7 +991,8 @@ namespace InvestorsCRM.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Master obj = new Master();
-                    obj.FK_SponsorId = r["FK_SponsorId"].ToString();
+                    obj.SponsorName = r["FK_SponsorId"].ToString();
+                    obj.FK_SponsorId = r["SponsorId"].ToString();
                     obj.LoginID = r["LoginId"].ToString();
                     obj.Password = Crypto.Decrypt(r["Password"].ToString());
                     obj.FullName = r["InvestorName"].ToString();
@@ -968,7 +1016,24 @@ namespace InvestorsCRM.Controllers
             }
             return View(model);
         }
+        public ActionResult DeleteRegistration(string ID)
+        {
+            Master model = new Master();
+            model.UserID = ID;
+            model.CreatedBy = Session["UserID"].ToString();
+            DataSet Ds = model.DeleteRegistration();
+            if (Ds != null && Ds.Tables[0].Rows.Count > 0 && Ds.Tables.Count > 0 && Ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+            {
+                TempData["update"] = "Registration Updated SuccessFully";
+            }
+            else
+            {
+                TempData["update"] = Ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+            }
 
+            return RedirectToAction("RegistrationList", "Master");
+            
+        }
 
     }
 }
