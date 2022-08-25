@@ -214,6 +214,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Crypto.cs" />
     <Compile Include="Models\DBHelper.cs" />
@@ -459,7 +460,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Master\CompanyMaster.cshtml" />
-    <Content Include="Views\Admin\Registration.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Master\ChangePassword.cshtml" />
@@ -475,8 +475,14 @@
     <Content Include="Views\Master\PlanList.cshtml" />
     <Content Include="Views\Master\GetCompanyProject.cshtml" />
     <Content Include="Views\Master\Registration.cshtml" />
+    <Content Include="Views\Master\RegistrationList.cshtml" />
+    <Content Include="Views\Master\ConfirmRegistration.cshtml" />
+    <Content Include="Views\Master\InvestmentForm.cshtml" />
+    <Content Include="Views\Master\InvestorList.cshtml" />
+    <Content Include="Views\Admin\InvestorRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AgreementUploadFile\" />
     <Folder Include="Agreement\" />
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />

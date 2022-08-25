@@ -1,0 +1,72 @@
+﻿@model InvestorsCRM.Models.Master
+
+@{
+    ViewBag.Title = "ConfirmRegistration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .confirm-box {
+    border: 1px solid #079f07;
+    background-color: #169516ba;
+    color: white;
+    padding: 40px 70px;
+    border-radius: 18px;
+}
+    i.feather.icon-check-circle {
+    font-size: 80px;
+}
+    h4.cong-msg {
+    color: white;
+    text-align: center;
+    margin: 30px 0;
+}
+    .pcoded-navbar .main-menu-header {
+    background: #2c3e50;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    align-items: center;
+}
+
+.user-details {
+    background-color: white;
+    padding: 7px;
+    border-radius: 8px;
+}
+
+.pcoded-navbar .main-menu-header .user-details {
+    cursor: pointer;
+    display: inline-block;
+    /*margin-left: 10px;*/
+}
+</style>
+@using (Html.BeginForm("ConfirmRegistration", "Master", FormMethod.Post, new { @id = "signupForm", @novalidate = "" }))
+{
+    <section class="pcoded-main-container">
+        <div class="pcoded-content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        @*<div class="card-header">
+                            <h5>Registration List</h5>
+                            <a href="/Master/Registration" class="btn btn-info" style="margin-left:90%">Add New</a>
+                        </div>*@
+                        <div class="card-body">
+                            <div class="card-block d-flex justify-content-center my-5">
+                                <div class="confirm-box">
+                                    <div class="icon text-center"><i class="feather icon-check-circle"></i></div>
+                                    <h4 class="cong-msg">Congratulation, Your account has <br />been successfully created.</h4>
+                                    <label for="PanCard"><b>Name :</b> @Session["FullName"]</label><br />
+                                    <label for="PanCard"><b>Login Id :</b> @Session["LoginId"]</label><br />
+                                    <label for="PanCard"><b>Password : </b>@Session["Password"]</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </section>
+            }
+

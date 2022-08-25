@@ -1,0 +1,126 @@
+﻿@model InvestorsCRM.Models.Master
+
+@{
+    ViewBag.Title = "InvestorList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+@using (Html.BeginForm("InvestorList", "Master", FormMethod.Post, new { @id = "signupForm", @novalidate = "" }))
+{
+    <section class="pcoded-main-container">
+        <div class="pcoded-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/Master/Registration"><i class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="#">Investor List</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="Username">Login Id</label>
+                                    @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @placeholder = "Login ID" })
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="Username">From Date</label>
+                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date" })
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="Username">To Date</label>
+                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "ToDate" })
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <input type="submit" style="margin-top:30px;" class="btn  btn-success" name="btnSearch" value="Search" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <a href="/Master/InvestorRegistration" class="btn btn-info" style="margin-left:70%;margin-top:30px;">Add New</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Investor List</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-block">
+                                <div class="dt-responsive table-responsive">
+                                    <table id="compact" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                 <th>S.N.</th>
+                                                 <th>Investor</th>
+                                                <th>Password</th>
+                                                <th>Sponsor</th>
+                                                <th>Mobile</th>
+                                                <th>Email Id</th>
+                                                <th>Pan No</th>
+                                                <th>Amount</th>
+                                                <th>Agreement</th>
+                                                <th>Address</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.lstInvestor != null)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var item in Model.lstInvestor)
+                                                    {
+                                                        <tr>
+                                                            <td>@i</td>
+                                                            <td>@item.FullName</td>
+                                                            <td>@item.Password</td>
+                                                            <td>@item.FK_SponsorId</td>
+                                                            <td>@item.Mobile</td>
+                                                            <td>@item.EmailId</td>
+                                                            <td>@item.PanNo</td>
+                                                            <td>@item.Amount</td>
+                                                            <td>
+                                                                <a href="@item.Image" download>
+                                                                    <i class="fa fa-file-pdf-o" style="font-size:25px;color:black">
+                                                                        @*<i class="mdi mdi-download" style="font-size:25px;color:black"></i>*@
+                                                                        <i class="fa fa-download" aria-hidden="true" style="font-size:25px;color:black"></i>
+                                                                    </i>
+                                                                </a>
+                                                            </td>
+                                                      
+                                                            <td>@item.Address</td>
+                                                        </tr>
+                                                        i = i + 1;
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
