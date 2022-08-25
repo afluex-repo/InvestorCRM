@@ -14,10 +14,10 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <ul class="breadcrumb">
+                            @*<ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/Master/index"><i class="feather icon-home"></i></a></li>
-                               <li class="breadcrumb-item"><a href="/Master/CompanyMaster">Company/ </a>Company List</li>
-                            </ul>
+                               <li class="breadcrumb-item"><a href="/Master/CompanyMaster"> </a>Company List</li>
+                            </ul>*@
                         </div>
 
                     </div>
@@ -66,10 +66,10 @@
                                                         <td>@item.CompanyName</td>
                                                         
                                                         <td>
-                                                            <a href="/Master/GetCompanyProject?PK_CompanyID=@item.PK_CompanyID" class="btn btn-default"><i class="fa fa-eye" style="font-size:20px"></i>
+                                                            <a href="/Master/GetCompanyProject?PK_CompanyID=@item.PK_CompanyID" class="btn btn-primary"><i class="icofont icofont-pencil-alt-5"></i>
                                                              </a>
-                                                             <a href="/Master/DeleteCompany?PK_CompanyID=@item.PK_CompanyID" class="btn btn-default">
-                                                                <i class="bi bi-trash"></i><img src="~/assets/trash.svg" />
+                                                             <a href="/Master/DeleteCompany?PK_CompanyID=@item.PK_CompanyID" class="btn btn-danger">
+                                                            <i class="icofont icofont-ui-delete"></i>
                                                               </a>
                                                         </td>
                                                     </tr>

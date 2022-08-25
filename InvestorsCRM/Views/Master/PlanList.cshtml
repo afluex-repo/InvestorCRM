@@ -12,10 +12,10 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <ul class="breadcrumb">
+                            @*<ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/Master/index"><i class="feather icon-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="#"> Plan List</a></li>
-                            </ul>
+                            </ul>*@
                         </div>
 
                     </div>
@@ -58,7 +58,7 @@
                                                         <td>@item.PlanName</td>
                                                       
                                                         <td>
-                                                            <a href="/Master/PlanMaster?PK_PlanID=@item.PK_PlanID" class="btn btn-default"><i class="feather icon-edit"></i></a>
+                                                            <a href="/Master/PlanMaster?PK_PlanID=@item.PK_PlanID"class="btn btn-primary"><i class="icofont icofont-pencil-alt-5"></i></a>
                                                         </td>
                                                     </tr>
                                                     i = i + 1;

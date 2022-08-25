@@ -69,8 +69,12 @@ namespace InvestorsCRM.Models
         public string Investorname { get; set; }
         public string TransactionNo { get; set; }
         public string TransactionDate { get; set; }
- public  string InvestmentDate { get; set; }
+        public  string InvestmentDate { get; set; }
         public string EncryptKey { get; set; }
+        public string FK_DesignationID { get; set; }
+        public List<SelectListItem> ddlDesignation { get; set;}
+
+
         public List<SelectListItem> ddlProject { get; set; }
         
         public DataSet Registration()
@@ -93,7 +97,9 @@ namespace InvestorsCRM.Models
                                      new SqlParameter("@Password",Password),
                                         new SqlParameter("@TransPassword",Password),
                                      new SqlParameter("@AddedBy",CreatedBy),
-                                     new SqlParameter("@FK_SponsorId",FK_SponsorId)
+                                     new SqlParameter("@FK_SponsorId",FK_SponsorId),
+                                       new SqlParameter("@FK_DesignationID",FK_DesignationID),
+                                     
             };
             DataSet ds = Connection.ExecuteQuery("Registration", para);
             return ds;
@@ -500,6 +506,17 @@ namespace InvestorsCRM.Models
         public DataSet DashBoardDetails()
         {
             DataSet ds = Connection.ExecuteQuery("GetDashBoardDetails");
+            return ds;
+        }
+
+        public DataSet GetDesignationName()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId",LoginID),
+                new SqlParameter("@PK_DesignationID",FK_DesignationID),
+                 new SqlParameter("@Percentage", Percentage)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDesignationName",para);
             return ds;
         }
     }
