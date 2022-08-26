@@ -27,6 +27,7 @@ namespace InvestorsCRM.Models
         public List<Master> lstPlan { get; set; }
         public List<Master> lstRegistation { get; set; }
         public List<Master> lstInvestor { get; set; }
+        public List<Master> lstInvestment { get; set; }
         public string DesignationName { get; set; }
         public string Percentage { get; set; }
         public string PK_DesignationID { get; set; }
@@ -40,7 +41,7 @@ namespace InvestorsCRM.Models
         public List<ListProject> listProject { get; set; }
         public DataTable dtCompanyDetails { get; set; }
         public string SponsorName { get; set; }
-     
+  
         public string UserID { get; set; }
         public string AssociateImage { get; set; }
         public string Result { get; set; }
@@ -63,6 +64,17 @@ namespace InvestorsCRM.Models
         public string FullName { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
+        public string PK_InvestorID { get; set; }
+        public string InvestorId { get; set; }
+        public string Investorname { get; set; }
+        public string TransactionNo { get; set; }
+        public string TransactionDate { get; set; }
+        public  string InvestmentDate { get; set; }
+        public string EncryptKey { get; set; }
+        public string FK_DesignationID { get; set; }
+        public List<SelectListItem> ddlDesignation { get; set;}
+
+
         public List<SelectListItem> ddlProject { get; set; }
         
         public DataSet Registration()
@@ -85,16 +97,45 @@ namespace InvestorsCRM.Models
                                      new SqlParameter("@Password",Password),
                                         new SqlParameter("@TransPassword",Password),
                                      new SqlParameter("@AddedBy",CreatedBy),
-                                     new SqlParameter("@FK_SponsorId",FK_SponsorId)
+                                     new SqlParameter("@FK_SponsorId",FK_SponsorId),
+                                       new SqlParameter("@FK_DesignationID",FK_DesignationID),
+                                     
             };
             DataSet ds = Connection.ExecuteQuery("Registration", para);
             return ds;
         }
-
+        public DataSet UpdateRegistration()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@FirstName",FirstName),
+                                     new SqlParameter("@LastName",LastName),
+                                     new SqlParameter("@MobileNo",Mobile),
+                                      new SqlParameter("@EmailId",EmailId),
+                                      new SqlParameter("@PanNo",PanNo),
+                                     new SqlParameter("@AddharNo",AdharNo),
+                                     new SqlParameter("@AccoutnNo",BankAccount),
+                                     new SqlParameter("@BankName",BankName),
+                                     new SqlParameter("@BranchName",BranchName),
+                                     new SqlParameter("@IFSC",IFSCCode),
+                                      new SqlParameter("@PinCode",Pincode),
+                                      new SqlParameter("@City",City),
+                                      new SqlParameter("@State",State),
+                                     new SqlParameter("@Address",Address),
+                                     new SqlParameter("@UserID",UserID),
+                                     new SqlParameter("@AddedBy",CreatedBy),
+                                   
+            };
+            DataSet ds = Connection.ExecuteQuery("UpdateRegistration", para);
+            return ds;
+        }
         public DataSet GetRegistartionDeatils()
         {
             SqlParameter[] para = {
-                new SqlParameter("@LoginId", LoginID)
+                new SqlParameter("@LoginId", LoginID),
+                 new SqlParameter("@SponsorLoginId", FK_SponsorId),
+                  new SqlParameter("@FromDate", FromDate),
+                   new SqlParameter("@ToDate", ToDate)
+
             };
             DataSet ds = Connection.ExecuteQuery("GetRegistartionDeatils",para);
             return ds;
@@ -106,12 +147,17 @@ namespace InvestorsCRM.Models
             DataSet ds = Connection.ExecuteQuery("GetStateCity", para);
             return ds;
         }
-
         public DataSet InsertProject()
         {
             SqlParameter[] para ={new SqlParameter ("@ProjectName",ProjectName),
                                   new SqlParameter("@CreatedBy",CreatedBy),};
             DataSet ds = Connection.ExecuteQuery("SaveProject", para);                 //Connetion.ExecuteQuery();
+            return ds;
+        }
+        public DataSet GetSponsorName()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginID) };
+            DataSet ds = Connection.ExecuteQuery("GetSponsorForInvestor", para);
             return ds;
         }
         public DataSet GetNameByLoginID()
@@ -362,9 +408,32 @@ namespace InvestorsCRM.Models
                                       new SqlParameter("@State",State)
 
             };
-            DataSet ds = Connection.ExecuteQuery("SaveUserRegistration", para);                 //Connetion.ExecuteQuery();
+            DataSet ds = Connection.ExecuteQuery("InvestmentForm", para);                 //Connetion.ExecuteQuery();
             return ds;
         }
+        public DataSet InvestmentForm()
+        {
+            SqlParameter[] para ={
+
+                                 new SqlParameter("@InvestmentDate",InvestmentDate),
+                                    new SqlParameter("@FK_UserID",UserID),
+                                   new SqlParameter("@FK_SponsorID",FK_SponsorId),
+                                    new SqlParameter("@Amount",Amount),
+                                     new SqlParameter("@FK_PlanID",PK_PlanID),
+                                     new SqlParameter("@FK_ProjectID",FK_ProjectID),
+                                      new SqlParameter("@Agreement",Image),
+                                      new SqlParameter("@FK_CompanyID",PK_CompanyID),
+                                     new SqlParameter("@CreatedBy",UserID),
+                                     new SqlParameter("@PaymentMode",Fk_Paymentid),
+                                     new SqlParameter("@TransactionNo",TransactionNo),
+                                     new SqlParameter("@TransactionDate",TransactionDate),
+                                     new SqlParameter("@BankName",BankName),
+                                      new SqlParameter("@BranchName",BranchName),
+            };
+            DataSet ds = Connection.ExecuteQuery("SaveInvestment", para);   
+            return ds;
+        }
+
 
         public DataSet GetInvestorDetails()
         {
@@ -376,8 +445,79 @@ namespace InvestorsCRM.Models
             return ds;
         }
 
-        
 
+        public DataSet InvestmentList()
+        {
+            SqlParameter[] para =
+            {
+               new  SqlParameter ("@PK_InvestorID",PK_InvestorID),
+                new  SqlParameter ("@FromDate",FromDate),
+                 new  SqlParameter ("@ToDate",ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetInvestmentDetails", para);
+            return ds;
+        }
 
+        public DataSet GetSponsorForInvestmentid()
+        {
+            SqlParameter[] para =
+           {
+               new  SqlParameter ("@LoginID",UserID)
+              
+            };
+            DataSet ds = Connection.ExecuteQuery("GetSponsorForInvestmentid", para);
+            return ds;
+        }
+        public DataSet UPDATEInvestment()
+        {
+            SqlParameter[] para =
+          {
+               new  SqlParameter ("@FK_UserID",UserID),
+               new  SqlParameter ("@PK_InvestorID",PK_InvestorID),
+               new  SqlParameter ("@Amount ",Amount),
+              new  SqlParameter ("@Agreement",Image),
+               new  SqlParameter ("@Updatedby",CreatedBy),
+             new  SqlParameter ("@PaymentMode",Fk_Paymentid),
+               new  SqlParameter ("@TransactionNo",TransactionNo),
+                 new  SqlParameter ("@TransactionDate",TransactionDate),
+             new  SqlParameter ("@BankName",BankName),
+               new  SqlParameter ("@BranchName",BranchName),
+               new SqlParameter("@InvestmentDate",InvestmentDate),
+               new SqlParameter("@FK_ProjectID",FK_ProjectID),
+               new SqlParameter("@FK_CompanyID",PK_CompanyID),
+                   new SqlParameter("@FK_PlanID",PK_PlanID)
+
+            };
+            DataSet ds = Connection.ExecuteQuery("UPDATEInvestment", para);
+            return ds;
+        }
+
+        public DataSet DeleteRegistration()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@AddedBy",CreatedBy),
+                 new SqlParameter("@UserID", UserID),
+                
+
+            };
+            DataSet ds = Connection.ExecuteQuery("DeleteRegistration", para);
+            return ds;
+        }
+        public DataSet DashBoardDetails()
+        {
+            DataSet ds = Connection.ExecuteQuery("GetDashBoardDetails");
+            return ds;
+        }
+
+        public DataSet GetDesignationName()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId",LoginID),
+                new SqlParameter("@PK_DesignationID",FK_DesignationID),
+                 new SqlParameter("@Percentage", Percentage)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDesignationName",para);
+            return ds;
+        }
     }
 }

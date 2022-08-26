@@ -13,10 +13,10 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <ul class="breadcrumb">
+                            @*<ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/Master/index"><i class="feather icon-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="#"> Designation List</a></li>
-                            </ul>
+                            </ul>*@
                         </div>
 
                     </div>
@@ -69,7 +69,7 @@
                                                         <td>@item.Designationame</td>
                                                         <td>@item.Percentage</td>
                                                         <td>
-                                                            <a href="/Master/DesignationDelete?PK_DesignationID=@item.PK_DesignationID"  class="btn btn-default"><i class="bi bi-trash"></i><img src="~/assets/trash.svg" /></a>
+                                                            <a href="/Master/DesignationDelete?PK_DesignationID=@item.PK_DesignationID" class="btn btn-danger"><i class="icofont icofont-ui-delete"></i>
                                                      
                                                         </td>
                                                     </tr>

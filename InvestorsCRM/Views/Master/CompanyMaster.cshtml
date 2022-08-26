@@ -4,94 +4,76 @@
     ViewBag.Title = "CompanyMaster";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<section class="pcoded-main-container">
-    <div class="pcoded-content">
-        <!-- [ breadcrumb ] start -->
-        <div class="page-header">
-            <div class="page-block">
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <div class="page-header-title">
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/Master/index"><i class="feather icon-home"></i></a></li>
-
-                                <li class="breadcrumb-item"><a href="#" >Add Company </a></li>
-                            </ul>
-                        </div>
-
+@using (Html.BeginForm("CompanyMaster", "Master", FormMethod.Post, new { @id = "signupForm" }))
+{
+<div class="page-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                @if (@TempData["Error"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="float:right">
+                        <strong> @TempData["Error"]!</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                }
+                <div class="card-header">
+                    <h5>Add Company</h5>
+                    <div class="card-header-right">
+                        <i class="icofont icofont-rounded-down"></i>
+                        <i class="icofont icofont-refresh"></i>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- [ breadcrumb ] end -->
-        <!-- [ Main Content ] start -->
-        @using (Html.BeginForm("CompanyMaster", "Master", FormMethod.Post, new { @id = "signupForm" }))
-        {
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        @if (@TempData["Error"] != null)
-                        {
-                            <div class="alert alert-success alert-dismissible fade show" role="alert" style="float:right">
-                                <strong> @TempData["Error"]!</strong>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-                        }
-                        <div class="card-header">
-                            <h5>Add Company </h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-row">
-                                
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustom01">Company Name</label>
-                                    @Html.TextBoxFor(m=>m.CompanyName, new {@class="form-control", @placeholder="Company Name", @required= "required" })
-                                  </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustom01">Project Name</label>
-                                   @Html.DropDownListFor(m => m.FK_ProjectIDTO, new SelectList(ViewBag.FK_ProjectID, "Value", "Text"), new { @class = "form-control chosen-select", multiple = "multiple" })
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-sm-12">
+                                <div class="row ">
+                                    <div class="col-lg-4">
+                                        <div class="m-b-1">
+                                            @Html.HiddenFor(m => m.FK_ProjectID)
+                                            <label for="validationCustom01">Company Name</label>
+                                            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "Company Name", @required = "required" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom01">Project Name</label>
+                                        @Html.DropDownListFor(m => m.FK_ProjectIDTO, new SelectList(ViewBag.FK_ProjectID, "Value", "Text"), new { @class = "form-control chosen-select", multiple = "multiple" })
+                                    </div>
+                                    @Html.HiddenFor(m => m.PK_CompanyID)
+                                    <div class="col-lg-4" style="margin-top:25px">
+                                        @if (Model.PK_CompanyID != null)
+                                        {
+                                            <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" />
+                                        }
+                                        else
+                                        {
+                                            <input class="btn btn-primary" type="submit" name="btnsave" value="Save" />
+                                        }
+
+                                        <a href="/Master/CompanyMaster" class="btn btn-dark">Reset</a>
+                                        <a href="/Master/CompanyList" class="btn btn-info">Back To List</a>
+                                    </div>
                                 </div>
-                                @Html.HiddenFor(m=>m.PK_CompanyID)
-                              
                             </div>
-                            @if (Model.PK_CompanyID != null)
-                            {
-                                <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" />
-                            }
-                            else
-                            {
-                                <input class="btn  btn-primary" type="submit" name="btnsave" value="Save" />
-                            }
-
-                          
-
-
-                            <a href="/Master/CompanyMaster" class="btn btn-dark">Reset</a>
-                            <a href="/Master/CompanyList" class="btn btn-info">Back To List</a>
-                           
                         </div>
-                        <!-- Input group -->
-
                     </div>
-                    <!-- [ form-element ] end -->
                 </div>
-                <!-- [ Main Content ] end -->
-
             </div>
-        }
+            <!-- Animation card end -->
+        </div>
     </div>
-</section>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+}
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/zui/1.9.1/lib/chosen/chosen.min.css" rel="stylesheet" />
-<style>
-    .chosen-container-multi .chosen-choices {
-        padding: 6px 5px !important;
-        width: 100% !important;
-    }
-</style>
-<script>
-    $(".chosen-select").chosen({
-        no_results_text: "Oops, nothing found!"
-    })
-</script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/zui/1.9.1/lib/chosen/chosen.min.css" rel="stylesheet" />
+  <style>
+       .chosen-container-multi .chosen-choices {
+                        padding: 6px 5px !important;
+                        width: 100% !important;
+                    }
+                </style>
+ <script>
+     $(".chosen-select").chosen({
+         no_results_text: "Oops, nothing found!"
+     })
+   </script>
