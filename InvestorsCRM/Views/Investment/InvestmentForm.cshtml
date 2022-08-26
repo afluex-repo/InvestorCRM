@@ -223,24 +223,6 @@
                                                 <label for="Fk_Paymentid">Payment Mode <span style="color:red">*</span></label>
                                                 @Html.DropDownListFor(m => m.Fk_Paymentid, new SelectList(ViewBag.ddlPayment, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode();" })
                                             </div>
-                                            @*<div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="single-price">
-                    <div class="deal-top">
-                        <h3>Invest Plan</h3>
-                    </div>
-                    <div class="deal-bottom">
-                        <ul class="deal-item">
-                            <li><i class="fa fa-star text-warning"></i> Invest Amount ..........................................</li>
-                            <li><i class="fa fa-star text-warning"></i> Return Period after 12 Months</li>
-                            <li><i class="fa fa-star text-warning"></i> Return Profit - .49% of Invested Amount</li>
-                            <li><i class="fa fa-star text-warning"></i> <strong>Investing Site</strong> - HM Green City | HM Kohinoor City | HM Golden City</li>
-                            <li><i class="fa fa-star text-warning"></i> Withdrawl amount no time limit</li>
-                        </ul>
-                        <hr class="bg-white"/>
-                        <p class="text-white"><strong>Note:</strong> Before withdraw invested amount get prior Information before 3 months.</p>
-                    </div>
-                </div>
-            </div>*@
                                         </div>
 
                                         <div class="row mt-3" style="display:none" id="divPaymentMode">
