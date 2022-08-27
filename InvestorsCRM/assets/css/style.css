@@ -21811,8 +21811,62 @@ body.dark-layout .chat-bg {
 }
 .client-blocks 
 {
-    background-image: linear-gradient(45deg, #71b38e, #427060 70.71%);
+    background-image: linear-gradient(45deg, #c2731b, #4bab61 70.71%);
 }
 .card-block h5{
     color:#fff;
 }
+
+.user_card {
+			width: 400px;
+			margin-top: 100px;
+			margin-bottom: auto;
+			background: #4bab61;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+
+		}
+		.brand_logo_container {
+			position: absolute;
+			height: 170px;
+			width: 170px;
+			top: -75px;
+			border-radius: 50%;
+			background:#d77e13;
+			padding: 10px;
+			text-align: center;
+		}
+		.brand_logo {
+			height: 150px;
+			width: 150px;
+            padding:6px;
+			border-radius: 50%;
+			border: 2px solid white;
+		}
+        .form-control
+        {
+            padding:12px;
+            border-radius:20px;
+        }
+
+		.form_container {
+			margin-top: 100px;
+            padding:20px;
+		}
+		.login_btn {
+			width: 100%;
+            border-radius:20px;
+			background: #d77e13 !important;
+			color: white !important;
+		}
+		.login_btn:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
