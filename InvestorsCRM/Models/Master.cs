@@ -451,6 +451,7 @@ namespace InvestorsCRM.Models
             SqlParameter[] para =
             {
                new  SqlParameter ("@PK_InvestorID",PK_InvestorID),
+               new SqlParameter("@InvestorLoginID",LoginID),
                 new  SqlParameter ("@FromDate",FromDate),
                  new  SqlParameter ("@ToDate",ToDate)
             };

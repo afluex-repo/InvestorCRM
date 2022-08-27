@@ -20,6 +20,7 @@ namespace InvestorsCRM.Controllers
         }
         public ActionResult Login()
         {
+            Session.Abandon();
             return View();
         }
         [HttpPost]
