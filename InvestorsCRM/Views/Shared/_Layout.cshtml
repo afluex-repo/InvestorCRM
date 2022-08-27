@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="Phoenixcoded">
-    <meta name="keywords" content=", Flat ui, Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="keywords" content="Flat ui, Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="Phoenixcoded">
     <!-- Favicon icon -->
     <link rel="icon" href="~/assets/images/favicon.png" type="image/x-icon">
@@ -29,9 +29,8 @@
     <link rel="stylesheet" type="text/css" href="~/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="~/assets/pages/data-table/extensions/buttons/css/buttons.dataTables.min.css">
     <!-- Style.css -->
+    <link href="~/assets/icon/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/assets/css/style.css">
-    <!--color css-->
-    @*<link rel="stylesheet" type="text/css" href="~/assets/css/color/color-1.css" id="color" />*@
 </head>
 <body>
     <div class="theme-loader">
@@ -51,9 +50,7 @@
                     <i class="ti-search"></i>
                 </a>
                 <a href="/Master/index">
-                    @*<img src="~/assets/images/HmGreenCity.png" width="100" alt="" class="logo">*@
-                    <i class="fa fa-user" style="font-size:36px"></i>
-                    <span>@Session["Username"]</span>
+                    <img src="~/assets/images/hmgreen_white.png" width="100" alt="" class="logo">
                 </a>
                 <a class="mobile-options">
                     <i class="ti-more"></i>
@@ -68,12 +65,6 @@
                             </a>
                         </li>
                         <li>
-                            <a class="main-search morphsearch-search" href="#">
-                                <!-- themify icon -->
-                                <i class="ti-search"></i>
-                            </a>
-                        </li>
-                        <li>
                             <a href="#!" onclick="javascript:toggleFullScreen()">
                                 <i class="ti-fullscreen"></i>
                             </a>
@@ -81,75 +72,20 @@
 
                     </ul>
                     <ul class="nav-right">
-
-                        @*<li class="header-notification">
-                                <a href="#!">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge">5</span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li>
-                                        <div class="media">
-                                            <img class="d-flex align-self-center" src="~/assets/images/user.png" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media">
-                                            <img class="d-flex align-self-center" src="~/assets/images/user.png" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media">
-                                            <img class="d-flex align-self-center" src="~/assets/images/user.png" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="header-notification">
-                                <a href="#!" class="displayChatbox">
-                                    <i class="ti-comments"></i>
-                                    <span class="badge">9</span>
-                                </a>
-                            </li>*@
                         <li class="user-profile header-notification">
                             <a href="#!">
-                                @*<img src="~/assets/images/user.png" alt="User-Profile-Image">*@
-                                <i class="fa fa-user"></i>
+                                <img src="~/assets/images/user.png" alt="User-Profile-Image">
                                 <span>@Session["Username"]</span>
                                 <i class="ti-angle-down"></i>
                             </a>
                             <ul class="show-notification profile-notification">
                                 <li>
                                     <a href="/Master/ChangePassword">
-                                        <i class="ti-settings"></i> Change Password
+                                        <i class="ti-key"></i> Change Password
                                     </a>
                                 </li>
-                                @*<li>
-                                        <a href="user-profile.html">
-                                            <i class="ti-user"></i> Profile
-                                        </a>
-                                    </li>*@
                                 <li>
-                                    <a href="#!">
+                                    <a href="/Home/Login">
                                         <i class="ti-layout-sidebar-left"></i> Logout
                                     </a>
                                 </li>
@@ -166,21 +102,20 @@
     <!-- Menu aside start -->
     <div class="main-menu">
         <div class="main-menu-header">
-            <img src="~/assets/images/HmGreenCity.png" width="100" alt="" class="logo" style="background-color: white;margin-left: 38px;">
+            <img class="img-40" src="~/assets/images/user.png" alt="User-Profile-Image">
+            <div class="user-details">
+                <span id="more-details">@Session["Username"]<i class="ti-angle-down"></i></span>
+            </div>
         </div>
+        <hr/>
         <div class="main-menu-content">
             <ul class="main-navigation">
                 <li class="more-details">
-                    <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                    <a href="#!"><i class="ti-settings"></i>Settings</a>
-                    <a href="#!"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                    <a href="/Master/ChangePassword"><i class="ti-key"></i>Change Password</a>
+                    <a href="/Home/Login"><i class="ti-layout-sidebar-left"></i>Logout</a>
                 </li>
-                @*<li class="nav-title" data-i18n="nav.category.navigation">
-                        <i class="ti-line-dashed"></i>
-                        <span>Navigation</span>
-                    </li>*@
-                <li class="nav-item">
-                    <a href="">
+                <li class="nav-item single-item">
+                    <a href="/Master/Index">
                         <i class="ti-home"></i>
                         <span data-i18n="nav.dash.main">Dashboard</span>
                     </a>
@@ -190,7 +125,6 @@
                     <a href="#!">
                         <i class="ti-layout"></i>
                         <span data-i18n="nav.page_layout.main">Master</span>
-                        @*<label class="label label-warning menu-caption">NEW</label>*@
                     </a>
                     <ul class="tree-1">
                         <li><a href="/Master/ProjectMaster">Project</a></li>
@@ -206,7 +140,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#!">
-                        <i class="ti-layout-cta-right"></i>
+                        <i class="ti-user"></i>
                         <span data-i18n="nav.navigate.main">User Master</span>
                     </a>
                     <ul class="tree-1">
@@ -217,7 +151,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#!">
-                        <i class="ti-layout-grid2-alt"></i>
+                        <i class="ti-user"></i>
                         <span data-i18n="nav.basic-components.main">Investor</span>
                     </a>
                     <ul class="tree-1">
