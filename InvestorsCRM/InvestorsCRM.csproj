@@ -209,7 +209,11 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvestmentController.cs" />
+    <Compile Include="Controllers\InvestorController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
+    <Compile Include="Controllers\SettingController.cs" />
+    <Compile Include="Controllers\UserBaseController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\SimpleAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -221,8 +225,11 @@
     <Compile Include="Models\DBHelper.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Investor.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Master.cs" />
+    <Compile Include="Models\Setting.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -2005,6 +2012,12 @@
     <Content Include="Views\Investment\InvestmentList.cshtml" />
     <Content Include="Views\Shared\Main_LayoutPage1.cshtml" />
     <Content Include="Views\Master\Home.cshtml" />
+    <Content Include="Views\User\UserDashBoard.cshtml" />
+    <Content Include="Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Views\User\DirectUser.cshtml" />
+    <Content Include="Views\User\TeamUser.cshtml" />
+    <Content Include="Views\User\InvestorList.cshtml" />
+    <Content Include="Views\Setting\ChangePasswordForUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgreementUploadFile\" />
@@ -2029,6 +2042,8 @@
     <Folder Include="assets\images\user-card\" />
     <Folder Include="assets\images\user-profile\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Investor\" />
+    <Folder Include="Views\UserBase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

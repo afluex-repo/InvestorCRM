@@ -42,8 +42,8 @@
                                         <div class="col-lg-4 " style="margin-top:25px">
                                             @if (Model.PK_PlanID != null)
                                             {
+                                                <input type="hidden" id="PK_PlanID" name="PK_PlanID" value="@Model.PK_PlanID" />
                                                 <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" />
-
                                             }
                                             else
                                             {
