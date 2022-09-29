@@ -31,30 +31,34 @@ namespace InvestorsCRM.Controllers
                 DataSet ds = obj.Login();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    if (ds.Tables[0].Rows[0]["FK_Usertype"].ToString() == "1")
+                    if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
                     {
-                        ViewBag.errormsg = "";
                         Session["UserID"] = ds.Tables[0].Rows[0]["PK_AdminId"].ToString();
                         Session["LoginID"] = ds.Tables[0].Rows[0]["LoginID"].ToString();
                         Session["Username"] = ds.Tables[0].Rows[0]["Username"].ToString();
-                        Session["FK_UserTypeID"] = ds.Tables[0].Rows[0]["FK_Usertype"].ToString();
-                        //Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
+                        Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
                         return RedirectToAction("Index", "Master");
                     }
 
-                    if (ds.Tables[0].Rows[0]["FK_Usertype"].ToString() != "1")
+                    if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Investor")
                     {
-                        ViewBag.errormsg = "";
-                        Session["UserID"] = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
-                        Session["LoginID"] = ds.Tables[0].Rows[0]["LoginID"].ToString();
-                        Session["Username"] = ds.Tables[0].Rows[0]["Username"].ToString();
-                        Session["FK_UserTypeID"] = ds.Tables[0].Rows[0]["FK_Usertype"].ToString();
-                      //  Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
-                        return RedirectToAction("Index", "Home");
+                        if (obj.Password == Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()))
+                        {
+                            Session["PK_UserId"] = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
+                            Session["LoginID"] = ds.Tables[0].Rows[0]["LoginID"].ToString();
+                            Session["Username"] = ds.Tables[0].Rows[0]["FullName"].ToString();
+                            Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
+                            return RedirectToAction("UserDashBoard", "User");
+                        }
+                        else
+                        {
+                            TempData["Login"] = "Incorrect LoginId Or Password";
+                            return RedirectToAction("Login");
+                        }
+
                     }
                     else
                     {
-                        ViewBag.errormsg = "";
                         TempData["Login"] = "Incorrect LoginId Or Password";
                         return RedirectToAction("Login");
                     }
@@ -87,7 +91,7 @@ namespace InvestorsCRM.Controllers
             Random rnd = new Random();
             string ctrpass = rnd.Next(111111, 999999).ToString();
             model.NewPsssword = Crypto.Encrypt(ctrpass);
-           
+
             DataSet ds = model.GetLoginDetails();
             if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
             {
@@ -133,7 +137,7 @@ namespace InvestorsCRM.Controllers
                 ViewBag.errormsg = "";
                 TempData["Error"] = "Invalied  EmailID !";
             }
-            return RedirectToAction ("ForgetPassword", "Home");
+            return RedirectToAction("ForgetPassword", "Home");
         }
     }
 }

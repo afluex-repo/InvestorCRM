@@ -507,6 +507,7 @@ namespace InvestorsCRM.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
+
         public ActionResult ChangePassword()
         {
             return View();
