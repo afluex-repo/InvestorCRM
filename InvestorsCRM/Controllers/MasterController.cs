@@ -40,7 +40,7 @@ namespace InvestorsCRM.Controllers
                 if (FK_ProjectID != null)
                 {
                     obj.FK_ProjectID = FK_ProjectID;
-                    DataSet ds = obj.GetProjectName();
+                    DataSet ds = obj.GetProjectList();
                     if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                     {
                         obj.ProjectName = ds.Tables[0].Rows[0]["ProjectName"].ToString();

@@ -15,6 +15,7 @@ namespace InvestorsCRM.Models
         public string ToDate { get; set; }
         public string FullName { get; set; }
         public string Password { get; set; }
+        public string SponsorId { get; set; }
         public string SponsorName { get; set; }
         public string Mobile { get; set; }
         public string EmailId { get; set; }
@@ -22,7 +23,11 @@ namespace InvestorsCRM.Models
         public string Amount { get; set; }
         public string Agreement { get; set; }
         public string Address { get; set; }
-        
+
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
+        public string ConfirmPassword { get; set; }
+        public string AddedBy { get; set; }
         public List<User> lstInvestor { get; set; }
         public List<User> lstDirect { get; set; }
         public List<User> lstTeam { get; set; }
@@ -51,19 +56,31 @@ namespace InvestorsCRM.Models
             {
                new  SqlParameter ("@LoginId",LoginID)
             };
-            DataSet ds = Connection.ExecuteQuery("GetInvestorDetails", para);
+            DataSet ds = Connection.ExecuteQuery("GetDirectUserList", para);
             return ds;
         }
-
-
+        
         public DataSet GetTeamUser()
         {
             SqlParameter[] para =
             {
                new  SqlParameter ("@LoginId",LoginID)
             };
-            DataSet ds = Connection.ExecuteQuery("GetInvestorDetails", para);
+            DataSet ds = Connection.ExecuteQuery("GetTeamUserList", para);
             return ds;
+        }
+        
+
+        public DataSet ChangePassword()
+        {
+            SqlParameter[] para = {new SqlParameter("@OldPassword",OldPassword),
+                                   new SqlParameter("@NewPassword",NewPassword),
+                                   new SqlParameter("@UpdatedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("ChangePasswordUser", para);
+            return ds;
+
+
         }
 
     }

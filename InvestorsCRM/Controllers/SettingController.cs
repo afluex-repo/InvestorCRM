@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace InvestorsCRM.Controllers
 {
-    public class SettingController : UserBaseController
+    public class SettingController : Controller
     {
         // GET: Setting
         public ActionResult ChangePasswordForUser()
@@ -45,6 +45,39 @@ namespace InvestorsCRM.Controllers
             return RedirectToAction("ChangePasswordForUser", "Setting");
         }
 
+        public ActionResult ChangePasswordForInvestor()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("ChangePasswordForInvestor")]
+        public ActionResult ChangePasswordForInvestor(Setting model)
+        {
+            try
+            {
+                model.OldPassword = Crypto.Encrypt(model.OldPassword);
+                model.NewPassword = Crypto.Encrypt(model.NewPassword);
+                model.AddedBy = Session["PK_InvestorId"].ToString();
+                DataSet ds = model.ChangePassword();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Error"] = "Password changed  successfully";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
+            return RedirectToAction("ChangePasswordForInvestor", "Setting");
+        }
 
     }
 }

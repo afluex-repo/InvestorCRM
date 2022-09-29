@@ -37,16 +37,12 @@ namespace InvestorsCRM.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     User obj = new User();
-                    obj.SponsorName = r["FK_SponsorId"].ToString();
                     obj.LoginID = r["LoginId"].ToString();
                     obj.Password = Crypto.Decrypt(r["Password"].ToString());
-                    obj.FullName = r["InvestorName"].ToString();
-                    obj.Amount = r["Amount"].ToString();
-                    obj.Image = r["Agreement"].ToString();
+                    obj.FullName = r["FullName"].ToString();
+                    obj.Address = r["Address"].ToString();
                     obj.Mobile = r["Mobile"].ToString();
                     obj.EmailId = r["Email"].ToString();
-                    obj.PanNo = r["PanNumber"].ToString();
-                    obj.Address = r["Address"].ToString();
                     lst.Add(obj);
                 }
                 model.lstDirect = lst;
@@ -64,16 +60,14 @@ namespace InvestorsCRM.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     User obj = new User();
-                    obj.SponsorName = r["FK_SponsorId"].ToString();
                     obj.LoginID = r["LoginId"].ToString();
                     obj.Password = Crypto.Decrypt(r["Password"].ToString());
-                    obj.FullName = r["InvestorName"].ToString();
-                    obj.Amount = r["Amount"].ToString();
-                    obj.Image = r["Agreement"].ToString();
+                    obj.FullName = r["FullName"].ToString();
+                    obj.SponsorId = r["SponsorId"].ToString();
+                    obj.SponsorName = r["sponsorName"].ToString();
+                    obj.Address = r["Address"].ToString();
                     obj.Mobile = r["Mobile"].ToString();
                     obj.EmailId = r["Email"].ToString();
-                    obj.PanNo = r["PanNumber"].ToString();
-                    obj.Address = r["Address"].ToString();
                     lst.Add(obj);
                 }
                 model.lstTeam = lst;

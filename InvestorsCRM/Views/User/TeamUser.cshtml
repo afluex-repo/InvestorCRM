@@ -63,15 +63,14 @@
                                     <thead>
                                         <tr>
                                             <th>S.N.</th>
-                                            <th>Investor</th>
+                                            <th>LoginID</th>
                                             <th>Password</th>
-                                            <th>Sponsor</th>
-                                            <th>Mobile</th>
-                                            <th>Email Id</th>
-                                            <th>Pan No</th>
-                                            <th>Amount</th>
-                                            <th>Agreement</th>
+                                            <th>Name</th>
+                                            <th>Sponsor Id</th>
+                                            <th>Sponsor Name</th>
                                             <th>Address</th>
+                                            <th>Mobile</th>
+                                            <th>Email</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -84,14 +83,15 @@
                                                 {
                                                     <tr>
                                                         <td>@i</td>
-                                                        <td>@item.FullName</td>
+                                                        <td>@item.LoginID</td>
                                                         <td>@item.Password</td>
+                                                        <td>@item.FullName</td>
+                                                        <td>@item.SponsorId</td>
                                                         <td>@item.SponsorName</td>
+                                                        <td>@item.Address</td>
                                                         <td>@item.Mobile</td>
                                                         <td>@item.EmailId</td>
-                                                        <td>@item.PanNo</td>
-                                                        <td>@item.Amount</td>
-                                                        <td>@item.Address</td>
+
                                                     </tr>
                                                     i = i + 1;
                                                 }

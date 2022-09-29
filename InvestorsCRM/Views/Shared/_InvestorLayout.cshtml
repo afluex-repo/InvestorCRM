@@ -74,16 +74,16 @@
                     <ul class="nav-right">
                         <li class="user-profile header-notification">
                             <a href="#!">
-                                <img src="~/assets/images/user.png" alt="User-Profile-Image">
+                                <img src="@Session["ProfilePic"]" alt="User-Profile-Image">
                                 <span>@Session["Username"]</span>
                                 <i class="ti-angle-down"></i>
                             </a>
                             <ul class="show-notification profile-notification">
-                                <li>
-                                    <a href="/Master/ChangePassword">
-                                        <i class="ti-key"></i> Change Password
-                                    </a>
-                                </li>
+                                @*<li>
+                                        <a href="/Master/ChangePassword">
+                                            <i class="ti-key"></i> Change Password
+                                        </a>
+                                    </li>*@
                                 <li>
                                     <a href="/Home/Login">
                                         <i class="ti-layout-sidebar-left"></i> Logout
@@ -93,7 +93,7 @@
                         </li>
                     </ul>
                     <!-- search -->
-                   
+
                 </div>
             </div>
         </div>
@@ -102,79 +102,55 @@
     <!-- Menu aside start -->
     <div class="main-menu">
         <div class="main-menu-header">
-            <img class="img-40" src="~/assets/images/user.png" alt="User-Profile-Image">
+            <img class="img-40" src="@Session["ProfilePic"]" alt="User-Profile-Image">
             <div class="user-details">
                 <span id="more-details">@Session["Username"]<i class="ti-angle-down"></i></span>
             </div>
         </div>
-        <hr/>
+        <hr />
         <div class="main-menu-content">
             <ul class="main-navigation">
                 <li class="more-details">
-                    <a href="/Master/ChangePassword"><i class="ti-key"></i>Change Password</a>
+                    @*<a href="/Master/ChangePassword"><i class="ti-key"></i>Change Password</a>*@
                     <a href="/Home/Login"><i class="ti-layout-sidebar-left"></i>Logout</a>
                 </li>
                 <li class="nav-item single-item">
-                    <a href="/Master/Index">
+                    <a href="/Investor/InvestorDashBoard">
                         <i class="ti-home"></i>
                         <span data-i18n="nav.dash.main">Dashboard</span>
                     </a>
-
                 </li>
                 <li class="nav-item">
-                    <a href="#!">
+                    <a href="/Investor/MyInvestment">
                         <i class="ti-layout"></i>
-                        <span data-i18n="nav.page_layout.main">Master</span>
+                        <span data-i18n="nav.page_layout.main">My Investment</span>
                     </a>
-                    <ul class="tree-1">
-                        <li><a href="/Master/ProjectMaster">Project</a></li>
-                        <li><a href="/Master/CompanyMaster">Company</a></li>
-                        <li><a href="/Master/DesignationMaster">Designation</a></li>
-                        <li><a href="/Master/PLanMaster">Plan</a></li>
+                    @*<ul class="tree-1">
+                        <li><a href="/User/DirectUser">Direct User</a></li>
+                        <li><a href="/User/TeamUser">Team User</a></li>*@
                         @*<li><a href="http://html.phoenixcoded.net/flatable/ltr/bottom-menu/menu-bottom.html" data-i18n="nav.page_layout.bottom-menu"> Bottom Menu</a></li>
                             <li><a href="box-layout.html" target="_blank" data-i18n="nav.page_layout.box-layout"> Box Layout</a></li>
                             <li>
                                 <a href="menu-rtl.html" target="_blank" data-i18n="nav.page_layout.rtl">RTL</a>
                             </li>*@
-                    </ul>
+                    @*</ul>*@
                 </li>
+                @*<li class="nav-item">
+                    <a href="#!">
+                        <i class="ti-user"></i>
+                        <span data-i18n="nav.navigate.main">Investor</span>
+                    </a>
+                    <ul class="tree-1">
+                        <li><a href="/User/InvestorList" data-i18n="nav.navigate.navbar">Investor List</a></li>
+                    </ul>
+                </li>*@
                 <li class="nav-item">
                     <a href="#!">
                         <i class="ti-user"></i>
-                        <span data-i18n="nav.navigate.main">User</span>
+                        <span data-i18n="nav.basic-components.main">Setting</span>
                     </a>
                     <ul class="tree-1">
-                        <li><a href="/Master/Registration" data-i18n="nav.navigate.navbar">User Registration</a></li>
-                        <li><a href="/Master/RegistrationList" data-i18n="nav.navigate.navbar">User List</a></li>
-
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#!">
-                        <i class="ti-user"></i>
-                        <span data-i18n="nav.basic-components.main">Investor</span>
-                    </a>
-                    <ul class="tree-1">
-                        <li><a href="/Admin/InvestorRegistration">Investor Registration</a></li>
-                        <li><a href="/Master/InvestorList">Investor List</a></li>
-
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#!">
-                        <i class="ti-crown"></i>
-                        <span data-i18n="nav.advance-components.main">Investment</span>
-                    </a>
-                    <ul class="tree-1">
-                        <li><a href="/Investment/InvestmentForm">Investment</a></li>
-                        <li>
-                            <a href="/Investment/InvestmentList">
-                                Investment
-                                List
-                            </a>
-                        </li>
-
-
+                        <li><a href="/Setting/ChangePasswordForInvestor">Change Password</a></li>
                     </ul>
                 </li>
 
@@ -306,7 +282,7 @@
                             </div>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
@@ -319,7 +295,7 @@
             <!-- Page-header start -->
             <div class="page-header">
                 <div class="page-header-title">
-                    
+
                 </div>
                 @RenderBody()
 

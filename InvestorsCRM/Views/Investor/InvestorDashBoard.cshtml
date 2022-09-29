@@ -1,8 +1,10 @@
-﻿
+﻿@model InvestorsCRM.Models.Investor
+
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "InvestorDashBoard";
+    Layout = "~/Views/Shared/_InvestorLayout.cshtml";
 }
+
 <div class="page-header-breadcrumb">
     <ul class="breadcrumb-title">
         <li class="breadcrumb-item">
@@ -110,13 +112,14 @@
         <div class="col-md-6 col-xl-4">
             <div class="card client-blocks dark-primary-border">
                 <div class="card-block">
-                    <h5>Total User</h5>
+                    <h5>Total Team</h5>
                     <ul>
                         <li>
                             <i class="fa fa-users"></i>
                         </li>
                         <li class="text-right">
-                            @ViewBag.TotalUser
+                            @*@ViewBag.TotalTeam*@
+                            0
                         </li>
                     </ul>
                 </div>
@@ -125,47 +128,49 @@
         <div class="col-md-6 col-xl-4">
             <div class="card client-blocks dark-primary-border">
                 <div class="card-block">
-                    <h5>Total Investor</h5>
+                    <h5>Direct Investor</h5>
                     <ul>
                         <li>
                             <i class="fa fa-user"></i>
                         </li>
                         <li class="text-right">
-                            @ViewBag.TotalInvestor
+                            @*@ViewBag.DirectInvestor*@
+                            0
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-4 col-sm-6">
+        <div class="col-md-6 col-xl-4">
             <div class="card client-blocks dark-primary-border">
                 <div class="card-block">
-                    <h5>Total Invesment</h5>
+                    <h5>Team Investor</h5>
+                    <ul>
+                        <li>
+                            <i class="fa fa-users"></i>
+                        </li>
+                        <li class="text-right">
+                            @*@ViewBag.TeamInvestor*@
+                            0
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 col-xl-4">
+            <div class="card client-blocks dark-primary-border">
+                <div class="card-block">
+                    <h5>Total Investment Amount</h5>
                     <ul>
                         <li>
                             <i class="fa fa-rupee"></i>
                         </li>
-                        <li class="text-center">
-                            @*Rs. 10000050666666666666.00*@
-                            Rs.  @ViewBag.Totalinvesment
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+                        <li class="text-right">
+                            @*@ViewBag.TotalInvestmentAmount*@
+                            0
 
-
-        <div class="col-md-6 col-xl-4">
-            <div class="card client-blocks dark-primary-border">
-                <div class="card-block">
-                    <h5>Total Project</h5>
-                    <ul>
-                        <li>
-                            <i class="fa fa-tasks"></i>
-                        </li>
-                        <li class="text-right">
-                            @*@ViewBag.TotalProject*@
-                            17
                         </li>
                     </ul>
                 </div>
@@ -174,14 +179,14 @@
         <div class="col-md-6 col-xl-4">
             <div class="card client-blocks dark-primary-border">
                 <div class="card-block">
-                    <h5>Completed Project</h5>
+                    <h5>Total Return</h5>
                     <ul>
                         <li>
-                            <i class="fa fa-tasks"></i>
+                            <i class="fa fa-rupee"></i>
                         </li>
                         <li class="text-right">
-                            @*@ViewBag.CompletedProject*@
-                            12
+                            @*@ViewBag.TotalReturn*@
+                            0
                         </li>
                     </ul>
                 </div>
@@ -190,14 +195,14 @@
         <div class="col-md-6 col-xl-4">
             <div class="card client-blocks dark-primary-border">
                 <div class="card-block">
-                    <h5>Runing Project</h5>
+                    <h5>Total Payout</h5>
                     <ul>
                         <li>
-                            <i class="fa fa-tasks"></i>
+                            <i class="fa fa-rupee"></i>
                         </li>
                         <li class="text-right">
-                            @*Rs.  @ViewBag.RuningProject*@
-                            5
+                            @*@ViewBag.TotalPayout*@
+                            0
                         </li>
                     </ul>
                 </div>
@@ -205,3 +210,5 @@
         </div>
     </div>
 </div>
+
+
