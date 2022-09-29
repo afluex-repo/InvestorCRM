@@ -39,8 +39,7 @@ namespace InvestorsCRM.Controllers
                         Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
                         return RedirectToAction("Index", "Master");
                     }
-
-                    if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Investor")
+                    else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Investor")
                     {
                         if (obj.Password == Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()))
                         {
@@ -48,6 +47,7 @@ namespace InvestorsCRM.Controllers
                             Session["LoginID"] = ds.Tables[0].Rows[0]["LoginID"].ToString();
                             Session["Username"] = ds.Tables[0].Rows[0]["FullName"].ToString();
                             Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
+                            Session["ProfilePic"] = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
                             return RedirectToAction("UserDashBoard", "User");
                         }
                         else
@@ -55,7 +55,23 @@ namespace InvestorsCRM.Controllers
                             TempData["Login"] = "Incorrect LoginId Or Password";
                             return RedirectToAction("Login");
                         }
-
+                    }
+                    else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "User")
+                    {
+                        if (obj.Password == Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()))
+                        {
+                            Session["PK_InvestorId"] = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
+                            Session["LoginID"] = ds.Tables[0].Rows[0]["LoginID"].ToString();
+                            Session["Username"] = ds.Tables[0].Rows[0]["FullName"].ToString();
+                            Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
+                            Session["ProfilePic"] = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
+                            return RedirectToAction("InvestorDashBoard", "Investor");
+                        }
+                        else
+                        {
+                            TempData["Login"] = "Incorrect LoginId Or Password";
+                            return RedirectToAction("Login");
+                        }
                     }
                     else
                     {
@@ -75,7 +91,6 @@ namespace InvestorsCRM.Controllers
                 ViewBag.errormsg = "";
                 TempData["Login"] = ex.Message;
                 return RedirectToAction("Login", "Home");
-
             }
         }
         public ActionResult ForgetPassword()

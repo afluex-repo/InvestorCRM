@@ -74,7 +74,9 @@
                     <ul class="nav-right">
                         <li class="user-profile header-notification">
                             <a href="#!">
-                                <img src="~/assets/images/user.png" alt="User-Profile-Image">
+                                @*<img src="~/assets/images/user.png" alt="User-Profile-Image">*@
+                                <img src="@Session["ProfilePic"]" alt="User-Profile-Image">
+                                
                                 <span>@Session["Username"]</span>
                                 <i class="ti-angle-down"></i>
                             </a>
@@ -102,7 +104,7 @@
     <!-- Menu aside start -->
     <div class="main-menu">
         <div class="main-menu-header">
-            <img class="img-40" src="~/assets/images/user.png" alt="User-Profile-Image">
+            <img class="img-40" src="@Session["ProfilePic"]" alt="User-Profile-Image">
             <div class="user-details">
                 <span id="more-details">@Session["Username"]<i class="ti-angle-down"></i></span>
             </div>

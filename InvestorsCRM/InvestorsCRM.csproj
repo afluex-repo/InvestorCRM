@@ -209,6 +209,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvestmentController.cs" />
+    <Compile Include="Controllers\InvestorBaseController.cs" />
     <Compile Include="Controllers\InvestorController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
@@ -2017,7 +2018,11 @@
     <Content Include="Views\User\DirectUser.cshtml" />
     <Content Include="Views\User\TeamUser.cshtml" />
     <Content Include="Views\User\InvestorList.cshtml" />
+    <Content Include="Views\Shared\_InvestorLayout.cshtml" />
+    <Content Include="Views\Investor\InvestorDashBoard.cshtml" />
+    <Content Include="Views\Investor\MyInvestment.cshtml" />
     <Content Include="Views\Setting\ChangePasswordForUser.cshtml" />
+    <Content Include="Views\Setting\ChangePasswordForInvestor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgreementUploadFile\" />
@@ -2042,7 +2047,7 @@
     <Folder Include="assets\images\user-card\" />
     <Folder Include="assets\images\user-profile\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Investor\" />
+    <Folder Include="Views\InvestorBase\" />
     <Folder Include="Views\UserBase\" />
   </ItemGroup>
   <ItemGroup>

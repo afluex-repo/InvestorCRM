@@ -14,8 +14,6 @@ namespace InvestorsCRM.Models
         public string ConfirmPassword { get; set; }
         public string AddedBy { get; set; }
 
-
-
         public DataSet ChangePassword()
         {
             SqlParameter[] para = {new SqlParameter("@OldPassword",OldPassword),
